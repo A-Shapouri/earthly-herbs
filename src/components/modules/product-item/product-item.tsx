@@ -10,7 +10,7 @@ import HeartIcon from '@icons-components/heart';
 
 const ProductItem = ({ image, title, price, rate, isHealthy, isNew }: ProductItemProps) => {
   return (
-    <Div className={'w-[248px] h-[335px] rounded-2xl flex-col border hover:border-primary hover:shadow-primary-500 shadow-md border-grey-50 group z-10 relative'}>
+    <Div className={'w-[248px] h-[335px] rounded-2xl flex-col border transition duration-300 hover:border-primary hover:shadow-primary-500 shadow-md border-grey-50 group z-10 relative'}>
       <Div className={'absolute top-2 w-full justify-between'}>
         <Div className={'gap-2 pl-2 group-hover:opacity-0 opacity-100 duration-300'}>
           {isHealthy ? (
@@ -24,7 +24,7 @@ const ProductItem = ({ image, title, price, rate, isHealthy, isNew }: ProductIte
             </Div>
           ) : null}
         </Div>
-        <Button className={'border border-grey-50 group-hover:opacity-100 group-hover:!border-black opacity-0 mr-4 duration-300 bg-white'} startAdornment={<HeartIcon />} color={'frost'} shape={'square'} size={'medium'} rounded={'full'} />
+        <Button className={'border border-grey-50 group-hover:opacity-100 group-hover:!border-black opacity-0 mr-4 transition duration-300 bg-white'} startAdornment={<HeartIcon />} color={'frost'} shape={'square'} size={'medium'} rounded={'full'} />
       </Div>
       <Div className={'rounded-t-2xl'}>
         <Image className={'rounded-t-2xl'} src={image} alt={title} width={248} height={248} />
