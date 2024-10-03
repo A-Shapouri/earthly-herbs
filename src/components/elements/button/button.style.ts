@@ -2,7 +2,7 @@ import { Shape, Variant, ButtonColor } from './button.props';
 import { Sizes } from '@types';
 
 export const SIZES = {
-  large: 'h-10 min-h-10 md:h-12 md:min-h-12 text-m-md md:text-d-sm gap-x-6 px-6',
+  large: 'h-10 min-h-10 md:h-12 md:min-h-12 text-m-md md:text-d-sm md:gap-x-6 gap-x-2 md:px-6 px-2',
   medium: 'h-9 min-h-9 md:h-10 md:min-h-10 text-m-sm md:text-d-sm gap-x-3 px-4',
   small: 'h-[30px] min-h-[30px] md:h-9 md:min-h-9 text-m-sm md:text-d-xs gap-x-2 px-4',
 };

@@ -19,7 +19,7 @@ const Services = () => {
   }, [index]);
 
   return (
-    <Div className={'p-10 flex-col gap-16 items-start justify-start my-36'}>
+    <Div className={'md:p-10 py-3 px-6 flex-col md:gap-16 gap-4 items-start justify-start md:my-36 my-3'}>
       <ServiceItem
         title={'Free Shipping'}
         subTitle={'Free shipping on all your order'}

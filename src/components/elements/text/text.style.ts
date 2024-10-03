@@ -8,7 +8,7 @@ export const MOBILE_SIZE = {
   'xxs': 'text-m-xxs',
   'xs': 'text-m-xs',
   'sm': 'text-m-sm',
-  'base': 'text-m-base=',
+  'base': 'text-m-base',
   'md': 'text-m-md',
   'lg': 'text-m-lg',
   'xl': 'text-m-xl',
@@ -21,12 +21,12 @@ export const DESKTOP_SIZE = {
   'xxs': 'md:text-d-xxs',
   'xs': 'md:text-d-xs',
   'sm': 'md:text-d-sm',
-  'base': 'md:text-d-base=',
+  'base': 'md:text-d-base',
   'md': 'md:text-d-md',
   'lg': 'md:text-d-lg',
   'xl': 'md:text-d-xl',
   'xxl': 'md:text-d-xxl',
-  'huge': 'md:text-d-huge leading-[57px]',
+  'huge': 'md:text-d-huge',
 };
 
 export const ALIGN = {

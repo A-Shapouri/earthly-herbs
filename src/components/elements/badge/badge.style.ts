@@ -25,7 +25,7 @@ export const SHAPES = ({ size, shape, variant }: { size: Size, shape: Shape, var
   if (size === 'tiny') {
     className = `min-w-[12px] h-3 p-0 px-1 ${className}`;
   } else if (size === 'small') {
-    className = `min-w-[16px] h-4 p-0 px-1 ${className}`;
+    className = `min-w-3 h-3 p-0 md:min-w-[16px] md:h-4 md:p-0 md:px-1 ${className}`;
   } else if (size === 'medium') {
     className = `min-w-[20px] h-5 p-0 px-1 ${className}`;
   } else if (size === 'large') {

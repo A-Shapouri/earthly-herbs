@@ -2,7 +2,7 @@ import React from 'react';
 
 const SecurePayIcon = () => {
   return (
-    <svg width="65" height="32" viewBox="0 0 65 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg className={'h-6 w-12 md:h-8 md:w-[65px]'} width="65" height="32" viewBox="0 0 65 32" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect x="0.5" y="0.5" width="64" height="31" rx="4.79412" fill="#002603" stroke="#173B1A" />
       <g clip-path="url(#clip0_33_1541)">
         <rect width="11" height="11" transform="translate(5 4)" fill="#002603" />
