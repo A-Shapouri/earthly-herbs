@@ -1,10 +1,10 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import Text from '../text';
 interface IProps {
   open?: boolean;
   header: string | React.ReactNode;
-  children: string
+  children: ReactNode
 }
 import ArrowUpIcon from '@icons-components/arrow-up';
 import classNames from '@utils/helpers/class-names';

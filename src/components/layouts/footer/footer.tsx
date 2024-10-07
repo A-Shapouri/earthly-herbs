@@ -1,10 +1,10 @@
 import React from 'react';
-import Div from '@elements/div'
-import Wrapper from '@layouts/wrapper'
+import Div from '@elements/div';
+import Wrapper from '@layouts/wrapper';
 import MazeImage from '@images-components/maze';
-import Text from '@elements/text'
-import TempImage from '../../../../public/images/footer/temp.png'
-import Image from 'next/image'
+import Text from '@elements/text';
+import TempImage from '../../../../public/images/footer/temp.png';
+import Image from 'next/image';
 import ApplePayIcon from '@icons-components/apple-pay';
 import InstagramIcon from '@icons-components/instagram';
 import TwitterIcon from '@icons-components/twitter';
@@ -13,8 +13,19 @@ import VisaIcon from '@icons-components/visa';
 import DiscoverIcon from '@icons-components/discover';
 import MasterIcon from '@icons-components/master';
 import SecurePayIcon from '@icons-components/secure-pay';
-import Media from '@elements/media'
+import Media from '@elements/media';
+import { useParams, usePathname } from 'next/navigation';
 const Footer = () => {
+  const currentRoute = usePathname();
+  const { lang } = useParams<{ lang: string }>();
+  const RoutesWithoutFooter: Array<string> = [
+    `/${lang}/shop`,
+  ];
+
+  if (RoutesWithoutFooter.indexOf(currentRoute) !== -1) {
+    return null;
+  }
+
   return (
     <Div className={'bg-desolace-500 w-full justify-between gap-8 md:gap-0 md:pt-28 pt-6 items-center relative flex-col'}>
       <Wrapper className={'justify-between flex-col md:flex-row px-5 gap-0 md:gap-10'}>

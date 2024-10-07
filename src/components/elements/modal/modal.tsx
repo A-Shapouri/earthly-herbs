@@ -35,7 +35,7 @@ export const Modal = ({ open, position = 'float', children, onClose, className, 
         <Div onClick={onClose} className={'-z-10 w-screen h-dvh absolute'} />
         <Div
           className={classNames(
-            'w-full h-auto rounded-tr-2xl rounded-tl-2xl justify-center overflow-hidden',
+            'w-full h-auto justify-center overflow-hidden',
             wrapperClassName,
           )}
         >

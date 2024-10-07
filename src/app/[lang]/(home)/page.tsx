@@ -4,7 +4,7 @@ import Products from './components/products';
 import Blends from './components/blends';
 import AboutEarthly from './components/about-earthly';
 import Articles from './components/articles';
-import Newsletter from './components/newsletter'
+import Newsletter from './components/newsletter';
 
 const Home = () => {
   return (

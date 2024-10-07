@@ -11,7 +11,7 @@ export const Checkbox = ({ color = 'primary', className, onChange, checked, disa
       checked={checked}
       disabled={disabled}
       className={classNames(
-        'h-5 w-5 rounded-2xl cursor-pointer',
+        'rounded-2xl cursor-pointer',
         COLORS[color],
         SIZES[size],
         className,

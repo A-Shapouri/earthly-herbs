@@ -44,7 +44,7 @@ const DrawerMenu = ({ open, onClose }: { open: boolean, onClose: () => void }) =
     }>
       {open ? <Div className={`-z-10 w-screen h-dvh absolute`} onClick={onClose} /> : null}
       <Div className={classNames('transition-all flex-col duration-500 absolute w-full left-0 bg-white p-5',
-        open ? 'h-80 opacity-100 z-5' : 'h-0 opacity-0 -z-5',
+        open ? 'h-80 visible opacity-100 z-5' : 'h-0 hidden opacity-0 -z-5',
       )}>
         {open ? (
           <Div className={'w-full flex-col h-full gap-5'}>

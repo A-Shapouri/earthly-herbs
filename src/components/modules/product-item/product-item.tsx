@@ -36,7 +36,7 @@ const ProductItem = ({ image, title, price, rate, isHealthy, isNew }: ProductIte
       <Div className={'rounded-t-xl md:rounded-t-2xl'}>
         <Image className={'rounded-t-xl md:rounded-t-2xl'} src={image} alt={title} />
       </Div>
-      <Div className={'w-full rounded-b-xl md:rounded-b-2xl bg-white justify-between md:px-4 px-3 md:pb-4 pb-2 md:pt-3 pt-1'}>
+      <Div className={'w-full items-center rounded-b-xl md:rounded-b-2xl bg-white justify-between md:px-4 px-3 md:pb-4 pb-2 md:pt-3 pt-1'}>
         <Div className={'flex-col justify-between items-start gap-1'}>
           <Div className={'flex-col'}>
             <Text color={'grey.900'} type={'medium'} typography={['xs', 'xs']}>{title}</Text>
