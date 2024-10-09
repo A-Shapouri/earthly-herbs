@@ -27,25 +27,27 @@ const Shop = () => {
       </Div>
       <Wrapper className={'px-5 md:flex-row-reverse flex-col pt-4 gap-4 pb-24 md:gap-16 md:pt-16'}>
         <Div className={'gap-4 md:gap-6 flex-col w-full'}>
-          <Div className={'justify-between'}>
-            <Div className='items-center gap-2 w-64'>
-              <Text color={'grey.500'} className={'whitespace-nowrap'} type={'medium'} typography={['xs', 'xs']}>Sort by:</Text>
-              <Select
-                variant='outlined'
-                size={'small'}
-                rounded={'small'}
-                id={'id'}
-                text={'value'}
-                onChange={(newValue) => setSortValue(newValue)}
-                value={sortValue}
-                optionsList={[
-                  { id: '1', value: 'Price - High to Low' },
-                  { id: '2', value: 'Price - Low to High' },
-                  { id: '3', value: 'Price - Popularity' },
-                  { id: '4', value: 'Discount' },
-                  { id: '5', value: 'Caffeine Level' }]}
-              />
-            </Div>
+          <Div className={'md:justify-between justify-start'}>
+            <Media className={'w-64'} greaterThan={'sm'}>
+              <Div className='items-center gap-2 w-full'>
+                <Text color={'grey.500'} className={'whitespace-nowrap'} type={'medium'} typography={['xs', 'xs']}>Sort by:</Text>
+                <Select
+                  variant='outlined'
+                  size={'small'}
+                  rounded={'small'}
+                  id={'id'}
+                  text={'value'}
+                  onChange={(newValue) => setSortValue(newValue)}
+                  value={sortValue}
+                  optionsList={[
+                    { id: '1', value: 'Price - High to Low' },
+                    { id: '2', value: 'Price - Low to High' },
+                    { id: '3', value: 'Price - Popularity' },
+                    { id: '4', value: 'Discount' },
+                    { id: '5', value: 'Caffeine Level' }]}
+                />
+              </Div>
+            </Media>
             <Text color={'grey.900'} typography={['lg', 'sm']} type={'medium'}><Text type={'bold'} typography={['lg', 'sm']} variant={'span'} className={'mr-1'}>52</Text>Results Found!</Text>
           </Div>
           <Div className={'grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-x-5 md:gap-y-10'}>
