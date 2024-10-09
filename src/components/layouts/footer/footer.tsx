@@ -23,9 +23,18 @@ const Footer = () => {
   ];
 
   if (RoutesWithoutFooter.indexOf(currentRoute) !== -1) {
-    return null;
+    return (
+      <Media greaterThan={'sm'}>
+        <FooterIndex />
+      </Media>);
   }
 
+  return (
+    <FooterIndex />
+  );
+};
+
+const FooterIndex = () => {
   return (
     <Div className={'bg-desolace-500 w-full justify-between gap-8 md:gap-0 md:pt-28 pt-6 items-center relative flex-col'}>
       <Wrapper className={'justify-between flex-col md:flex-row px-5 gap-0 md:gap-10'}>

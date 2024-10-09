@@ -55,6 +55,12 @@
       "@types": [
         "types"
       ],
+      "@dictionaries": [
+        "dictionaries/dictionaries.ts"
+      ],
+      "@dictionaries-client": [
+        "dictionaries/dictionaries-client.ts"
+      ]
     },
     "incremental": true,
     "plugins": [

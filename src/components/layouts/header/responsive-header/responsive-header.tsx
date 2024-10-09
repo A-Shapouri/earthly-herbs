@@ -10,17 +10,22 @@ import Image from 'next/image';
 import Text from '@elements/text';
 import classNames from '@utils/helpers/class-names';
 import Link from 'next/link';
+import routes from '@routes';
+import getParseRoute from '@utils/helpers/parse-route';
+import { useParams } from 'next/navigation';
+import { DictionariesTypes } from '@dictionaries';
 
 const ResponsiveHeader = () => {
   const [open, setOpen] = useState(false);
+  const { lang } = useParams<{ lang: DictionariesTypes }>();
 
   return (
     <Div className={'w-full px-5 bg-white justify-between items-center h-16 transition-all duration-300 relative'}>
       <Div className={'items-center gap-3'}>
         <Button onClick={() => setOpen(!open)} iconSize={'large'} startAdornment={<HameMenuIcon close={open} />} variant='text' className={'!text-black hover:!text-primary-700 active:!text-primary'} size='small' shape='square' color='primary' />
-        <Div className={'relative w-[32px] h-[21px] z-10'}>
+        <Link href={getParseRoute({ pathname: routes['route.home.index'], locale: lang })} className={'relative w-[32px] h-[21px] z-10'}>
           <Image quality={100} fill={true} alt={'earthly logo'} src={'/images/earthly-logo.png'} />
-        </Div>
+        </Link>
       </Div>
       <Div className={'items-center gap-3'}>
         <Badge color='primary' size='small' badgeContent={2}>
@@ -28,14 +33,14 @@ const ResponsiveHeader = () => {
         </Badge>
         <Button iconSize={'large'} startAdornment={<ProfileIcon />} variant='text' size='small' shape='square' color='primary' />
       </Div>
-      <DrawerMenu open={open} onClose={() => setOpen(false)} />
+      <DrawerMenu lang={lang} open={open} onClose={() => setOpen(false)} />
     </Div>
   );
 };
 
 export default ResponsiveHeader;
 
-const DrawerMenu = ({ open, onClose }: { open: boolean, onClose: () => void }) => {
+const DrawerMenu = ({ open, onClose, lang }: { open: boolean, onClose: () => void, lang: DictionariesTypes }) => {
   return (
     <Div className={
       classNames(
@@ -48,19 +53,19 @@ const DrawerMenu = ({ open, onClose }: { open: boolean, onClose: () => void }) =
       )}>
         {open ? (
           <Div className={'w-full flex-col h-full gap-5'}>
-            <Link className={'h-10'} href={'/en'}>
+            <Link onClick={onClose} className={'h-10'} href={getParseRoute({ pathname: routes['route.home.index'], locale: lang })}>
               <Text typography={['md', 'md']} color={'grey.700'}>Home</Text>
             </Link>
-            <Link className={'h-10'} href={'/en'}>
+            <Link onClick={onClose} className={'h-10'} href={getParseRoute({ pathname: routes['route.shop.index'], locale: lang })}>
               <Text typography={['md', 'md']} color={'grey.700'}>Shop</Text>
             </Link>
-            <Link className={'h-10'} href={'/en'}>
+            <Link onClick={onClose} className={'h-10'} href={'/en'}>
               <Text typography={['md', 'md']} color={'grey.700'}>Collections</Text>
             </Link>
-            <Link className={'h-10'} href={'/en'}>
+            <Link onClick={onClose} className={'h-10'} href={'/en'}>
               <Text typography={['md', 'md']} color={'grey.700'}>Blog</Text>
             </Link>
-            <Link className={'h-10'} href={'/en'}>
+            <Link onClick={onClose} className={'h-10'} href={'/en'}>
               <Text typography={['md', 'md']} color={'grey.700'}>About Us</Text>
             </Link>
           </Div>

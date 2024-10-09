@@ -30,7 +30,7 @@ const MobileFilter = () => {
 
   return (
     <Div className={'flex-col'}>
-      <Div className={'fixed shadow-md bottom-0 right-0 bg-white h-[85px] w-full z-10 items-center justify-evenly'}>
+      <Div className={'fixed shadow-md bottom-0 right-0 bg-white h-[85px] w-full z-10 items-center justify-evenly drop-shadow-2xl shadow-brown-800'}>
         <Button onClick={handleFilterModal} color={'frost'} className={'flex-col gap-2'} variant={'text'} startAdornment={<FilterIcon />}>
           Filter
         </Button>
@@ -69,7 +69,7 @@ const MobileFilter = () => {
             <Text typography={['lg', 'lg']}>Filters</Text>
             <Button className={'!pr-0'} onClick={handleFilterModal} startAdornment={<CloseIcon />} variant={'text'} color={'frost'} />
           </Div>
-          <Div className={'flex-col w-full gap-6'}>
+          <Div className={'flex-col w-full gap-6 overflow-y-auto overflow-x-hidden max-h-[500px]'}>
             <Collapsible header={'All Categories'}>
               <Div className={'flex-col w-full py-1.5 gap-3'}>
                 <FormControlLabel className={'pl-0 pt-1.5'} label={'Day (50)'}>
@@ -91,33 +91,33 @@ const MobileFilter = () => {
             </Collapsible>
             <Divider />
             <Collapsible header={'Price'}>
-              <Div className={'flex-col w-full pt-5'}>
+              <Div className={'flex-col w-full pt-5 px-3'}>
                 <MultiRangeSlider min={0} max={1700} step={1} value={value} onChange={setValue} />
               </Div>
             </Collapsible>
             <Divider />
             <Collapsible header={'Caffeine level'}>
               <Div className={'flex-col w-full py-4 gap-2'}>
-                <Div className={'gap-2'}>
+                <label className={'gap-2 flex'}>
                   <Checkbox size={'tiny'} />
                   <Rating size={['xs', 'xs']} value={5} />
-                </Div>
-                <Div className={'gap-2'}>
+                </label>
+                <label className={'gap-2 flex'}>
                   <Checkbox size={'tiny'} />
                   <Rating size={['xs', 'xs']} value={4} />
-                </Div>
-                <Div className={'gap-2'}>
+                </label>
+                <label className={'gap-2 flex'}>
                   <Checkbox size={'tiny'} />
                   <Rating size={['xs', 'xs']} value={3} />
-                </Div>
-                <Div className={'gap-2'}>
+                </label>
+                <label className={'gap-2 flex'}>
                   <Checkbox size={'tiny'} />
                   <Rating size={['xs', 'xs']} value={2} />
-                </Div>
-                <Div className={'gap-2'}>
+                </label>
+                <label className={'gap-2 flex'}>
                   <Checkbox size={'tiny'} />
                   <Rating size={['xs', 'xs']} value={1} />
-                </Div>
+                </label>
               </Div>
             </Collapsible>
             <Divider />
@@ -132,10 +132,10 @@ const MobileFilter = () => {
               </Div>
             </Collapsible>
             <Divider />
-            <Div className={'w-full gap-4'}>
-              <Button size={'large'} color={'frost'} className={'w-full'}>Clear All</Button>
-              <Button onClick={handleFilterModal} size={'large'} className={'w-full'}>View 10 Results</Button>
-            </Div>
+          </Div>
+          <Div className={'w-full gap-4'}>
+            <Button size={'large'} color={'frost'} className={'w-full'}>Clear All</Button>
+            <Button onClick={handleFilterModal} size={'large'} className={'w-full'}>View 10 Results</Button>
           </Div>
         </Div>
       </Modal>

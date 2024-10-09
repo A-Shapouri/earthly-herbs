@@ -25,7 +25,7 @@ const ProductItem = ({ image, title, price, rate, isHealthy, isNew }: ProductIte
           ) : null}
         </Div>
         <Button
-          className={'border border-grey-50 group-hover:opacity-100 opacity-0 md:mr-4 mr-2 transition duration-300 bg-white hover:!bg-secondary-800 active:!bg-secondary-300'}
+          className={'border border-grey-50 group-hover:opacity-100 opacity-0 md:mr-4 mr-2 transition duration-300 bg-white hover:!bg-grey-300 active:!bg-grey-200'}
           startAdornment={<HeartIcon />}
           color={'frost'}
           shape={'square'}
@@ -44,7 +44,7 @@ const ProductItem = ({ image, title, price, rate, isHealthy, isNew }: ProductIte
           </Div>
           <Rating size={['xs', 'xxs']} value={rate} />
         </Div>
-        <Button color={'secondary'} className={'group-hover:!text-white !text-black !bg-grey-50 group-hover:!bg-secondary-500 active:!bg-secondary-300 transition-all duration-300'} startAdornment={<CartIcon />} shape={'square'} size={'large'} rounded={'full'} />
+        <Button color={'secondary'} className={'group-hover:!text-white !text-black !bg-grey-50 group-hover:!bg-secondary-500 hover:!bg-secondary-700 transition-all duration-300'} startAdornment={<CartIcon />} shape={'square'} size={'large'} rounded={'full'} />
       </Div>
     </Div>
   );
