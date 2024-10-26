@@ -7,8 +7,8 @@ import Chip from '@elements/chip';
 import FlowerOneImage from '@images-components/flower_one';
 import ArrowRightIcon from '@icons-components/arrow-right';
 import Services from './sub-components/services';
-import DaySymphony from '../../../../../../public/images/home/day-symphony.png'
-import Image from 'next/image'
+import DaySymphony from '../../../../../../public/images/home/day-symphony.png';
+import Image from 'next/image';
 
 const Intro = () => {
   return (

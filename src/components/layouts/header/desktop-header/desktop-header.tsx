@@ -23,8 +23,8 @@ import Select from '@elements/select';
 const DesktopHeader = () => {
   const { lang } = useParams<{ lang: DictionariesTypes }>();
   const pathname = usePathname();
-  const [locale, setLocale] = useState(lang)
-  const [currency, setCurrency] = useState('USD')
+  const [locale, setLocale] = useState(lang);
+  const [currency, setCurrency] = useState('USD');
 
   return (
     <AppBar position={'sticky'} className={'flex-col items-center justify-center'}>
@@ -105,10 +105,10 @@ const DesktopHeader = () => {
             </Div>
             <Div className={'items-center gap-5'}>
               <TextField inputClassName='pr-[104px]' size='small' rounded='full' className='w-[334px]' endAdornment={<Button className='w-24' size={'small'} rounded='full'>Search</Button>} placeholder='Search product name, ...' />
-              <Badge color='primary' size='small' badgeContent={2}>
-                <Button className={'!text-black'} iconSize={'large'} startAdornment={<CartIcon />} variant='text' size='small' shape='square' color='primary' />
+              <Badge color='primary' size='sm' variant='dot' badgeContent={2}>
+                <Button className={'!text-black hover:!text-control-500 active:!text-control-700'} iconSize={'large'} startAdornment={<CartIcon />} variant='text' size='small' shape='square' color='primary' />
               </Badge>
-              <Button iconSize={'large'} startAdornment={<ProfileIcon />} variant='text' size='small' shape='square' color='primary' />
+              <Button className={''} iconSize={'large'} startAdornment={<ProfileIcon />} variant='text' size='small' shape='square' color='primary' />
             </Div>
           </Div>
         </Div>

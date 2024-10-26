@@ -15,7 +15,7 @@ const DesktopFilter = () => {
 
   return (
     <Div className={'flex-col gap-6'}>
-      <Button className={'w-36'} startAdornment={<FilterSimpleIcon />}>
+      <Button data-ripple-light="true" className={'w-36'} startAdornment={<FilterSimpleIcon />}>
         Filter
       </Button>
       <Div className={'flex-col w-full gap-6'}>
@@ -64,7 +64,7 @@ const DesktopFilter = () => {
               <Rating size={['xs', 'xs']} value={2} />
             </label>
             <label className={'gap-2 flex'}>
-              <Checkbox size={'tiny'} />
+              <Checkbox size={'medium'} />
               <Rating size={['xs', 'xs']} value={1} />
             </label>
           </Div>
