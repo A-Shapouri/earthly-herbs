@@ -16,12 +16,12 @@ import Media from '@elements/media';
 const Products = () => {
   return (
     <Wrapper className={'flex-col md:pt-24 pt-5 items-center md:pb-32 pb-5 relative'}>
-      {/* <Div className={'absolute top-[145px] -left-40'}>
+      <Div className={'absolute top-[145px] -left-40'}>
         <FlowerTwoImage />
       </Div>
       <Div className={'absolute bottom-40 -right-32'}>
         <FlowerThreeImage />
-      </Div> */}
+      </Div>
       <Div className={'flex-col items-center w-full justify-center md:gap-2 gap-1'}>
         <Text color={'primary'} type={'normal'} typography={['xxs', 'xs']}>PRODUCTS</Text>
         <Text type={'bold'} typography={['xl', 'xxl']}>Our Featured Products</Text>

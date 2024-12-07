@@ -2,10 +2,8 @@ import { StaticImageData } from 'next/image';
 
 export interface ProductItemProps {
     image: StaticImageData
-    title: string
+    name: string
     price: string
-    rate: number,
-    isHealthy?: boolean
-    isNew?: boolean
+    amount: number
     id: number
 }

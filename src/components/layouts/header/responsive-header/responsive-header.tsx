@@ -28,10 +28,10 @@ const ResponsiveHeader = () => {
         </Link>
       </Div>
       <Div className={'items-center gap-3'}>
-        <Badge color='primary' size='small' badgeContent={2}>
+        <Badge color='primary' size='xs' badgeContent={2}>
           <Button className={'!text-black'} iconSize={'large'} startAdornment={<CartIcon />} variant='text' size='small' shape='square' color='primary' />
         </Badge>
-        <Button iconSize={'large'} startAdornment={<ProfileIcon />} variant='text' size='small' shape='square' color='primary' />
+        <Button iconSize={'large'} className='!text-black' startAdornment={<ProfileIcon />} variant='text' size='small' shape='square' color='primary' />
       </Div>
       <DrawerMenu lang={lang} open={open} onClose={() => setOpen(false)} />
     </Div>

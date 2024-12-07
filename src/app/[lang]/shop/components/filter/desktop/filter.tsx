@@ -48,19 +48,19 @@ const DesktopFilter = () => {
         <Collapsible open={true} header={'Caffeine level'}>
           <Div className={'flex-col w-full py-4 gap-2'}>
             <label className={'gap-2 flex'}>
-              <Checkbox size={'tiny'} />
+              <Checkbox size={'medium'} />
               <Rating size={['xs', 'xs']} value={5} />
             </label>
             <label className={'gap-2 flex'}>
-              <Checkbox size={'tiny'} />
+              <Checkbox size={'medium'} />
               <Rating size={['xs', 'xs']} value={4} />
             </label>
             <label className={'gap-2 flex'}>
-              <Checkbox size={'tiny'} />
+              <Checkbox size={'medium'} />
               <Rating size={['xs', 'xs']} value={3} />
             </label>
             <label className={'gap-2 flex'}>
-              <Checkbox size={'tiny'} />
+              <Checkbox size={'medium'} />
               <Rating size={['xs', 'xs']} value={2} />
             </label>
             <label className={'gap-2 flex'}>

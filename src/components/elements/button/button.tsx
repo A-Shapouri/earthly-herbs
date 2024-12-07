@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { ButtonProps } from './button.props';
 import classNames from '@utils/helpers/class-names';
 import { COLOR_VARIANTS, DISABLED_VARIANTS, ICON_SIZES, ROUNDED, SHAPES, SIZES } from './button.style';
@@ -39,7 +39,7 @@ export const Button = (props: ButtonProps) => {
 
   const rippleRef = useRef();
   const clickOnButton = (event: any) => {
-    rippleEffect(event);
+    // rippleEffect(event);
     if (!disabled && onClick && typeof onClick !== 'undefined') {
       onClick();
     }

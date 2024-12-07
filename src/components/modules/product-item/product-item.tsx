@@ -5,10 +5,10 @@ import Button from '@elements/button';
 import Image from 'next/image';
 import { ProductItemProps } from './prodcut-item.props';
 import Rating from '@elements/rating';
-import CartIcon from '@icons-components/cart';
 import HeartIcon from '@icons-components/heart';
+import ProductAction from './action';
 
-const ProductItem = ({ image, title, price, rate, isHealthy, isNew }: ProductItemProps) => {
+const ProductItem = ({ image, title, price, rate, isHealthy, isNew, id }: ProductItemProps) => {
   return (
     <Div className={'rounded-xl md:rounded-2xl flex-col border transition duration-300 hover:border-primary hover:shadow-primary-500 shadow-sm md:shadow-md border-grey-50 group z-10 relative'}>
       <Div className={'absolute top-2 w-full justify-between'}>
@@ -40,11 +40,16 @@ const ProductItem = ({ image, title, price, rate, isHealthy, isNew }: ProductIte
         <Div className={'flex-col justify-between items-start gap-1'}>
           <Div className={'flex-col'}>
             <Text color={'grey.900'} type={'medium'} typography={['xs', 'xs']}>{title}</Text>
-            <Text typography={['base', 'sm']}>{price}</Text>
+            <Text typography={['base', 'sm']}>${price}</Text>
           </Div>
           <Rating size={['xs', 'xxs']} value={rate} />
         </Div>
-        <Button color={'secondary'} className={'group-hover:!text-white !text-black !bg-grey-50 group-hover:!bg-secondary-500 hover:!bg-secondary-700 transition-all duration-300'} startAdornment={<CartIcon />} shape={'square'} size={'large'} rounded={'full'} />
+        <ProductAction
+          id={id}
+          image={image}
+          price={price}
+          title={title}
+        />
       </Div>
     </Div>
   );

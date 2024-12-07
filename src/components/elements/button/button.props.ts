@@ -62,6 +62,7 @@ export interface ButtonProps extends Omit<React.HTMLProps<HTMLButtonElement | HT
 
 export interface ButtonPropsColorOverrides {
   frost
+  flurries
 }
 
 export interface ButtonPropsShapeOverrides {

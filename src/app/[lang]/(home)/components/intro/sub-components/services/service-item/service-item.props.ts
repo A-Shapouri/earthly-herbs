@@ -6,6 +6,4 @@ export interface ServiceItemProps {
     subTitle: string
 
     children: ReactNode
-
-    active: boolean
 }

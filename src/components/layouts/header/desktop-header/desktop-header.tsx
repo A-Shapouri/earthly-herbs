@@ -5,7 +5,6 @@ import Text from '@elements/text';
 import PhoneIcon from '@icons-components/phone';
 import LocationIcon from '@icons-components/location';
 import Image from 'next/image';
-import ArrowDownIcon from '@icons-components/arrow-down';
 import Button from '@elements/button';
 import Link from 'next/link';
 import TextField from '@elements/text-field';
@@ -19,12 +18,26 @@ import { useParams, usePathname } from 'next/navigation';
 import { DictionariesTypes } from '@dictionaries';
 import classNames from '@utils/helpers/class-names';
 import Select from '@elements/select';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@store/root-reducer';
+import { useRouter } from 'next-nprogress-bar';
+import { ShopActions } from '@store/shop/shop-actions';
 const DesktopHeader = () => {
   const { lang } = useParams<{ lang: DictionariesTypes }>();
+  const dispatch = useDispatch();
   const pathname = usePathname();
   const [locale, setLocale] = useState(lang);
-  const [currency, setCurrency] = useState('USD');
+  const router = useRouter();
+
+  const { cart, currency } = useSelector((state: RootState) => state.shop);
+
+  const handleCart = () => {
+    router.push(getParseRoute({ pathname: routes['route.shop.cart'], locale: lang }));
+  };
+
+  const handleNewCurrency = (newValue: 'CAD' | 'USD') => {
+    dispatch(ShopActions.setCurrency({ currency: newValue }));
+  };
 
   return (
     <AppBar position={'sticky'} className={'flex-col items-center justify-center'}>
@@ -63,7 +76,7 @@ const DesktopHeader = () => {
                   rounded={'small'}
                   id={'id'}
                   text={'value'}
-                  onChange={(newValue) => setCurrency(newValue)}
+                  onChange={(newValue) => handleNewCurrency(newValue)}
                   value={currency}
                   optionsList={[
                     { id: 'USD', value: 'USD' },
@@ -105,10 +118,14 @@ const DesktopHeader = () => {
             </Div>
             <Div className={'items-center gap-5'}>
               <TextField inputClassName='pr-[104px]' size='small' rounded='full' className='w-[334px]' endAdornment={<Button className='w-24' size={'small'} rounded='full'>Search</Button>} placeholder='Search product name, ...' />
-              <Badge color='primary' size='sm' variant='dot' badgeContent={2}>
+              {cart.length ? (
+                <Badge color='primary' size='xs' variant='standard' badgeContent={cart.length}>
+                  <Button onClick={handleCart} className={'!text-black hover:!text-control-500 active:!text-control-700'} iconSize={'large'} startAdornment={<CartIcon />} variant='text' size='small' shape='square' color='primary' />
+                </Badge>
+              ) : (
                 <Button className={'!text-black hover:!text-control-500 active:!text-control-700'} iconSize={'large'} startAdornment={<CartIcon />} variant='text' size='small' shape='square' color='primary' />
-              </Badge>
-              <Button className={''} iconSize={'large'} startAdornment={<ProfileIcon />} variant='text' size='small' shape='square' color='primary' />
+              )}
+              <Button className={'!text-black hover:!text-control-500 active:!text-control-700'} iconSize={'large'} startAdornment={<ProfileIcon />} variant='text' size='small' shape='square' color='primary' />
             </Div>
           </Div>
         </Div>

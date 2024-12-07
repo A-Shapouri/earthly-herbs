@@ -31,6 +31,7 @@ export const DISABLED_VARIANTS = {
 
 export const COLORS = {
   frost: 'bg-frost border-frost text-black active:text-black hover:bg-frost-dark active:bg-frost-light',
+  flurries: 'bg-flurries border-flurries text-black active:text-black hover:bg-flurries-dark active:bg-flurries-light',
   inherit: 'bg-transparent hover:bg-transparent',
   primary: 'bg-primary border-primary text-white hover:bg-primary-dark',
   danger: 'bg-danger border-danger text-white hover:bg-danger-dark active:bg-danger-light',

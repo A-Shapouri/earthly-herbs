@@ -17,14 +17,13 @@ export const Badge = (props: BadgeProps) => {
     className,
     anchorOrigin = { vertical: 'top', horizontal: 'right' },
   } = props;
-  console.log('here', size, TYPOGRAPHY[size]);
   const content: string | number = variant !== 'dot' ? (max < badgeContent ? `${max}+` : badgeContent) : '';
   return (
     <div className={classNames('inline-flex relative shrink-0 w-fit', className)}>
       {children}
       <Text
         color={'inherit'}
-        typography={[size, size]}
+        typography={['xxs', 'tiny']}
         className={classNames(
           'absolute flex flex-row-reverse justify-center items-center rounded-full',
           max < badgeContent ? '!w-auto' : '',
