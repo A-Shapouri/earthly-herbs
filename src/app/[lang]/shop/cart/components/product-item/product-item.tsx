@@ -9,7 +9,7 @@ import TrashIcon from '@icons-components/trash';
 import { ShopActions } from '@store/shop/shop-actions';
 import { useDispatch } from 'react-redux';
 import { ProductItemProps } from './prodcut-item.props'
-const ProductItem = ({ image, name, price, id, amount }: ProductItemProps) => {
+const ProductItem = ({image, name, price, id, amount, key}: ProductItemProps) => {
   const dispatch = useDispatch();
 
   const handleRemoveProduct = () => {

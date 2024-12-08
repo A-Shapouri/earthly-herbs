@@ -7,6 +7,7 @@ export const initialState: ShopReducerProps = {
   currency: 'USD',
   couponModal: false,
   couponValue: '',
+  isCouponValid: false
 };
 
 function shopReducer(state = initialState, action: any) {
@@ -71,8 +72,20 @@ function shopReducer(state = initialState, action: any) {
       return {
         ...state,
         couponModal: action.data.open,
-
       };
+
+    case ShopActionTypes.SET_COUPON_VALUE:
+      return {
+        ...state,
+        couponValue: action.data.value,
+      }
+
+    case ShopActionTypes.VALIDATE_COUPON_CODE:
+      return {
+        ...state,
+        isCouponValid: true,
+        couponModal: false,
+      }
 
     default:
       return state;

@@ -5,20 +5,34 @@ import Button from '@elements/button';
 import Text from '@elements/text';
 import CrossIcon from '@icons-components/cross';
 import TextField from '@elements/text-field';
+import {useDispatch, useSelector} from "react-redux";
+import {ShopActions} from "@store/shop/shop-actions";
+import {RootState} from "@store/root-reducer";
 
-const CopuonModal = ({ isShow, closeModal }: { isShow: boolean, closeModal: () => void }) => {
+const CouponModal = ({isShow, closeModal}: { isShow: boolean, closeModal: () => void }) => {
+  const dispatch = useDispatch()
+  const {couponValue} = useSelector((state: RootState) => state.shop);
+
+  const handleCouponValue = (e: any) => {
+      dispatch(ShopActions.setCouponValue({value: e.target.value}))
+  }
+
+  const submitCouponValue = () => {
+    dispatch(ShopActions.validateCouponCode())
+  }
+
   return (
     <Modal open={isShow} onClose={closeModal}>
       <Div className={`relative w-[480px] bg-white z-40 rounded-3xl p-6 flex flex-col justify-center items-center self-center gap-6`}>
         <Div className={'w-full justify-between items-center !text-black'}>
           <Text typography={['base', 'base']} type={'normal'} color={'black'}>Add Coupon</Text>
-          <Button onClick={closeModal} startAdornment={<CrossIcon />} variant={'text'} color='primary' className={'!p-0 !text-black'} />
+          <Button onClick={closeModal} startAdornment={<CrossIcon/>} variant={'text'} color='primary' className={'!p-0 !text-black'}/>
         </Div>
         <Div className='w-full gap-2 justify-start items-start flex-col'>
           <Text typography={['base', 'base']} type={'medium'} color={'black'}>Coupon Number</Text>
-          <TextField placeholder='s12W1q2#!x4ftg' className='w-full' />
+          <TextField value={couponValue} onChange={handleCouponValue} placeholder='s12W1q2#!x4ftg' className='w-full'/>
         </Div>
-        <Button className='w-full' color='secondary' size='medium'>
+        <Button onClick={submitCouponValue} disabled={!couponValue && couponValue.length < 3} className='w-full' color='secondary' size='medium'>
           Apply
         </Button>
       </Div>
@@ -26,4 +40,4 @@ const CopuonModal = ({ isShow, closeModal }: { isShow: boolean, closeModal: () =
   );
 };
 
-export default CopuonModal;
+export default CouponModal;

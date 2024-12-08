@@ -1,3 +1,3 @@
-import CopuonModal from './coupon-modal';
+import CouponModal from './coupon-modal';
 
-export default CopuonModal;
+export default CouponModal;

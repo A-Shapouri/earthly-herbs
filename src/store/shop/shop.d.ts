@@ -4,6 +4,7 @@ export interface ShopReducerProps {
   currency: 'CAD' | 'USD'
   couponModal: boolean
   couponValue: string
+  isCouponValid: boolean
 }
 
 export interface CartProps {
