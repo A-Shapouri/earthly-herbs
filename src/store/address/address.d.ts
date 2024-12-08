@@ -2,6 +2,10 @@ export interface AddressReducerProps {
   addresses: Array<AddressProps>
   shippingAddress: AddressProps | null
   addressModal: boolean
+  billingAddress: AddressProps | null
+  newAddress: AddressProps
+  newAddressError: AddressErrorProps
+  newAddressIsValid: boolean
 }
 
 export interface AddressProps {
@@ -15,4 +19,14 @@ export interface AddressProps {
   province: string
   postalCode: string
   phone: string
+}
+
+export interface AddressErrorProps {
+  firstName: boolean
+  lastName: boolean
+  address: boolean
+  country: boolean
+  city: boolean
+  province: boolean
+  postalCode: boolean
 }
