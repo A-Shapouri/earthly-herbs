@@ -6,6 +6,8 @@ export interface AddressReducerProps {
   newAddress: AddressProps
   newAddressError: AddressErrorProps
   newAddressIsValid: boolean
+  billingSameAsShipping: boolean
+  addressListModal: boolean
 }
 
 export interface AddressProps {

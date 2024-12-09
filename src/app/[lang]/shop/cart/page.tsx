@@ -47,7 +47,7 @@ const Cart = () => {
         <Wrapper className={'px-5 md:px-0'}>
           <Breadcrumbs breadcrumbsData={[{
             label: 'Shop',
-            path: 'en/shop',
+            path: '/en/shop',
           },
           {
             label: 'Cart',

@@ -1,5 +1,7 @@
+import {AddressProps} from "@store/address/address";
 
 export interface AddressItemProps {
-  name: string,
-  address: string,
+  address: AddressProps,
+  selectable?: boolean
+  shipping?: boolean
 }

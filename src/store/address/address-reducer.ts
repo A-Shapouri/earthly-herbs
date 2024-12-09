@@ -28,19 +28,30 @@ export const initialState: AddressReducerProps = {
     postalCode: false,
   },
   newAddressIsValid: true,
+  billingSameAsShipping: false,
+  addressListModal: false,
 };
 
 function addressReducer(state = initialState, action: any) {
   switch (action.type) {
     case AddressActionTypes.ADD_NEW_ADDRESS: {
       const addresses = JSON.parse(JSON.stringify(state.addresses));
-      state.newAddress.id = (Math.random() * 100).toString();
-      addresses.push(state.newAddress);
+      const newId = (Math.random() * 100).toString();
+      if(!addresses.length) {
+
+      }
+      addresses.push({
+        ...state.newAddress,
+        id: newId,
+      });
       return {
         ...state,
         addresses: addresses,
         newAddress: initialState.newAddress,
+        newAddressIsValid: true,
         addressModal: false,
+        shippingAddress: addresses.length === 1 ? addresses[0] : state.shippingAddress,
+        billingAddress: addresses.length === 1 ? addresses[0] : state.billingAddress,
       };
     }
     case AddressActionTypes.EDIT_ADDRESS: {
@@ -52,18 +63,22 @@ function addressReducer(state = initialState, action: any) {
       return {
         ...state,
         shippingAddress: action.data.address,
+        addressListModal: false,
       };
     }
     case AddressActionTypes.SET_ADDRESS_MODAL: {
       return {
         ...state,
         addressModal: action.data.open,
+        newAddress: initialState.newAddress,
+        newAddressIsValid: initialState.newAddressIsValid,
       };
     }
     case AddressActionTypes.SET_BILLING_ADDRESS: {
       return {
         ...state,
         billingAddress: action.data.address,
+        addressListModal: false,
       };
     }
     case AddressActionTypes.SET_NEW_ADDRESS: {
@@ -84,6 +99,17 @@ function addressReducer(state = initialState, action: any) {
         ...state,
         newAddressIsValid: false,
         newAddressError: action.data.errorObject
+      }
+    case AddressActionTypes.SET_ADDRESS_LIST_MODAL:
+      return {
+        ...state,
+        addressListModal: action.data.open,
+      }
+    case AddressActionTypes.SET_BILLING_AS_SHIPPING:
+      return {
+        ...state,
+        billingAddress: state.billingSameAsShipping ? state.addresses[0] : state.shippingAddress,
+        billingSameAsShipping: !state.billingSameAsShipping
       }
     default:
       return state;

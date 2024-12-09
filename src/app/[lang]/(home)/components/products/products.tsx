@@ -28,12 +28,12 @@ const Products = () => {
       </Div>
       <Div className={'md:py-11 pt-6 pb-5 gap-4 px-5 md:px-0 grid grid-cols-2 md:grid-cols-5 justify-center'}>
         <SpecialOffer />
-        <ProductItem isHealthy isNew image={ProductImage2} price={'$14.99'} rate={2} title={'Green Lettuce'} />
-        <ProductItem image={ProductImage1} price={'$16.99'} rate={3} title={'Green Chili'} />
-        <ProductItem isHealthy isNew image={ProductImage2} price={'$29.99'} rate={5} title={'Green Lettuce'} />
-        <ProductItem isHealthy isNew image={ProductImage2} price={'$60.99'} rate={1} title={'Green Lettuce'} />
+        <ProductItem id={1} isHealthy isNew image={ProductImage2} price={'14.99'} rate={2} title={'Green Lettuce'} />
+        <ProductItem id={2} image={ProductImage1} price={'16.99'} rate={3} title={'Green Chili'} />
+        <ProductItem id={3} isHealthy isNew image={ProductImage2} price={'29.99'} rate={5} title={'Green Lettuce'} />
+        <ProductItem id={4} isHealthy isNew image={ProductImage2} price={'60.99'} rate={1} title={'Green Lettuce'} />
         <Media lessThan='md'>
-          <ProductItem isHealthy isNew image={ProductImage2} price={'$60.99'} rate={1} title={'Green Lettuce'} />
+          <ProductItem id={5} isHealthy isNew image={ProductImage2} price={'60.99'} rate={1} title={'Green Lettuce'} />
         </Media>
       </Div>
       <Div className={'md:gap-6 gap-5 flex-col md:flex-row w-full justify-center'}>

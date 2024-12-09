@@ -12,7 +12,7 @@ const PriceInfo = () => {
 
 
   return(
-    <Div className='flex-col border border-grey-50 rounded-3xl'>
+    <Div className='flex-col border border-grey-100 rounded-3xl'>
       <Div className='h-24 items-center px-6 justify-between'>
         <Text color='grey.800' type='medium' typography={['md', 'md']}>Product Total</Text>
         <Text typography={['lg', 'lg']}>${totalPrice}</Text>
