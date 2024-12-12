@@ -22,7 +22,7 @@ const AddAddressModal = ({ isShow, closeModal }: { isShow: boolean, closeModal: 
   };
   return (
     <Modal className={'flex-col-reverse md:flex-col !justify-start md:!justify-center'} open={isShow} onClose={closeModal}>
-      <Div className={`relative w-full md:w-1/2 bg-white z-40 md:rounded-3xl md:p-6 p-4 flex flex-col justify-center items-center self-center gap-10 gap-8`}>
+      <Div className={`relative w-full md:w-1/2 bg-white z-40 md:rounded-3xl md:p-6 p-4 flex flex-col justify-center items-center self-center md:gap-10 gap-8`}>
         <Div className={'w-full justify-between items-center !text-black'}>
           <Text typography={['lg', 'base']} type={'normal'} color={'black'}>New Address</Text>
           <Button onClick={closeModal} startAdornment={<CrossIcon />} variant={'text'} color='primary' className={'!p-0 !text-black'} />
