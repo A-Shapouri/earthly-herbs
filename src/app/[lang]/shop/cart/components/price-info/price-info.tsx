@@ -12,18 +12,18 @@ const PriceInfo = () => {
 
 
   return(
-    <Div className='flex-col border border-grey-100 rounded-3xl'>
-      <Div className='h-24 items-center px-6 justify-between'>
+    <Div className='flex-col border border-grey-100 rounded-3xl w-full'>
+      <Div className='md:h-24 h-16 items-center md:px-6 px-4 justify-between'>
         <Text color='grey.800' type='medium' typography={['md', 'md']}>Product Total</Text>
         <Text typography={['lg', 'lg']}>${totalPrice}</Text>
       </Div>
       <Divider color='control' />
-      <Div className='h-24 items-center px-6 justify-between'>
+      <Div className='md:h-24 h-16 items-center md:px-6 px-4 justify-between'>
         <Text color='grey.800' type='medium' typography={['md', 'md']}>Shipping</Text>
         <Text typography={['lg', 'lg']}>$14.99</Text>
       </Div>
       <Divider color='control' />
-      <Div className='h-24 items-center px-6 justify-between'>
+      <Div className='md:h-24 h-16 items-center md:px-6 px-4 justify-between'>
         <Text color='grey.800' type='medium' typography={['md', 'md']}>Total</Text>
         <Text typography={['lg', 'lg']}>${(parseFloat(totalPrice) + parseFloat('14.99')).toFixed(2)} {currency}</Text>
       </Div>

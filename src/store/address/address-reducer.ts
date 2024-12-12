@@ -30,6 +30,7 @@ export const initialState: AddressReducerProps = {
   newAddressIsValid: true,
   billingSameAsShipping: false,
   addressListModal: false,
+  addressModalType: 'Shipping'
 };
 
 function addressReducer(state = initialState, action: any) {
@@ -104,6 +105,7 @@ function addressReducer(state = initialState, action: any) {
       return {
         ...state,
         addressListModal: action.data.open,
+        addressModalType: action.data.addressModalType,
       }
     case AddressActionTypes.SET_BILLING_AS_SHIPPING:
       return {

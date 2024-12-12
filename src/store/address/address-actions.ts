@@ -24,8 +24,9 @@ const setAddressModal = (data: { open: boolean }) => ({type: AddressActionTypes.
 const setBillingAddress = (data: { address: AddressProps }) => ({type: AddressActionTypes.SET_BILLING_ADDRESS, data: data});
 const setNewAddress = (data: { id: string, value: string }) => ({type: AddressActionTypes.SET_NEW_ADDRESS, data: data});
 const validateNewAddress = () => ({type: AddressActionTypes.VALIDATE_NEW_ADDRESS});
-const setAddressListModal = (data: { open: boolean }) => ({type: AddressActionTypes.SET_ADDRESS_LIST_MODAL, data: data});
+const setAddressListModal = (data: { open: boolean, addressModalType: 'Shipping' | 'Billing' }) => ({type: AddressActionTypes.SET_ADDRESS_LIST_MODAL, data: data});
 const setBillingAsShipping = () => ({type: AddressActionTypes.SET_BILLING_AS_SHIPPING});
+
 export const AddressActions = {
   addNewAddress: addNewAddress,
   editAddress: editAddress,

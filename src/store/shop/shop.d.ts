@@ -5,6 +5,9 @@ export interface ShopReducerProps {
   couponModal: boolean
   couponValue: string
   isCouponValid: boolean
+  shippingOption: ShippingOptionProps | null
+  shippingOptionList: Array<ShippingOptionProps>
+  shippingOptionListModal: boolean
 }
 
 export interface CartProps {
@@ -28,4 +31,11 @@ export interface SendVerificationCodeResponse {
     user_exist: false,
     validation_code_lifetime: number
   }
+}
+
+
+export interface ShippingOptionProps {
+  title: string,
+  description: string,
+  id: string,
 }

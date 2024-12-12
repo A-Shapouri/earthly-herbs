@@ -20,16 +20,15 @@ const AddAddressModal = ({ isShow, closeModal }: { isShow: boolean, closeModal: 
   const handleNewAddress = () => {
     dispatch(AddressActions.validateNewAddress());
   };
-  console.log(newAddressError.firstName)
   return (
-    <Modal open={isShow} onClose={closeModal}>
-      <Div className={`relative w-1/2 bg-white z-40 rounded-3xl p-6 flex flex-col justify-center items-center self-center gap-10`}>
+    <Modal className={'flex-col-reverse md:flex-col !justify-start md:!justify-center'} open={isShow} onClose={closeModal}>
+      <Div className={`relative w-full md:w-1/2 bg-white z-40 md:rounded-3xl md:p-6 p-4 flex flex-col justify-center items-center self-center gap-10 gap-8`}>
         <Div className={'w-full justify-between items-center !text-black'}>
-          <Text typography={['base', 'base']} type={'normal'} color={'black'}>New Address</Text>
+          <Text typography={['lg', 'base']} type={'normal'} color={'black'}>New Address</Text>
           <Button onClick={closeModal} startAdornment={<CrossIcon />} variant={'text'} color='primary' className={'!p-0 !text-black'} />
         </Div>
-        <Div className={'grid grid-cols-2 gap-x-4 gap-y-5 w-full'}>
-          <Div className={'flex-col gap-1 items-start'}>
+        <Div className={'grid grid-cols-2 gap-x-4 md:gap-y-5 gap-y-3 w-full'}>
+          <Div className={'flex-col gap-3 md:gap-1 items-start'}>
             <Text color={'black'} type={'medium'} typography={['base', 'base']}>First Name</Text>
             <TextField
               value={newAddress.firstName}
@@ -39,7 +38,7 @@ const AddAddressModal = ({ isShow, closeModal }: { isShow: boolean, closeModal: 
               helperText={newAddressError.firstName ? 'First name is required' : undefined}
               className={'w-full'} />
           </Div>
-          <Div className={'flex-col gap-1 items-start'}>
+          <Div className={'flex-col gap-3 md:gap-1 items-start'}>
             <Text color={'black'} type={'medium'} typography={['base', 'base']}>Last Name</Text>
             <TextField
               value={newAddress.lastName}
@@ -49,7 +48,7 @@ const AddAddressModal = ({ isShow, closeModal }: { isShow: boolean, closeModal: 
               placeholder={'Last Name'}
               className={'w-full'} />
           </Div>
-          <Div className={'flex-col gap-1 items-start col-span-2'}>
+          <Div className={'flex-col gap-3 md:gap-1 items-start col-span-2'}>
             <Text color={'black'} type={'medium'} typography={['base', 'base']}>Address</Text>
             <TextField
               value={newAddress.address}
@@ -59,7 +58,7 @@ const AddAddressModal = ({ isShow, closeModal }: { isShow: boolean, closeModal: 
               placeholder={'Address'}
               className={'w-full'} />
           </Div>
-          <Div className={'flex-col gap-1 items-start col-span-2'}>
+          <Div className={'flex-col gap-3 md:gap-1 items-start col-span-2'}>
             <Text color={'black'} type={'medium'} typography={['base', 'base']}>Apartment, suite, etc. (Optional)</Text>
             <TextField
               value={newAddress.extra}
@@ -67,7 +66,7 @@ const AddAddressModal = ({ isShow, closeModal }: { isShow: boolean, closeModal: 
               placeholder={'Apartment, suite, etc. (Optional)'}
               className={'w-full'} />
           </Div>
-          <Div className={'flex-col gap-1 items-start'}>
+          <Div className={'flex-col gap-3 md:gap-1 items-start'}>
             <Text color={'black'} type={'medium'} typography={['base', 'base']}>Country/Region</Text>
             <TextField
               value={newAddress.country}
@@ -77,7 +76,7 @@ const AddAddressModal = ({ isShow, closeModal }: { isShow: boolean, closeModal: 
               placeholder={'Country/Region'}
               className={'w-full'} />
           </Div>
-          <Div className={'flex-col gap-1 items-start'}>
+          <Div className={'flex-col gap-3 md:gap-1 items-start'}>
             <Text color={'black'} type={'medium'} typography={['base', 'base']}>City</Text>
             <TextField
               value={newAddress.city}
@@ -87,7 +86,7 @@ const AddAddressModal = ({ isShow, closeModal }: { isShow: boolean, closeModal: 
               placeholder={'City'}
               className={'w-full'} />
           </Div>
-          <Div className={'flex-col gap-1 items-start'}>
+          <Div className={'flex-col gap-3 md:gap-1 items-start'}>
             <Text color={'black'} type={'medium'} typography={['base', 'base']}>Province</Text>
             <TextField
               value={newAddress.province}
@@ -97,7 +96,7 @@ const AddAddressModal = ({ isShow, closeModal }: { isShow: boolean, closeModal: 
               placeholder={'Province'}
               className={'w-full'} />
           </Div>
-          <Div className={'flex-col gap-1 items-start'}>
+          <Div className={'flex-col gap-3 md:gap-1 items-start'}>
             <Text color={'black'} type={'medium'} typography={['base', 'base']}>Postal Code</Text>
             <TextField
               value={newAddress.postalCode}
@@ -107,7 +106,7 @@ const AddAddressModal = ({ isShow, closeModal }: { isShow: boolean, closeModal: 
               placeholder={'Postal Code'}
               className={'w-full'} />
           </Div>
-          <Div className={'flex-col gap-1 items-start col-span-2'}>
+          <Div className={'flex-col gap-3 md:gap-1 items-start col-span-2'}>
             <Text color={'black'} type={'medium'} typography={['base', 'base']}>Phone (optional)</Text>
             <TextField
               value={newAddress.phone}

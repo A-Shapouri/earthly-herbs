@@ -8,6 +8,7 @@ export interface AddressReducerProps {
   newAddressIsValid: boolean
   billingSameAsShipping: boolean
   addressListModal: boolean
+  addressModalType: 'Shipping' | 'Billing'
 }
 
 export interface AddressProps {

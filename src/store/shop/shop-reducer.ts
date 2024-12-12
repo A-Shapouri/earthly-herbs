@@ -7,7 +7,16 @@ export const initialState: ShopReducerProps = {
   currency: 'USD',
   couponModal: false,
   couponValue: '',
-  isCouponValid: false
+  isCouponValid: false,
+  shippingOption: {title: 'Expedited Parcel', description: 'Est delivery: November 22, 2024 – November 23, 2024', id: '1'},
+  shippingOptionList: [
+    {title: 'Expedited Parcel', description: 'Est delivery: November 22, 2024 – November 23, 2024', id: '1'},
+    {title: 'Expedited Parcel', description: 'Est delivery: November 24, 2024 – November 25, 2024', id: '2'},
+    {title: 'Expedited Parcel', description: 'Est delivery: November 26, 2024 – November 27, 2024', id: '3'},
+    {title: 'Expedited Parcel', description: 'Est delivery: November 28, 2024 – November 29, 2024', id: '4'},
+    {title: 'Expedited Parcel', description: 'Est delivery: November 30, 2024 – December 01, 2024', id: '5'},
+  ],
+  shippingOptionListModal: false,
 };
 
 function shopReducer(state = initialState, action: any) {
@@ -85,6 +94,18 @@ function shopReducer(state = initialState, action: any) {
         ...state,
         isCouponValid: true,
         couponModal: false,
+      }
+    case ShopActionTypes.SET_SHIPPING_OPTION: {
+      return {
+        ...state,
+        shippingOption: action.data.option,
+        shippingOptionListModal: false,
+      };
+    }
+    case ShopActionTypes.SET_SHIPPING_OPTION_LIST_MODAL:
+      return {
+        ...state,
+        shippingOptionListModal: action.data.open,
       }
 
     default:

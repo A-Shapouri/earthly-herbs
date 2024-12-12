@@ -20,6 +20,8 @@ const Footer = () => {
   const { lang } = useParams<{ lang: string }>();
   const RoutesWithoutFooter: Array<string> = [
     `/${lang}/shop`,
+    `/${lang}/shop/cart`,
+    `/${lang}/shop/cart/checkout`,
   ];
 
   if (RoutesWithoutFooter.indexOf(currentRoute) !== -1) {

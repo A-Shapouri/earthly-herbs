@@ -39,30 +39,9 @@ export const Button = (props: ButtonProps) => {
 
   const rippleRef = useRef();
   const clickOnButton = (event: any) => {
-    // rippleEffect(event);
     if (!disabled && onClick && typeof onClick !== 'undefined') {
       onClick();
     }
-  };
-
-  const rippleEffect = (event: any) => {
-    const btn = event?.currentTarget;
-    const diameter = Math.max(btn.clientWidth, btn.clientHeight);
-    const radius = diameter / 2;
-    const circle = rippleRef.current
-
-    circle.style.width = circle.style.height = `${diameter}px`;
-    circle.style.left = `${event.clientX - (btn.offsetLeft + radius)}px`;
-    circle.style.top = `${event.clientY - (btn.offsetTop + radius)}px`;
-    circle.classList.add('ripple');
-
-    const ripple = btn.getElementsByClassName('ripple')[0];
-
-    if (ripple) {
-      ripple.remove();
-    }
-
-    btn.appendChild(circle);
   };
 
   const buttonProps = {

@@ -14,11 +14,20 @@ import routes from '@routes';
 import getParseRoute from '@utils/helpers/parse-route';
 import { useParams } from 'next/navigation';
 import { DictionariesTypes } from '@dictionaries';
+import {useSelector} from "react-redux";
+import {RootState} from "@store/root-reducer";
+import {useRouter} from "next-nprogress-bar";
 
 const ResponsiveHeader = () => {
   const [open, setOpen] = useState(false);
-  const { lang } = useParams<{ lang: DictionariesTypes }>();
+  const router = useRouter();
 
+  const { lang } = useParams<{ lang: DictionariesTypes }>();
+  const { cart } = useSelector((state: RootState) => state.shop);
+
+  const handleCart = () => {
+    router.push(getParseRoute({ pathname: routes['route.shop.cart'], locale: lang }));
+  };
   return (
     <Div className={'w-full px-5 bg-white justify-between items-center h-16 transition-all duration-300 relative'}>
       <Div className={'items-center gap-3'}>
@@ -28,8 +37,8 @@ const ResponsiveHeader = () => {
         </Link>
       </Div>
       <Div className={'items-center gap-3'}>
-        <Badge color='primary' size='xs' badgeContent={2}>
-          <Button className={'!text-black'} iconSize={'large'} startAdornment={<CartIcon />} variant='text' size='small' shape='square' color='primary' />
+        <Badge color='primary' size='xs' badgeContent={cart.length}>
+          <Button onClick={handleCart} className={'!text-black'} iconSize={'large'} startAdornment={<CartIcon />} variant='text' size='small' shape='square' color='primary' />
         </Badge>
         <Button iconSize={'large'} className='!text-black' startAdornment={<ProfileIcon />} variant='text' size='small' shape='square' color='primary' />
       </Div>

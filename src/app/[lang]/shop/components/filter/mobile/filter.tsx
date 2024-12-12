@@ -31,10 +31,10 @@ const MobileFilter = () => {
   return (
     <Div className={'flex-col'}>
       <Div className={'fixed shadow-md bottom-0 right-0 bg-white h-[85px] w-full z-10 items-center justify-evenly drop-shadow-2xl shadow-brown-800'}>
-        <Button onClick={handleFilterModal} color={'frost'} className={'flex-col gap-2'} variant={'text'} startAdornment={<FilterIcon />}>
+        <Button onClick={handleFilterModal} color={'frost'} className={'flex-col gap-2 !text-black'} variant={'text'} startAdornment={<FilterIcon />}>
           Filter
         </Button>
-        <Button onClick={handleSortModal} color={'frost'} className={'flex-col gap-2'} variant={'text'} startAdornment={<SortIcon />}>
+        <Button onClick={handleSortModal} color={'frost'} className={'flex-col gap-2 !text-black'} variant={'text'} startAdornment={<SortIcon />}>
           Sort
         </Button>
       </Div>
@@ -42,22 +42,22 @@ const MobileFilter = () => {
         <Div className={'bg-white w-full pl-5 pr-1 py-5 flex-col gap-6'}>
           <Div className={'w-full items-center justify-between'}>
             <Text typography={['lg', 'lg']}>Sort by</Text>
-            <Button onClick={handleSortModal} startAdornment={<CloseIcon />} variant={'text'} color={'frost'} />
+            <Button className={'!text-black'} onClick={handleSortModal} startAdornment={<CloseIcon />} variant={'text'} color={'frost'} />
           </Div>
           <Div className={'flex-col w-full gap-1'}>
-            <Button onClick={handleSortModal} variant={'text'} fontType={'medium'} color={'frost'} className={'w-full !pl-0 !justify-end'} size={'large'} >
+            <Button onClick={handleSortModal} variant={'text'} fontType={'medium'} color={'frost'} className={'w-full !pl-0 !justify-end !text-black'} size={'large'} >
               Price - High to Low
             </Button>
-            <Button onClick={handleSortModal} variant={'text'} fontType={'medium'} color={'frost'} className={'w-full !pl-0 !justify-end'} size={'large'} >
+            <Button onClick={handleSortModal} variant={'text'} fontType={'medium'} color={'frost'} className={'w-full !pl-0 !justify-end !text-black'} size={'large'} >
               Price - Low to High
             </Button>
-            <Button onClick={handleSortModal} variant={'text'} fontType={'medium'} color={'frost'} className={'w-full !pl-0 !justify-end'} size={'large'} >
+            <Button onClick={handleSortModal} variant={'text'} fontType={'medium'} color={'frost'} className={'w-full !pl-0 !justify-end !text-black'} size={'large'} >
               Popularity
             </Button>
-            <Button onClick={handleSortModal} variant={'text'} fontType={'medium'} color={'frost'} className={'w-full !pl-0 !justify-end'} size={'large'} >
+            <Button onClick={handleSortModal} variant={'text'} fontType={'medium'} color={'frost'} className={'w-full !pl-0 !justify-end !text-black'} size={'large'} >
               Discount
             </Button>
-            <Button onClick={handleSortModal} variant={'text'} fontType={'medium'} color={'frost'} className={'w-full !pl-0 !justify-end'} size={'large'} >
+            <Button onClick={handleSortModal} variant={'text'} fontType={'medium'} color={'frost'} className={'w-full !pl-0 !justify-end !text-black'} size={'large'} >
               Caffeine Level
             </Button>
           </Div>
@@ -67,7 +67,7 @@ const MobileFilter = () => {
         <Div className={'bg-white w-full p-5 flex-col gap-6'}>
           <Div className={'w-full items-center justify-between'}>
             <Text typography={['lg', 'lg']}>Filters</Text>
-            <Button className={'!pr-0'} onClick={handleFilterModal} startAdornment={<CloseIcon />} variant={'text'} color={'frost'} />
+            <Button className={'!pr-0 !text-black'} onClick={handleFilterModal} startAdornment={<CloseIcon />} variant={'text'} color={'frost'} />
           </Div>
           <Div className={'flex-col w-full gap-6 overflow-y-auto overflow-x-hidden max-h-[500px]'}>
             <Collapsible header={'All Categories'}>
