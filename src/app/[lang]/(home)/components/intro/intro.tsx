@@ -4,7 +4,7 @@ import Text from '@elements/text';
 import Div from '@elements/div';
 import Button from '@elements/button';
 import Chip from '@elements/chip';
-import FlowerOneImage from '@images-components/flower_one';
+// import FlowerOneImage from '@images-components/flower_one';
 import ArrowRightIcon from '@icons-components/arrow-right';
 import Services from './sub-components/services';
 import DaySymphony from '../../../../../../public/images/home/day-symphony.png';
@@ -14,9 +14,9 @@ const Intro = () => {
   return (
     <Div className={'bg-flurries-500 w-full justify-center items-center'}>
       <Wrapper className={'md:flex-row flex-col justify-between z-10'}>
-        <Div className={'absolute bottom-0 left-0'}>
-          <FlowerOneImage />
-        </Div>
+        {/*<Div className={'absolute bottom-0 left-0'}>*/}
+        {/*  <FlowerOneImage />*/}
+        {/*</Div>*/}
         <Div className={'flex-col px-8 md:px-0 md:pr-20 md:gap-7 gap-4 md:my-32 my-8'}>
           <Text type={'black'} className={'leading-7 md:leading-[57px] whitespace-nowrap'} typography={['xxl', 'huge']}>Fresh & Healthy<br /> Organic Tea</Text>
           <Div className={'gap-3'}>
