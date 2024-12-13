@@ -12,7 +12,7 @@ const ProductItem = ({ image, title, price, rate, isHealthy, isNew, id }: Produc
   return (
     <Div className={'rounded-xl md:rounded-2xl flex-col border transition duration-300 hover:border-primary hover:shadow-primary-500 shadow-sm md:shadow-md border-grey-50 group z-10 relative'}>
       <Div className={'absolute top-2 w-full justify-between'}>
-        <Div className={'flex-col md:flex-row gap-2 pl-2 group-hover:opacity-0 opacity-100 duration-300'}>
+        <Div className={'flex-col md:flex-row gap-2 pl-2 group-hover:opacity-0 opacity-100 duration-300 flex-wrap'}>
           {isHealthy ? (
             <Div className={'rounded-full md:px-4 px-2 md:h-9 h-8 bg-frost-500 justify-center items-center'}>
               <Text type={'medium'} typography={['xs', 'xs']}>Healthy</Text>
@@ -36,7 +36,7 @@ const ProductItem = ({ image, title, price, rate, isHealthy, isNew, id }: Produc
       <Div className={'rounded-t-xl md:rounded-t-2xl'}>
         <Image className={'rounded-t-xl md:rounded-t-2xl'} src={image} alt={title} />
       </Div>
-      <Div className={'w-full items-center rounded-b-xl md:rounded-b-2xl bg-white justify-between md:px-4 px-3 md:pb-4 pb-2 md:pt-3 pt-1'}>
+      <Div className={'w-full items-center rounded-b-xl md:rounded-b-2xl bg-white justify-between md:px-4 px-3 md:pb-4 pb-2 md:pt-3 pt-2'}>
         <Div className={'flex-col justify-between items-start gap-1'}>
           <Div className={'flex-col'}>
             <Text color={'grey.900'} type={'medium'} typography={['xs', 'xs']}>{title}</Text>
