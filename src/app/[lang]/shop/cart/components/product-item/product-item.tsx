@@ -30,19 +30,15 @@ const ProductItem = ({image, name, price, id, amount, key}: ProductItemProps) =>
     }));
   };
 
-  // useEffect(() => {
-  //   return () => controls.stop();
-  // }, []);
-
   return (
     <Div
-      className={'rounded-xl justify-between md:rounded-2xl border transition duration-300 shadow-sm md:shadow-md border-grey-50 group z-10 relative p-1'}>
+      className={'rounded-xl justify-between md:rounded-2xl border transition duration-300 shadow-sm md:shadow-md border-grey-50 group z-10 relative p-1 gap-2'}>
       <Div className='gap-5 items-center'>
-        <Div className={'rounded-xl md:rounded-t-2xl md:h-36 md:w-36 h-28 w-28 '}>
-          <Image className={'rounded-xl md:rounded-t-2xl object-contain'} src={image} alt={name}/>
+        <Div className={'rounded-xl md:rounded-t-2xl md:h-36 md:w-36 h-28 w-28 min-h-28 min-w-28 '}>
+          <Image objectFit={'contain'} className={'rounded-xl md:rounded-t-2xl'} src={image} alt={name}/>
         </Div>
         <Div className={'flex-col self-center'}>
-          <Text color={'grey.900'} type={'medium'} typography={['md', 'base']}>{name}</Text>
+          <Text color={'grey.900'} className={'text-ellipsis'} type={'medium'} typography={['md', 'base']}>{name}</Text>
           <Text typography={['lg', 'md']}>${price}</Text>
         </Div>
       </Div>
