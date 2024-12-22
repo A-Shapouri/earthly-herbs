@@ -30,6 +30,21 @@ function* getProductsListWatcher() {
   }
 }
 
+function* getProductDetailsWatcher() {
+  try {
+    const {productItemId} = yield select(productsStore);
+    const productItem = productsData.find((value) => value.id.toString() === productItemId);
+    yield put({
+      type: ProductsActionTypes.SET_PRODUCT_DETAILS,
+      payload: {
+        productItem: productItem
+      }
+    })
+  } catch (error: any) {
+  }
+}
+
+
 function* watchRapidAction() {
   yield debounce(700, ProductsActionTypes.SET_PRICE_RANGE, getProductsListWatcher);
 }
@@ -43,6 +58,7 @@ function* productsMiddleware() {
     yield takeEvery(ProductsActionTypes.SET_CAFFEINE_LEVEL, getProductsListWatcher),
     yield takeEvery(ProductsActionTypes.SET_SORT_BY, getProductsListWatcher),
     yield takeEvery(ProductsActionTypes.CLEAR_FILTER_PRODUCTS, getProductsListWatcher),
+    yield takeEvery(ProductsActionTypes.GET_PRODUCT_DETAILS, getProductDetailsWatcher),
     yield watchRapidAction(),
   ]);
 }

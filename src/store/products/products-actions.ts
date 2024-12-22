@@ -10,6 +10,8 @@ export const ProductsActionTypes = {
   SET_SORT_BY: `${preType}SET_SORT_BY`,
   SET_PRICE_RANGE: `${preType}SET_PRICE_RANGE`,
   CLEAR_FILTER_PRODUCTS: `${preType}CLEAR_FILTER_PRODUCTS`,
+  GET_PRODUCT_DETAILS: `${preType}GET_PRODUCT_DETAILS`,
+  SET_PRODUCT_DETAILS: `${preType}SET_PRODUCT_DETAILS`,
 };
 
 const getProductsList = () => ({type: ProductsActionTypes.GET_PRODUCTS_LIST});
@@ -20,6 +22,7 @@ const setCaffeineLevel = (payload: { level: number }) => ({type: ProductsActionT
 const setSortBy = (payload: { sort: 'PLH | PHL' | 'PD' | 'PCL' }) => ({type: ProductsActionTypes.SET_SORT_BY, payload: payload});
 const setPriceRange = (payload: { min: number, max: number }) => ({type: ProductsActionTypes.SET_PRICE_RANGE, payload: payload});
 const clearFilterProducts = () => ({type: ProductsActionTypes.CLEAR_FILTER_PRODUCTS});
+const getProductDetails = (payload: { productId: string }) => ({type: ProductsActionTypes.GET_PRODUCT_DETAILS, payload: payload});
 
 export const ProductsActions = {
   getProductsList: getProductsList,
@@ -30,4 +33,5 @@ export const ProductsActions = {
   setSortBy: setSortBy,
   setPriceRange:setPriceRange,
   clearFilterProducts: clearFilterProducts,
+  getProductDetails: getProductDetails,
 };

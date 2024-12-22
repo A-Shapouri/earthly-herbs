@@ -14,6 +14,9 @@ export const initialState: ProductsReducerProps = {
     min: 0,
     max: 100,
   },
+  productItem: null,
+  productsDetailsLoading: true,
+  productItemId: null
 };
 
 function productsReducer(state = initialState, action: { payload: any, type: any }) {
@@ -100,6 +103,20 @@ function productsReducer(state = initialState, action: { payload: any, type: any
           max: initialState.priceRange.max,
         },
       };
+    }
+    case ProductsActionTypes.GET_PRODUCT_DETAILS: {
+      return {
+        ...state,
+        productsDetailsLoading: true,
+        productItemId: action.payload.productId,
+      };
+    }
+    case ProductsActionTypes.SET_PRODUCT_DETAILS: {
+      return {
+        ...state,
+        productsDetailsLoading: false,
+        productItem: action.payload.productItem,
+      }
     }
     default:
       return state;

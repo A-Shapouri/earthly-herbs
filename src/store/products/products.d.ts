@@ -11,6 +11,9 @@ export interface ProductsReducerProps {
     min: number;
     max: number;
   }
+  productItem: ProductProps | null;
+  productsDetailsLoading: boolean;
+  productItemId: string | null;
 }
 
 export interface ProductProps {

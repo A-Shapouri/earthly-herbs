@@ -46,7 +46,7 @@ const ProductAction = ({ id, title, price, image }: { id: number, title: string,
   };
   if (cartItem) {
     return (
-      <Div className='rounded-full items-center md:gap-3 gap-1 md:px-2 flex-col-reverse md:flex-row'>
+      <Div className='rounded-full items-center md:gap-2 gap-1 flex-col-reverse md:flex-row'>
         {cartItem.amount === 1 ? (
           <Button onClick={handleRemoveProduct} size='small' iconSize={'small'} color='danger' variant='text' className='!p-0' startAdornment={<TrashIcon />} />
         ) : (

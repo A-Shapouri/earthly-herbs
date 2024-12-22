@@ -79,6 +79,7 @@ const MobileFilter = () => {
 
   const handleClearFilters = () => {
     dispatch(ProductsActions.clearFilterProducts())
+    handleFilterModal();
   }
 
     return (
