@@ -40,7 +40,7 @@ const ResponsiveHeader = () => {
         <Badge color='primary' size='xs' badgeContent={cart.length}>
           <Button onClick={handleCart} className={'!text-black'} iconSize={'large'} startAdornment={<CartIcon />} variant='text' size='small' shape='square' color='primary' />
         </Badge>
-        <Button iconSize={'large'} className='!text-black' startAdornment={<ProfileIcon />} variant='text' size='small' shape='square' color='primary' />
+        <Button href={'/en/auth/sign-in'} iconSize={'large'} className='!text-black' startAdornment={<ProfileIcon />} variant='text' size='small' shape='square' color='primary' />
       </Div>
       <DrawerMenu lang={lang} open={open} onClose={() => setOpen(false)} />
     </Div>

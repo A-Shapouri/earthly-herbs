@@ -86,7 +86,7 @@ const DesktopHeader = () => {
             </Div>
           </Div>
         </Div>
-        <Div className={'w-full bg-white h-20 justify-center items-center'}>
+        <Div className={'w-full bg-white h-20 justify-center items-center border-b border-b-flurries shadow'}>
           <Div className={'w-full max-w-[1440px] items-center justify-between'}>
             <Link href={getParseRoute({ pathname: routes['route.home.index'], locale: lang })} className={'relative w-[300px] h-10'}>
               <Image quality={100} fill={true} alt={'earthly logo'} src={'/images/earthly-logo-desktop.png'} />
@@ -125,7 +125,7 @@ const DesktopHeader = () => {
               ) : (
                 <Button className={'!text-black hover:!text-control-500 active:!text-control-700'} iconSize={'large'} startAdornment={<CartIcon />} variant='text' size='small' shape='square' color='primary' />
               )}
-              <Button className={'!text-black hover:!text-control-500 active:!text-control-700'} iconSize={'large'} startAdornment={<ProfileIcon />} variant='text' size='small' shape='square' color='primary' />
+              <Button href={'/en/auth/sign-in'} className={'!text-black hover:!text-control-500 active:!text-control-700'} iconSize={'large'} startAdornment={<ProfileIcon />} variant='text' size='small' shape='square' color='primary' />
             </Div>
           </Div>
         </Div>

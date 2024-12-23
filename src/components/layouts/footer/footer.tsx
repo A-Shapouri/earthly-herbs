@@ -22,6 +22,9 @@ const Footer = () => {
     `/${lang}/shop`,
     `/${lang}/shop/cart`,
     `/${lang}/shop/cart/checkout`,
+    `/${lang}/auth/sign-in`,
+    `/${lang}/auth/sign-up`,
+    `/${lang}/auth/forgot-password`,
   ];
 
   if (RoutesWithoutFooter.indexOf(currentRoute) !== -1) {
