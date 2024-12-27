@@ -17,7 +17,7 @@ import Media from '@elements/media';
 import { useParams, usePathname } from 'next/navigation';
 const Footer = () => {
   const currentRoute = usePathname();
-  const { lang } = useParams<{ lang: string }>();
+  const { lang, id } = useParams<{ lang: string, id: string }>();
   const RoutesWithoutFooter: Array<string> = [
     `/${lang}/shop`,
     `/${lang}/shop/cart`,
@@ -25,6 +25,7 @@ const Footer = () => {
     `/${lang}/auth/sign-in`,
     `/${lang}/auth/sign-up`,
     `/${lang}/auth/forgot-password`,
+    `/${lang}/shop/${id}`,
   ];
 
   if (RoutesWithoutFooter.indexOf(currentRoute) !== -1) {

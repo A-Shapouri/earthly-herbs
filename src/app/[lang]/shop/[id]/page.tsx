@@ -14,12 +14,20 @@ import {ProductsActions} from "@store/products/products-actions";
 import {RootState} from "@store/root-reducer";
 import Image from 'next/image'
 import Rating from "@elements/rating";
+import Amounts from './components/amounts'
+import {ShopActions} from "@store/shop/shop-actions";
+import {any} from "prop-types";
+import Action from "./components/action";
+import Media from "@elements/media";
+import Slider from "@modules/slider";
 
 const ProductDetails = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const {productItem, productsDetailsLoading} = useSelector((state: RootState) => state.products);
-  const {id} = useParams();
+  const { cart } = useSelector((state: RootState) => state.shop);
+
+  const {id} = useParams<{id: any}>();
 
   const handleBackButton = () => {
     router.back();
@@ -30,6 +38,7 @@ const ProductDetails = () => {
       dispatch(ProductsActions.getProductDetails({productId: id}))
     }
   }, [id])
+
 
   return (
     <Container>
@@ -45,14 +54,15 @@ const ProductDetails = () => {
       </Div>
       <Wrapper className={'px-5 md:flex-row-reverse flex-col pt-4 gap-4 pb-24 md:gap-16 md:pt-16'}>
         <Div className={'gap-4 md:gap-28 flex-col w-full'}>
-          <Div className='w-full justify-between items-center'>
+          <Div className='w-full justify-between items-center hidden md:visible'>
             <Button onClick={handleBackButton} color='control' variant='text' className='!p-0 rotate-180'
                     startAdornment={<ArrowRightIcon/>}/>
             <Div className='w-6 h-10'/>
           </Div>
           {!productsDetailsLoading ? (
-            <Div className={'grid grid-cols-5 gap-16'}>
-              <Div className='grid grid-cols-5 gap-4 col-span-3'>
+            <Div className={'grid md:grid-cols-5 gap-16 flex-col grid-cols-1'}>
+              <Media className={'w-full col-span-3'} greaterThan={"sm"}>
+              <Div className='grid grid-cols-5 gap-4 w-full'>
                 <Div className='col-span-1 grid grid-cols-1 gap-4 max-h-[670px]'>
                   {productItem.imageList.map((image, index) => (
                     <Div className={'relative w-full h-full rounded-2xl shadow-md'}>
@@ -60,15 +70,24 @@ const ProductDetails = () => {
                     </Div>
                   ))}
                 </Div>
-                <Div
-                  className="w-full justify-between items-center relative h-full col-span-4 rounded-2xl shadow-md max-h-[670px]">
+                <Div className="w-full justify-between items-center relative h-full col-span-4 rounded-2xl shadow-md max-h-[670px]">
                   <Image className={'rounded-2xl'} fill={true} src={productItem.image} alt={productItem.title}/>
                 </Div>
               </Div>
-              <Div className={'col-span-2 flex-col'}>
+              </Media>
+              <Media className={'w-full'} lessThan={'md'}>
+                <Slider direction={'ltr'} slides={1}>
+                  {productItem.imageList.map((image, index) => (
+                    <Div key={index} className={'relative w-full h-60 bg-yellow-500'}>
+                      <Image objectFit={'cover'} fill={true} src={image} alt={productItem.title}/>
+                    </Div>
+                  ))}
+                </Slider>
+              </Media>
+              <Div className={'md:col-span-2 flex-col'}>
                 <Text typography={['lg', 'lg']} type={'medium'} color={'grey.700'}>{productItem.title}</Text>
                 <Text typography={['xl', 'xl']} type={'normal'} color={'black'}>${productItem.price}</Text>
-                <Div className={'mt-4 gap-8'}>
+                <Div className={'mt-4 md:gap-8 gap-4'}>
                   <Rating size={['xxs', 'xxs']} value={productItem.rate}/>
                   <Text typography={['md', 'md']} type={'medium'}>Category: {productItem.category}</Text>
                   <Text typography={['md', 'md']} type={'medium'}>Tag: {productItem.tag}</Text>
@@ -77,24 +96,9 @@ const ProductDetails = () => {
                       className={'mt-8'}>{productItem.description}</Text>
                 <Div className={'mt-11 flex-col gap-4'}>
                   <Text typography={['md', 'md']} type={'medium'}>Amount:</Text>
-                  <Div className={'gap-4'}>
-                    <Div className={'border border-black h-10 px-7 rounded-2xl items-center justify-center'}>
-                      <Text typography={['base', 'base']} type={'black'}>100 g</Text>
-                    </Div>
-                    <Div className={'border border-black h-10 px-7 rounded-2xl items-center justify-center'}>
-                      <Text typography={['base', 'base']} type={'black'}>500 g</Text>
-                    </Div>
-                    <Div className={'border border-black h-10 px-7 rounded-2xl items-center justify-center'}>
-                      <Text typography={['base', 'base']} type={'black'}>1000 g</Text>
-                    </Div>
-                    <Div className={'border border-black h-10 px-7 rounded-2xl items-center justify-center'}>
-                      <Text typography={['base', 'base']} type={'black'}>2000 g</Text>
-                    </Div>
-                  </Div>
+                  <Amounts data={['100', '500', '1000', '2000']}/>
                 </Div>
-                <Button  onClick={() => {}} className='w-full !h-20 mt-20' color='secondary' size='large'>
-                  Add to Cart
-                </Button>
+                <Action id={id} />
               </Div>
             </Div>
           ) : null}
