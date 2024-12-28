@@ -15,8 +15,6 @@ import {RootState} from "@store/root-reducer";
 import Image from 'next/image'
 import Rating from "@elements/rating";
 import Amounts from './components/amounts'
-import {ShopActions} from "@store/shop/shop-actions";
-import {any} from "prop-types";
 import Action from "./components/action";
 import Media from "@elements/media";
 import Slider from "@modules/slider";
@@ -25,9 +23,10 @@ const ProductDetails = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const {productItem, productsDetailsLoading} = useSelector((state: RootState) => state.products);
-  const { cart } = useSelector((state: RootState) => state.shop);
+  const {cart, currency} = useSelector((state: RootState) => state.shop);
+  const {id} = useParams<{ id: any }>();
+  const cartItem = cart.find((item: any) => item.id.toString() === id.toString());
 
-  const {id} = useParams<{id: any}>();
 
   const handleBackButton = () => {
     router.back();
@@ -48,7 +47,7 @@ const ProductDetails = () => {
             label: 'Shop',
             path: '/en/shop',
           }, {
-            label: 'Details',
+            label: productItem?.title,
           }]}/>
         </Wrapper>
       </Div>
@@ -60,20 +59,21 @@ const ProductDetails = () => {
             <Div className='w-6 h-10'/>
           </Div>
           {!productsDetailsLoading ? (
-            <Div className={'grid md:grid-cols-5 gap-16 flex-col grid-cols-1'}>
+            <Div className={'grid md:grid-cols-5 gap-8 md:gap-16 flex-col grid-cols-1'}>
               <Media className={'w-full col-span-3'} greaterThan={"sm"}>
-              <Div className='grid grid-cols-5 gap-4 w-full'>
-                <Div className='col-span-1 grid grid-cols-1 gap-4 max-h-[670px]'>
-                  {productItem.imageList.map((image, index) => (
-                    <Div className={'relative w-full h-full rounded-2xl shadow-md'}>
-                      <Image className={'rounded-2xl'} fill={true} src={image} alt={productItem.title}/>
-                    </Div>
-                  ))}
+                <Div className='grid grid-cols-5 gap-4 w-full'>
+                  <Div className='col-span-1 grid grid-cols-1 gap-4 max-h-[670px]'>
+                    {productItem.imageList.map((image, index) => (
+                      <Div className={'relative w-full h-full rounded-2xl shadow-md'}>
+                        <Image className={'rounded-2xl'} fill={true} src={image} alt={productItem.title}/>
+                      </Div>
+                    ))}
+                  </Div>
+                  <Div
+                    className="w-full justify-between items-center relative h-full col-span-4 rounded-2xl shadow-md max-h-[670px]">
+                    <Image className={'rounded-2xl'} fill={true} src={productItem.image} alt={productItem.title}/>
+                  </Div>
                 </Div>
-                <Div className="w-full justify-between items-center relative h-full col-span-4 rounded-2xl shadow-md max-h-[670px]">
-                  <Image className={'rounded-2xl'} fill={true} src={productItem.image} alt={productItem.title}/>
-                </Div>
-              </Div>
               </Media>
               <Media className={'w-full'} lessThan={'md'}>
                 <Slider direction={'ltr'} slides={1}>
@@ -98,12 +98,28 @@ const ProductDetails = () => {
                   <Text typography={['md', 'md']} type={'medium'}>Amount:</Text>
                   <Amounts data={['100', '500', '1000', '2000']}/>
                 </Div>
-                <Action id={id} />
+                <Media greaterThan={'sm'} className={'w-full'}>
+                <Action id={id}/>
+                </Media>
               </Div>
             </Div>
           ) : null}
         </Div>
       </Wrapper>
+      <Media lessThan={'md'} className={'shadow-2xl drop-shadow-2xl w-full fixed bottom-0 z-20'}>
+        <Div className={'bg-white h-24 px-5 items-center justify-between w-full gap-4'}>
+          {cartItem ? (
+            <Div className={'flex-col gap-1 whitespace-nowrap'}>
+              <Text className={'whiteSpace-nowrap'} color={'grey.700'} typography={['lg', 'lg']}>Total Amount</Text>
+              <Text type={"bold"}
+                    typography={['lg', 'lg']}>
+                ${(parseFloat(cartItem.price) * cartItem.amount).toFixed(2)} {currency}
+              </Text>
+            </Div>
+          ) : null}
+          <Action id={id}/>
+        </Div>
+      </Media>
     </Container>
   )
 }

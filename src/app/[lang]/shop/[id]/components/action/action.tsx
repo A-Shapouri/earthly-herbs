@@ -18,9 +18,7 @@ const Action = ({id}: { id: number }) => {
   const dispatch = useDispatch();
   const {productItem} = useSelector((state: RootState) => state.products);
   const {cart} = useSelector((state: RootState) => state.shop);
-
-  const cartItem = cart.find((item: any) => item.id === id);
-
+  const cartItem = cart.find((item: any) => item.id.toString() === id.toString());
   const handleAddProduct = () => {
     dispatch(ShopActions.addToCart({
       id: id,
@@ -57,7 +55,7 @@ const Action = ({id}: { id: number }) => {
     }))
   }
   return (
-    <Div className={'md:mt-20 mt-6'}>
+    <Div className={'md:mt-20 w-full'}>
       {cartItem ? (
         <Div className={'w-full gap-4'}>
           <Div
@@ -73,12 +71,12 @@ const Action = ({id}: { id: number }) => {
             <Button onClick={handleIncreaseProduct} size='small' iconSize={'small'} color='primary' variant='text'
                     className='!p-0' startAdornment={<PlusIcon/>}/>
           </Div>
-          <Button onClick={handleBuyNow} className='w-full !h-16' color='secondary' size='large'>
+          <Button onClick={handleBuyNow} className='w-full md:!h-16 !h-12' color='secondary' size='large'>
             Buy Now
           </Button>
         </Div>
       ) : (
-        <Button onClick={handleAddProduct} className='w-full !h-16' color='secondary' size='large'>
+        <Button onClick={handleAddProduct} className='w-full md:!h-16 !h-14' color='secondary' size='large'>
           Add to Cart
         </Button>
       )}
