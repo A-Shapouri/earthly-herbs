@@ -27,6 +27,7 @@ const Footer = () => {
     `/${lang}/auth/forgot-password`,
     `/${lang}/shop/${id}`,
     `/${lang}/survey`,
+    `/${lang}/profile`,
   ];
 
   const RoutesWithoutFooter: Array<string> = [
