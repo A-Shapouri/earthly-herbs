@@ -19,8 +19,8 @@ const Blog = () => {
           }]}/>
         </Wrapper>
       </Div>
-      <Wrapper className={'px-5 md:flex-row-reverse flex-col pt-4 gap-4 pb-24 md:gap-16 md:pt-16'}>
-        <Div className={'gap-14 md:gap-6 flex-col w-full'}>
+      <Wrapper className={'px-5 md:flex-row-reverse flex-col pt-8 gap-4 pb-24 md:gap-16 md:pt-16'}>
+        <Div className={'md:gap-16 gap-6 flex-col w-full'}>
           <RecentBlogSection />
           <AllBlogsSection />
         </Div>

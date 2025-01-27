@@ -71,7 +71,7 @@ const DrawerMenu = ({ open, onClose, lang }: { open: boolean, onClose: () => voi
             <Link onClick={onClose} className={'h-10'} href={'/en'}>
               <Text typography={['md', 'md']} color={'grey.700'}>Collections</Text>
             </Link>
-            <Link onClick={onClose} className={'h-10'} href={'/en'}>
+            <Link onClick={onClose} className={'h-10'} href={getParseRoute({ pathname: routes['route.blog.index'], locale: lang })}>
               <Text typography={['md', 'md']} color={'grey.700'}>Blog</Text>
             </Link>
             <Link onClick={onClose} className={'h-10'} href={'/en'}>

@@ -2,30 +2,63 @@ import Div from '@elements/div';
 import React from 'react';
 import Image from 'next/image'
 import Text from '@elements/text'
-import { BlogItemProps } from './blog-item.props'
+import {BlogItemProps} from './blog-item.props'
 import Button from '@elements/button';
 import PointerRightIcon from '@icons-components/pointer-right';
 import classNames from "@utils/helpers/class-names";
-const BlogItem = ({ day, description, image, month, title, tags, className, isPrimary = false }: BlogItemProps) => {
+import Media from '@elements/media';
+import getParseRoute from "@utils/helpers/parse-route";
+import routes from "@routes";
+
+const BlogItem = ({day, description, image, month, title, tags, isPrimary = false}: BlogItemProps) => {
+  console.log(title)
   return (
-    <Div className={classNames('md:gap-8 gap-2 group', isPrimary ? 'grid grid-cols-2 col-span-2' : 'flex-col')}>
-      <Div className={'relative px-2 self-center w-full'}>
-        <Div className={classNames('transition-all duration-300 w-full', isPrimary ? 'h-[320px]' : 'h-[200px]')}>
-          <Image src={image} alt={'test'} fill={true} className={'object-fill rounded-xl'} />
+    <Div
+      className={classNames('md:gap-8 gap-2 group', isPrimary ? 'grid md:grid-cols-2 grid-cols-1 md:col-span-2' : 'flex-col')}>
+      <Div className={'relative md:px-2 self-center w-full'}>
+        <Div
+          className={classNames('transition-all duration-300 w-full', isPrimary ? 'md:h-[320px] h-[160px]' : 'md:h-[200px] h-[160px]')}>
+          <Image src={image} alt={'test'} fill={true} className={'object-fill rounded-xl'}/>
         </Div>
-        <Div className={'flex-col transition-colors duration-500 group-hover:bg-black bg-white w-[58px] h-[58px] rounded items-center justify-center absolute bottom-5 left-5'}>
-          <Text className={'group-hover:text-white transition-colors duration-300'} typography={['md', 'md']}>{day}</Text>
-          <Text className={'group-hover:text-grey-300 transition-colors duration-300'} color={'grey.700'} typography={['xxs', 'xxs']}>{month}</Text>
+        <Div
+          className={'flex-col transition-colors duration-500 group-hover:bg-black bg-white w-[58px] h-[58px] rounded items-center justify-center absolute bottom-5 left-5'}>
+          <Text className={'group-hover:text-white transition-colors duration-300'}
+                typography={['xl', 'md']}>{day}</Text>
+          <Text className={'group-hover:text-grey-300 transition-colors duration-300'} color={'grey.700'}
+                typography={['xxs', 'xxs']}>{month}</Text>
         </Div>
       </Div>
-      <Div className={'flex-col md:gap-4 gap-1 items-start px-3'}>
+      <Div className={'flex-col md:gap-6 gap-4 items-start md:px-3'}>
         <Div className={'flex-col md:gap-2 gap-1'}>
-          <Text typography={['xs', 'lg']} type={"bold"} color={'black'}>{title}</Text>
-          <Text typography={['xxs', 'xs']} color={'grey.700'} type={'medium'}>{description}</Text>
+          <Text typography={['xl', 'lg']} type={"bold"} color={'black'}>{title}</Text>
+          <Text typography={['md', 'xs']} color={'grey.700'} type={'medium'}>{description}</Text>
         </Div>
-        <Button className={'!pl-0'} variant={'text'} startAdornment={<PointerRightIcon />}>
-          Read More
-        </Button>
+        <Div className={'w-full items-center justify-between'}>
+          <Div>
+            <Media className={'gap-2 flex- flex-wrap'} greaterThan={'sm'}>
+              {tags.map((tag, index) => (
+                <Div className={'h-8 px-4 rounded-full bg-flurries items-center justify-center'} key={index}>
+                  <Text type={'bold'} typography={['xs', 'xs']}>{tag}</Text>
+                </Div>
+              ))}
+            </Media>
+            <Media className={'gap-2'} lessThan={'md'}>
+              {tags.slice(0, 2).map((tag, index) => (
+                <Div className={'h-8 px-4 rounded-full bg-flurries items-center justify-center'} key={index}>
+                  <Text type={'bold'} typography={['xs', 'xs']}>{tag}</Text>
+                </Div>
+              ))}
+            </Media>
+          </Div>
+          <Button
+            href={getParseRoute({pathname: routes['route.blog.details'], locale: 'en', query: {id: title}})}
+            size={'small'}
+            className={'!pl-0'}
+            variant={'text'}
+            startAdornment={<PointerRightIcon/>}>
+            Read More
+          </Button>
+        </Div>
       </Div>
     </Div>
   );
