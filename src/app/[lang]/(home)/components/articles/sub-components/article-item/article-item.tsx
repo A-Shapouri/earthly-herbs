@@ -5,6 +5,8 @@ import Text from '@elements/text'
 import { ArticleItemProps } from './article-item.props'
 import Button from '@elements/button';
 import PointerRightIcon from '@icons-components/pointer-right';
+import getParseRoute from "@utils/helpers/parse-route";
+import routes from "@routes";
 const ArticleItem = ({ day, description, image, month, title }: ArticleItemProps) => {
   return (
     <Div className={'flex-col bg-white md:p-6 py-2 rounded-2xl md:gap-6 gap-2 group shadow-md'}>
@@ -22,7 +24,9 @@ const ArticleItem = ({ day, description, image, month, title }: ArticleItemProps
           <Text typography={['xs', 'base']} color={'brown'}>{title}</Text>
           <Text typography={['xxs', 'xs']} type={'medium'}>{description}</Text>
         </Div>
-        <Button className={'!pl-0'} variant={'text'} startAdornment={<PointerRightIcon />}>
+        <Button
+          href={getParseRoute({pathname: routes['route.blog.details'], locale: 'en', query: {id: title}})}
+          className={'!pl-0'} variant={'text'} startAdornment={<PointerRightIcon />}>
           Read More
         </Button>
       </Div>

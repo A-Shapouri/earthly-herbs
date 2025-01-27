@@ -3,6 +3,8 @@ import Div from '@elements/div';
 import Text from '@elements/text';
 import Button from '@elements/button';
 import ArrowRightIcon from '@icons-components/arrow-right';
+import getParseRoute from "@utils/helpers/parse-route";
+import routes from "@routes";
 
 const SpecialOffer = () => {
   return (
@@ -11,7 +13,9 @@ const SpecialOffer = () => {
         <Text className={'leading-3 !text-black md:!text-white'} color={'white'} type={'normal'} typography={['sm', 'xxs']}>SUMMER SALE</Text>
         <Text className={'leading-10 !text-black md:!text-white'} color={'white'} type={'bold'} typography={['huge', 'xl']}>75% off</Text>
       </Div>
-      <Button startAdornment={<ArrowRightIcon />} color={'secondary'} rounded={'full'} size={'large'} className={'w-full'}>
+      <Button
+        href={getParseRoute({pathname: routes['route.shop.index'], locale: 'en'})}
+        startAdornment={<ArrowRightIcon />} color={'secondary'} rounded={'full'} size={'large'} className={'w-full'}>
         Shop now
       </Button>
     </Div>

@@ -10,11 +10,40 @@ import Button from "@elements/button";
 import Divider from "@elements/divider";
 import Link from "next/link";
 import EyeIcon from "@icons-components/eye";
+import {AuthActions} from "@store/auth/auth-actions";
+import {AlertActions} from "@store/alert/alert-action";
+import {useRouter} from "next-nprogress-bar";
+import getParseRoute from "@utils/helpers/parse-route";
+import routes from "@routes";
 
 const SignIn = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
 
-  const {products, sortBy} = useSelector((state: RootState) => state.auth);
+  const {email, password} = useSelector((state: RootState) => state.auth);
+
+  const handleUserEmail = (value: string) => {
+    dispatch(AuthActions.setEmail({email: value}));
+  }
+
+  const handleUserPassword = (value: string) => {
+    dispatch(AuthActions.setPassword({password: value}));
+  }
+
+  const handleUserLogin = () => {
+    if(email && password) {
+      dispatch(AuthActions.clientLogin());
+      router.push(getParseRoute({
+        pathname: routes['route.home.index'],
+        locale: 'en'
+      }));
+    } else {
+      dispatch(AlertActions.showAlert({
+        text: 'Please fill the required fields',
+        severity: 'danger',
+      }))
+    }
+  }
 
   return (
     <Container>
@@ -23,7 +52,11 @@ const SignIn = () => {
           <Text type={'black'} typography={['lg', 'lg']}>Sign in to Earthly Herbs</Text>
           <Div className={'flex-col gap-2 mt-2'}>
             <Text typography={['base', 'base']} type={'medium'}>Email</Text>
-            <TextField placeholder={'example@gmail.com'} className={'sm:w-[400px] w-full'}/>
+            <TextField
+              value={email}
+              onChange={(e) => handleUserEmail(e.target.value)}
+              placeholder={'example@gmail.com'}
+              className={'sm:w-[400px] w-full'}/>
           </Div>
           <Div className={'flex-col gap-2'}>
             <Div className={'items-center justify-between sm:w-[400px] w-full'}>
@@ -33,6 +66,8 @@ const SignIn = () => {
               </Link>
             </Div>
             <TextField
+              value={password}
+              onChange={(e) => handleUserPassword(e.target.value)}
               autoComplete={'new-password'}
               type={'password'}
               placeholder={'* * * * * *'}
@@ -50,7 +85,7 @@ const SignIn = () => {
               </Text>
             </Link>
           </Div>
-          <Button className={'sm:w-[400px] w-full !h-16 mt-3'} color={'secondary'}>
+          <Button onClick={handleUserLogin} className={'sm:w-[400px] w-full !h-16 mt-3'} color={'secondary'}>
             Sign in
           </Button>
           <Div className={'sm:w-[400px] w-full items-center gap-4 mt-3'}>
