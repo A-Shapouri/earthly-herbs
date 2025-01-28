@@ -28,6 +28,9 @@ const Footer = () => {
     `/${lang}/shop/${id}`,
     `/${lang}/survey`,
     `/${lang}/profile`,
+    `/${lang}/profile/orders`,
+    `/${lang}/profile/orders/${id}`,
+    `/${lang}/profile/wish-list`,
   ];
 
   const RoutesWithoutFooter: Array<string> = [

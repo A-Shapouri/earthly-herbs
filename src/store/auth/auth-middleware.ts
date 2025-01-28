@@ -6,13 +6,13 @@ import {AlertActionType} from "@store/alert/alert-action";
 function* clientLoginWatcher() {
   try {
     saveToCookie('token', 'true')
-    yield put({
-      type: AlertActionType.SHOW_ALERT,
-      data: {
-        text: 'Welcome To EARTHLY HERBS!',
-        severity: 'success',
-      }
-    })
+    // yield put({
+    //   type: AlertActionType.SHOW_ALERT,
+    //   data: {
+    //     text: 'Welcome To EARTHLY HERBS!',
+    //     severity: 'success',
+    //   }
+    // })
   } catch (error: any) {
   }
 }

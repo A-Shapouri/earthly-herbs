@@ -9,15 +9,16 @@ import Button from '@elements/button';
 import Link from 'next/link';
 import ArrowRightIcon from '@icons-components/arrow-right';
 import Divider from '@elements/divider';
+import routes from '@routes'
 
 const menu = [
   {
     title: 'My Orders',
-    route: '#',
+    route: '/en' + routes['route.profile.orders'],
   },
   {
     title: 'Wishlist',
-    route: '#',
+    route: '/en' + routes['route.profile.wish-list'],
   },
 ];
 

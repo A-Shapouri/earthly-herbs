@@ -43,7 +43,7 @@ const DesktopHeader = () => {
 
   const handleProfile = () => {
     if (isLoggedIn) {
-      router.push(getParseRoute({pathname: routes['route.shop.cart'], locale: lang}));
+      router.push(getParseRoute({pathname: routes['route.profile.index'], locale: lang}));
     } else {
       router.push(getParseRoute({pathname: '/auth/sign-in', locale: lang}));
     }
