@@ -18,7 +18,7 @@ import { useParams, usePathname } from 'next/navigation';
 const Footer = () => {
   const currentRoute = usePathname();
   const { lang, id } = useParams<{ lang: string, id: string }>();
-  const RoutesWithoutFooter: Array<string> = [
+  const RoutesWithoutFooterMobile: Array<string> = [
     `/${lang}/shop`,
     `/${lang}/shop/cart`,
     `/${lang}/shop/cart/checkout`,
@@ -26,9 +26,22 @@ const Footer = () => {
     `/${lang}/auth/sign-up`,
     `/${lang}/auth/forgot-password`,
     `/${lang}/shop/${id}`,
+    `/${lang}/survey`,
+    `/${lang}/profile`,
+    `/${lang}/profile/orders`,
+    `/${lang}/profile/orders/${id}`,
+    `/${lang}/profile/wish-list`,
+  ];
+
+  const RoutesWithoutFooter: Array<string> = [
+    `/${lang}/survey`,
   ];
 
   if (RoutesWithoutFooter.indexOf(currentRoute) !== -1) {
+    return null;
+  }
+
+  if (RoutesWithoutFooterMobile.indexOf(currentRoute) !== -1) {
     return (
       <Media greaterThan={'sm'}>
         <FooterIndex />

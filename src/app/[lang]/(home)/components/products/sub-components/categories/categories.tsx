@@ -1,10 +1,10 @@
-import Div from '@elements/div'
-import React from 'react'
-import CategoryItem from './category-item'
-import ProductThumbnail from '@modules/product-thumbnail'
-import ThumbnailImage from '../../../../../../../../public/images/products/thumbnail-1.png'
-import ThumbnailImage2 from '../../../../../../../../public/images/products/thumbnail-2.png'
-import Media from '@elements/media'
+import Div from '@elements/div';
+import React from 'react';
+import CategoryItem from './category-item';
+import ProductThumbnail from '@modules/product-thumbnail';
+import ThumbnailImage from '../../../../../../../../public/images/products/thumbnail-1.png';
+import ThumbnailImage2 from '../../../../../../../../public/images/products/thumbnail-2.png';
+import Media from '@elements/media';
 
 const Categories = () => {
   return (
@@ -28,7 +28,7 @@ const Categories = () => {
         <ProductThumbnail image={ThumbnailImage2} title={'Indian Malta'} price={'$13.99'} rate={1} />
       </CategoryItem>
     </Div>
-  )
-}
+  );
+};
 
 export default Categories;

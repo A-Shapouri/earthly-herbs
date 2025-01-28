@@ -9,6 +9,8 @@ import ArrowRightIcon from '@icons-components/arrow-right';
 import Services from './sub-components/services';
 import DaySymphony from '../../../../../../public/images/home/day-symphony.png';
 import Image from 'next/image';
+import getParseRoute from "@utils/helpers/parse-route";
+import routes from "@routes";
 
 const Intro = () => {
   return (
@@ -29,7 +31,13 @@ const Intro = () => {
               <Text type={'medium'} color={'brown'} typography={['xs', 'xs']}>Free shipping on all your order.</Text>
             </Div>
           </Div>
-          <Button startAdornment={<ArrowRightIcon />} color={'secondary'} rounded={'full'} size={'large'} className={'md:w-[183px] w-32'}>
+          <Button
+            href={getParseRoute({pathname: routes['route.shop.index'], locale: 'en'})}
+            startAdornment={<ArrowRightIcon />}
+            color={'secondary'}
+            rounded={'full'}
+            size={'large'}
+            className={'md:w-[183px] w-32'}>
             Shop now
           </Button>
         </Div>

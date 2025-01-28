@@ -24,6 +24,7 @@ const ResponsiveHeader = () => {
 
   const { lang } = useParams<{ lang: DictionariesTypes }>();
   const { cart } = useSelector((state: RootState) => state.shop);
+  const { isLoggedIn } = useSelector((state: RootState) => state.auth);
 
   const handleCart = () => {
     router.push(getParseRoute({ pathname: routes['route.shop.cart'], locale: lang }));
@@ -40,7 +41,7 @@ const ResponsiveHeader = () => {
         <Badge color='primary' size='xs' badgeContent={cart.length}>
           <Button onClick={handleCart} className={'!text-black'} iconSize={'large'} startAdornment={<CartIcon />} variant='text' size='small' shape='square' color='primary' />
         </Badge>
-        <Button href={'/en/auth/sign-in'} iconSize={'large'} className='!text-black' startAdornment={<ProfileIcon />} variant='text' size='small' shape='square' color='primary' />
+        <Button href={isLoggedIn ? '/en/profile' : '/en/auth/sign-in'} iconSize={'large'} className='!text-black' startAdornment={<ProfileIcon />} variant='text' size='small' shape='square' color='primary' />
       </Div>
       <DrawerMenu lang={lang} open={open} onClose={() => setOpen(false)} />
     </Div>
@@ -71,7 +72,7 @@ const DrawerMenu = ({ open, onClose, lang }: { open: boolean, onClose: () => voi
             <Link onClick={onClose} className={'h-10'} href={'/en'}>
               <Text typography={['md', 'md']} color={'grey.700'}>Collections</Text>
             </Link>
-            <Link onClick={onClose} className={'h-10'} href={'/en'}>
+            <Link onClick={onClose} className={'h-10'} href={getParseRoute({ pathname: routes['route.blog.index'], locale: lang })}>
               <Text typography={['md', 'md']} color={'grey.700'}>Blog</Text>
             </Link>
             <Link onClick={onClose} className={'h-10'} href={'/en'}>

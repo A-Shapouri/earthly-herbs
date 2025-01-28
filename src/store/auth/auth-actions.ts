@@ -2,11 +2,31 @@ const preType = 'AUTH_';
 
 export const AuthActionTypes = {
   SAVE_TOKEN: `${preType}SAVE_TOKEN`,
-  GET_CLIENT_INFO: `${preType}GET_CLIENT_INFO`,
+  CLIENT_LOGIN: `${preType}CLIENT_LOGIN`,
+  CLIENT_LOGOUT: `${preType}CLIENT_LOGOUT`,
+  SET_EMAIL: `${preType}SET_EMAIL`,
+  SET_PASSWORD: `${preType}SET_PASSWORD`,
 };
 
-const saveToken = (data: { accessToken: string, tokenType: string }) => ({ type: AuthActionTypes.SAVE_TOKEN, data: data });
+const saveToken = (data: { accessToken: string, tokenType: string }) => ({
+  type: AuthActionTypes.SAVE_TOKEN,
+  data: data
+});
+const clientLogin = () => ({
+  type: AuthActionTypes.CLIENT_LOGIN
+});
+const setEmail = (data: { email: string }) => ({
+  type: AuthActionTypes.SET_EMAIL,
+  data: data
+});
+const setPassword = (data: { password: string }) => ({
+  type: AuthActionTypes.SET_PASSWORD,
+  data: data
+});
 
 export const AuthActions = {
   saveToken: saveToken,
+  clientLogin: clientLogin,
+  setPassword: setPassword,
+  setEmail: setEmail,
 };

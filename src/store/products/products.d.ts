@@ -14,6 +14,7 @@ export interface ProductsReducerProps {
   productItem: ProductProps | null;
   productsDetailsLoading: boolean;
   productItemId: string | null;
+  surveyProducts: Array<ProductProps>;
 }
 
 export interface ProductProps {

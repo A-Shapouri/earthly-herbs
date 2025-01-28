@@ -16,7 +16,8 @@ export const initialState: ProductsReducerProps = {
   },
   productItem: null,
   productsDetailsLoading: true,
-  productItemId: null
+  productItemId: null,
+  surveyProducts: []
 };
 
 function productsReducer(state = initialState, action: { payload: any, type: any }) {
@@ -116,6 +117,17 @@ function productsReducer(state = initialState, action: { payload: any, type: any
         ...state,
         productsDetailsLoading: false,
         productItem: action.payload.productItem,
+      }
+    }
+    case ProductsActionTypes.GET_SURVEY_PRODUCTS: {
+      const amount = Math.floor(Math.random() * 3)
+      const temp = [];
+      for (let i = 0; i < amount; i++) {
+        temp.push(state.products[i]);
+      }
+      return {
+        ...state,
+        surveyProducts: temp,
       }
     }
     default:
