@@ -35,7 +35,7 @@ function shopReducer(state = initialState, action: any) {
     case ShopActionTypes.REMOVE_FROM_CART: {
       const id = action.data.id;
       const cart = JSON.parse(JSON.stringify(state.cart));
-      const index = cart.findIndex(item => item.id === id);
+      const index = cart.findIndex(item => item.id.toString() === id.toString());
       const productPrice = cart[index].price;
       cart.splice(index, 1);
       return {
@@ -48,7 +48,7 @@ function shopReducer(state = initialState, action: any) {
     case ShopActionTypes.INCREASE_PRODUCT_AMOUNT: {
       const productId = action.data.id;
       const cart = JSON.parse(JSON.stringify(state.cart));
-      const product = cart.find(item => item.id === productId);
+      const product = cart.find(item => item.id.toString() === productId.toString());
       product.amount = product.amount + 1;
       return {
         ...state,
@@ -61,7 +61,7 @@ function shopReducer(state = initialState, action: any) {
     case ShopActionTypes.DECREASE_PRODUCT_AMOUNT: {
       const productId = action.data.id;
       const cart = JSON.parse(JSON.stringify(state.cart));
-      const product = cart.find(item => item.id === productId);
+      const product = cart.find(item => item.id.toString() === productId.toString());
       product.amount = product.amount - 1;
       return {
         ...state,

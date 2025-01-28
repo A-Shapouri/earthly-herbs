@@ -15,6 +15,7 @@ const Text = (
     style,
     disabled = false,
     dir = 'ltr',
+    ref,
     ...rest
   }: TextProps) => {
   const Component = variant;
@@ -23,6 +24,7 @@ const Text = (
     <Component
       dir={dir}
       style={style}
+      ref={ref}
       className={classNames(
         'z-[4]',
         MOBILE_SIZE[typography[0]],

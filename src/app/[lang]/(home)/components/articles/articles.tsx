@@ -9,6 +9,8 @@ import ArticleItem from './sub-components/article-item';
 import NatureImage from '../../../../../../public/images/articles/nature.png';
 import FieldImage from '../../../../../../public/images/articles/field.png';
 import GreenTeaImage from '../../../../../../public/images/articles/green-tea.png';
+import getParseRoute from "@utils/helpers/parse-route";
+import routes from "@routes";
 const Articles = () => {
   return (
     <Div className={'bg-flurries-500 w-full justify-center items-center px-5'}>
@@ -16,12 +18,12 @@ const Articles = () => {
         <Div className={'items-center justify-between'}>
           <Text typography={['xxl', 'xxl']} type={'bold'}>Latest Articles</Text>
           <Media greaterThan={'sm'}>
-            <Button size={'large'} className={'w-44'} startAdornment={<ArrowRightIcon />}>
+            <Button href={getParseRoute({pathname: routes['route.blog.index'], locale: 'en'})} size={'large'} className={'w-44'} startAdornment={<ArrowRightIcon />}>
               Our blog
             </Button>
           </Media>
           <Media lessThan={'md'}>
-            <Button size={'large'} variant={'text'} startAdornment={<ArrowRightIcon />}>
+            <Button href={getParseRoute({pathname: routes['route.blog.index'], locale: 'en'})} size={'large'} variant={'text'} startAdornment={<ArrowRightIcon />}>
               Our blog
             </Button>
           </Media>

@@ -28,11 +28,18 @@ import Bank4 from "@images-components/banks/bank-4";
 import Bank5 from "@images-components/banks/bank-5";
 import TextField from "@elements/text-field";
 import Media from "@elements/media";
+import {motion, AnimatePresence} from 'motion/react';
 
 const Checkout = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const {cart, shippingOption, shippingOptionListModal, totalPrice, currency} = useSelector((state: RootState) => state.shop);
+  const {
+    cart,
+    shippingOption,
+    shippingOptionListModal,
+    totalPrice,
+    currency
+  } = useSelector((state: RootState) => state.shop);
   const {
     shippingAddress,
     addressModal,
@@ -110,15 +117,24 @@ const Checkout = () => {
                   <Checkbox onChange={handleSameAddress} checked={billingSameAsShipping} color={'secondary'}/>
                 </FormControlLabel>
               ) : null}
-              {shippingAddress && billingAddress && !billingSameAsShipping ? (
-                <Div className={'flex-col mt-4 md:gap-4 gap-3'}>
-                  <Text>Billing Address</Text>
-                  <AddressItem
-                    address={billingAddress}
-                    shipping={false}
-                  />
-                </Div>
-              ) : null}
+              <AnimatePresence>
+                {shippingAddress && billingAddress && !billingSameAsShipping ? (
+                  <motion.div
+                    className='w-full flex'
+                    exit={{opacity: 0, height: 0, transition: {duration: 0.3}}}
+                    initial={{opacity: 0, height: 0}}
+                    animate={{opacity: 1, height: 'auto', transition: {duration: 0.5}}}
+                  >
+                    <Div className={'flex-col mt-4 md:gap-4 gap-3 w-full'}>
+                      <Text>Billing Address</Text>
+                      <AddressItem
+                        address={billingAddress}
+                        shipping={false}
+                      />
+                    </Div>
+                  </motion.div>
+                ) : null}
+              </AnimatePresence>
               <Div className={'flex-col mt-4 md:gap-4 gap-3'}>
                 <Text>Shipping Option</Text>
                 <ShippingOptionItem
@@ -150,31 +166,39 @@ const Checkout = () => {
               </Div>
             </Div>
             <Media greaterThan={'sm'} className={'md:col-span-2'}>
-            <Div className='flex-col w-full gap-6 self-start'>
-              <Text type='normal' typography={['md', 'md']}>Order Summary</Text>
-              {cart && cart.length ? cart.map((item: any, index: number) => (
-                <ProductItem key={index} amount={item.amount} id={item.id} image={item.image} price={item.price}
-                             name={item.name}/>
-              )) : null}
-              <PriceInfo/>
-              <Button className='w-full !h-20' color='secondary' size='large'>
-                Place Order
-              </Button>
-            </Div>
+              <Div className='flex-col w-full gap-6 self-start'>
+                <Text type='normal' typography={['md', 'md']}>Order Summary</Text>
+                {cart && cart.length ? cart.map((item: any, index: number) => (
+                  <motion.div
+                    key={index}
+                    initial={{opacity: 0, translateX: '400px'}}
+                    animate={{opacity: 1, translateX: 0}}
+                    transition={{duration: 0.3, delay: 0.3 * (index + 1)}}
+                  >
+                    <ProductItem key={index} amount={item.amount} id={item.id} image={item.image} price={item.price}
+                                 name={item.name}/>
+                  </motion.div>
+                )) : null}
+                <PriceInfo/>
+                <Button className='w-full !h-20' color='secondary' size='large'>
+                  Place Order
+                </Button>
+              </Div>
             </Media>
           </Div>
         </Div>
       </Wrapper>
       <Media lessThan={'md'} className={'shadow-2xl drop-shadow-2xl w-full fixed bottom-0 z-20'}>
-      <Div className={'bg-white h-24 px-5 items-center w-full justify-between'}>
-        <Div className={'flex-col gap-1'}>
-          <Text color={'grey.700'} typography={['lg', 'lg']}>Total Amount</Text>
-          <Text type={"bold"} typography={['xl', 'xl']}>${(parseFloat(totalPrice) + parseFloat('14.99')).toFixed(2)} {currency}</Text>
+        <Div className={'bg-white h-24 px-5 items-center w-full justify-between'}>
+          <Div className={'flex-col gap-1'}>
+            <Text color={'grey.700'} typography={['lg', 'lg']}>Total Amount</Text>
+            <Text type={"bold"}
+                  typography={['xl', 'xl']}>${(parseFloat(totalPrice) + parseFloat('14.99')).toFixed(2)} {currency}</Text>
+          </Div>
+          <Button className='!h-14 w-[120px]' color='secondary' size='large'>
+            Place Order
+          </Button>
         </Div>
-        <Button className='!h-14 w-[120px]' color='secondary' size='large'>
-          Place Order
-        </Button>
-      </Div>
       </Media>
       <AddAddressModal closeModal={handleAddAddressModal} isShow={addressModal}/>
       <AddressListModal type={addressModalType} closeModal={handleAddressListModal} isShow={addressListModal}/>

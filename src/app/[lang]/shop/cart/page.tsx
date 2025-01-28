@@ -20,13 +20,14 @@ import {DictionariesTypes} from "@dictionaries";
 import getParseRoute from "@utils/helpers/parse-route";
 import routes from "@routes";
 import Media from "@elements/media";
+import {motion} from 'motion/react';
 
 const Cart = () => {
   const router = useRouter();
   const {lang} = useParams<{ lang: DictionariesTypes }>()
   const dispatch = useDispatch();
   const {cart, couponModal, isCouponValid, couponValue} = useSelector((state: RootState) => state.shop);
-  const { totalPrice, currency } = useSelector((state: RootState) => state.shop);
+  const {totalPrice, currency} = useSelector((state: RootState) => state.shop);
 
   const handleBackButton = () => {
     router.back();
@@ -67,8 +68,20 @@ const Cart = () => {
           <Div className='mt-6 md:mt-28 grid md:grid-cols-3 grid-cols-1 md:gap-16 gap-5 relative overflow-visible'>
             <Div className='flex-col gap-4 md:col-span-2'>
               {cart && cart.length ? cart.map((item: any, index: number) => (
-                <ProductItem key={index} amount={item.amount} id={item.id} image={item.image} price={item.price}
-                             name={item.name}/>
+                <motion.div
+                  key={index}
+                  initial={{opacity: 0, translateX: '-400px'}}
+                  animate={{opacity: 1, translateX: 0}}
+                  transition={{duration: 0.3, delay: 0.3 * (index + 1)}}
+                >
+                  <ProductItem
+                    amount={item.amount}
+                    id={item.id}
+                    image={item.image}
+                    price={item.price}
+                    name={item.name}
+                  />
+                </motion.div>
               )) : null}
               {isCouponValid ? (
                 <Div className={'flex-col gap-2 md:mt-9 mt-5'}>
@@ -100,10 +113,11 @@ const Cart = () => {
       </Wrapper>
       <CouponModal closeModal={handleCouponModal} isShow={couponModal}/>
       <Media lessThan={'md'} className={'shadow-2xl drop-shadow-2xl w-full fixed bottom-0 z-20'}>
-      <Div className={'bg-white h-24 px-5 items-center justify-between w-full'}>
+        <Div className={'bg-white h-24 px-5 items-center justify-between w-full'}>
           <Div className={'flex-col gap-1'}>
             <Text color={'grey.700'} typography={['lg', 'lg']}>Total Amount</Text>
-            <Text type={"bold"} typography={['xl', 'xl']}>${(parseFloat(totalPrice) + parseFloat('14.99')).toFixed(2)} {currency}</Text>
+            <Text type={"bold"}
+                  typography={['xl', 'xl']}>${(parseFloat(totalPrice) + parseFloat('14.99')).toFixed(2)} {currency}</Text>
           </Div>
           <Button onClick={handleCheckout} className='!h-14 w-[120px]' color='secondary' size='large'>
             Continue

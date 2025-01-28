@@ -10,10 +10,13 @@ import { RootState } from '@store/root-reducer';
 import MinusIcon from '@icons-components/minus';
 import PlusIcon from '@icons-components/plus';
 import TrashIcon from '@icons-components/trash';
+import AnimatedNumber from '../../animated-number'
+
+
 const ProductAction = ({ id, title, price, image }: { id: number, title: string, price: string, image: any }) => {
   const dispatch = useDispatch();
   const { cart } = useSelector((state: RootState) => state.shop);
-  const cartItem = cart.find(item => item.id === id);
+  const cartItem = cart.find(item => item.id.toString() === id.toString());
 
   const handleAddProduct = () => {
     dispatch(ShopActions.addToCart({
@@ -43,7 +46,7 @@ const ProductAction = ({ id, title, price, image }: { id: number, title: string,
   };
   if (cartItem) {
     return (
-      <Div className='rounded-full items-center gap-3 border border-control px-2'>
+      <Div className='rounded-full items-center gap-2 flex-row'>
         {cartItem.amount === 1 ? (
           <Button onClick={handleRemoveProduct} size='small' iconSize={'small'} color='danger' variant='text' className='!p-0' startAdornment={<TrashIcon />} />
         ) : (
