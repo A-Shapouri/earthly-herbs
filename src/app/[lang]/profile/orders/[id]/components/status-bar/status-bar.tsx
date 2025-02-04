@@ -10,7 +10,7 @@ const StatusBar = ({status} : {status: 'delivered' | 'canceled' | 'processing'})
   return(
     <Div className={classNames(
       'w-full h-14 items-center gap-4 px-4 rounded-2xl',
-      status === 'delivered' && 'bg-[#ECFDF5]',
+      status === 'delivered' && 'bg-success-50',
       status === 'canceled' && 'bg-danger-50',
       status === 'processing' && 'bg-warning-50',
       )}>

@@ -122,7 +122,10 @@ const DesktopHeader = () => {
               </Link>
               <Link
                 href={getParseRoute({pathname: routes['route.blog.index'], locale: lang})}
-                className={'font-open-sauce-medium text-d-xs text-grey-700'}>
+                className={classNames('font-open-sauce-medium text-d-xs transition-colors duration-500',
+                  pathname === `/${lang}${routes['route.blog.index']}` ? 'text-black' : 'text-grey-700'
+                )}
+              >
                 Blog
               </Link>
               <Link className={'font-open-sauce-medium text-d-xs text-grey-700'} href={'#'}>
