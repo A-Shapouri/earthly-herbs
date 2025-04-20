@@ -3,8 +3,6 @@ import Wrapper from '@layouts/wrapper';
 import Text from '@elements/text';
 import Div from '@elements/div';
 import PlayIcon from '@icons-components/play';
-import FlowerFourImage from '@images-components/flower-four';
-
 
 const AboutEarthly = () => {
   return (

@@ -14,11 +14,10 @@ import Checkbox from '@elements/checkbox';
 import Rating from '@elements/rating';
 import Tag from '@elements/tag';
 import MultiRangeSlider from '@elements/multi-range-slider';
-import {ProductsActions} from "@store/products/products-actions";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "@store/root-reducer";
-import RadioGroup from "@elements/radio-group";
-
+import { ProductsActions } from '@store/products/products-actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@store/root-reducer';
+import RadioGroup from '@elements/radio-group';
 
 function countProductsByCategory(products) {
   const categoryCount = {};
@@ -35,12 +34,11 @@ function countProductsByCategory(products) {
   return categoryCount;
 }
 
-
 const MobileFilter = () => {
-  const {tags, categories, products, priceRange, selectedCategory, caffeineLevel, selectedTags} = useSelector((state: RootState) => state.products);
+  const { tags, categories, products, priceRange, selectedCategory, caffeineLevel, selectedTags } = useSelector((state: RootState) => state.products);
   const [sortModal, setSortModal] = useState(false);
   const [filterModal, setFilterModal] = useState(false);
-  const counts = countProductsByCategory(products)
+  const counts = countProductsByCategory(products);
   const dispatch = useDispatch();
 
   const handleSortModal = () => {
@@ -52,37 +50,36 @@ const MobileFilter = () => {
   };
 
   const handleRemoveTag = (value: string) => {
-    dispatch(ProductsActions.removeFilterTag({tag: value}));
-  }
+    dispatch(ProductsActions.removeFilterTag({ tag: value }));
+  };
 
   const handleAddTag = (value: string) => {
-    dispatch(ProductsActions.addFilterTag({tag: value}));
-  }
+    dispatch(ProductsActions.addFilterTag({ tag: value }));
+  };
 
-
-  const handlePriceRange = ({min, max}: { min: number, max: number }) => {
-    dispatch(ProductsActions.setPriceRange({min, max}))
-  }
+  const handlePriceRange = ({ min, max }: { min: number, max: number }) => {
+    dispatch(ProductsActions.setPriceRange({ min, max }));
+  };
 
   const handleCategory = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(ProductsActions.setFilterCategory({category: e.target.value}));
-  }
+    dispatch(ProductsActions.setFilterCategory({ category: e.target.value }));
+  };
 
   const handleCaffeineLevel = (level: number) => {
-    dispatch(ProductsActions.setCaffeineLevel({level: level}))
-  }
+    dispatch(ProductsActions.setCaffeineLevel({ level: level }));
+  };
 
   const handleSortBy = (newValue: any) => {
-    dispatch(ProductsActions.setSortBy({sort: newValue}));
+    dispatch(ProductsActions.setSortBy({ sort: newValue }));
     handleSortModal();
-  }
+  };
 
   const handleClearFilters = () => {
-    dispatch(ProductsActions.clearFilterProducts())
+    dispatch(ProductsActions.clearFilterProducts());
     handleFilterModal();
-  }
+  };
 
-    return (
+  return (
     <Div className={'flex-col'}>
       <Div className={'fixed shadow-md bottom-0 right-0 bg-white h-[85px] w-full z-10 items-center justify-evenly drop-shadow-2xl shadow-brown-800'}>
         <Button onClick={handleFilterModal} color={'frost'} className={'flex-col gap-2 !text-black'} variant={'text'} startAdornment={<FilterIcon />}>

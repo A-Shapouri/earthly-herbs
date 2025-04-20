@@ -10,10 +10,10 @@ import Checkbox from '@elements/checkbox';
 import Rating from '@elements/rating';
 import Tag from '@elements/tag';
 import MultiRangeSlider from '@elements/multi-range-slider';
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "@store/root-reducer";
-import {ProductsActions} from "@store/products/products-actions";
-import RadioGroup from "@elements/radio-group";
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@store/root-reducer';
+import { ProductsActions } from '@store/products/products-actions';
+import RadioGroup from '@elements/radio-group';
 
 function countProductsByCategory(products) {
   const categoryCount = {};
@@ -30,36 +30,34 @@ function countProductsByCategory(products) {
   return categoryCount;
 }
 
-
 const DesktopFilter = () => {
   const dispatch = useDispatch();
-  const {tags, categories, products, priceRange, selectedCategory, caffeineLevel, selectedTags} = useSelector((state: RootState) => state.products);
-  const counts = countProductsByCategory(products)
+  const { tags, categories, products, priceRange, selectedCategory, caffeineLevel, selectedTags } = useSelector((state: RootState) => state.products);
+  const counts = countProductsByCategory(products);
 
   const handleRemoveTag = (value: string) => {
-    dispatch(ProductsActions.removeFilterTag({tag: value}));
-  }
+    dispatch(ProductsActions.removeFilterTag({ tag: value }));
+  };
 
   const handleAddTag = (value: string) => {
-    dispatch(ProductsActions.addFilterTag({tag: value}));
-  }
+    dispatch(ProductsActions.addFilterTag({ tag: value }));
+  };
 
-
-  const handlePriceRange = ({min, max}: { min: number, max: number }) => {
-    dispatch(ProductsActions.setPriceRange({min, max}))
-  }
+  const handlePriceRange = ({ min, max }: { min: number, max: number }) => {
+    dispatch(ProductsActions.setPriceRange({ min, max }));
+  };
 
   const handleCategory = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(ProductsActions.setFilterCategory({category: e.target.value}));
-  }
+    dispatch(ProductsActions.setFilterCategory({ category: e.target.value }));
+  };
 
   const handleCaffeineLevel = (level: number) => {
-    dispatch(ProductsActions.setCaffeineLevel({level: level}))
-  }
+    dispatch(ProductsActions.setCaffeineLevel({ level: level }));
+  };
 
   const handleClearFilters = () => {
-    dispatch(ProductsActions.clearFilterProducts())
-  }
+    dispatch(ProductsActions.clearFilterProducts());
+  };
   return (
     <Div className={'flex-col gap-6'}>
       <Button onClick={handleClearFilters} className={'w-44'} startAdornment={<FilterSimpleIcon/>}>
