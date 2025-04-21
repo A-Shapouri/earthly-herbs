@@ -19,13 +19,13 @@ const Footer = () => {
   const currentRoute = usePathname();
   const { lang, id } = useParams<{ lang: string, id: string }>();
   const RoutesWithoutFooterMobile: Array<string> = [
-    `/${lang}/shop`,
-    `/${lang}/shop/cart`,
-    `/${lang}/shop/cart/checkout`,
+    `/${lang}/products`,
+    `/${lang}/products/cart`,
+    `/${lang}/products/cart/checkout`,
     `/${lang}/auth/sign-in`,
     `/${lang}/auth/sign-up`,
     `/${lang}/auth/forgot-password`,
-    `/${lang}/shop/${id}`,
+    `/${lang}/products/${id}`,
     `/${lang}/survey`,
     `/${lang}/profile`,
     `/${lang}/profile/orders`,

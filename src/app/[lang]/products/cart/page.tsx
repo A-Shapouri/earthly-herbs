@@ -35,7 +35,7 @@ const Cart = () => {
 
   const handleCheckout = () => {
     router.push(getParseRoute({
-      pathname: routes['route.shop.checkout'],
+      pathname: routes['route.products.checkout'],
       locale: lang,
     }));
   };
@@ -48,8 +48,8 @@ const Cart = () => {
       <Div className={'bg-flurries-500 w-full justify-center items-center'}>
         <Wrapper className={'px-5 md:px-0'}>
           <Breadcrumbs breadcrumbsData={[{
-            label: 'Shop',
-            path: '/en/shop',
+            label: 'products',
+            path: '/en/products',
           },
           {
             label: 'Cart',

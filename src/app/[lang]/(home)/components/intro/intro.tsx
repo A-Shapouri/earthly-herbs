@@ -32,7 +32,7 @@ const Intro = () => {
             </Div>
           </Div>
           <Button
-            href={getParseRoute({ pathname: routes['route.shop.index'], locale: 'en' })}
+            href={getParseRoute({ pathname: routes['route.products.index'], locale: 'en' })}
             startAdornment={<ArrowRightIcon />}
             color={'secondary'}
             rounded={'full'}

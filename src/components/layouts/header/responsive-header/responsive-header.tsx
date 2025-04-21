@@ -14,9 +14,9 @@ import routes from '@routes';
 import getParseRoute from '@utils/helpers/parse-route';
 import { useParams } from 'next/navigation';
 import { DictionariesTypes } from '@dictionaries';
-import {useSelector} from "react-redux";
-import {RootState} from "@store/root-reducer";
-import {useRouter} from "next-nprogress-bar";
+import { useSelector } from 'react-redux';
+import { RootState } from '@store/root-reducer';
+import { useRouter } from 'next-nprogress-bar';
 
 const ResponsiveHeader = () => {
   const [open, setOpen] = useState(false);
@@ -27,7 +27,7 @@ const ResponsiveHeader = () => {
   const { isLoggedIn } = useSelector((state: RootState) => state.auth);
 
   const handleCart = () => {
-    router.push(getParseRoute({ pathname: routes['route.shop.cart'], locale: lang }));
+    router.push(getParseRoute({ pathname: routes['route.products.cart'], locale: lang }));
   };
   return (
     <Div className={'w-full px-5 bg-white justify-between items-center h-16 transition-all duration-300 relative'}>
@@ -66,7 +66,7 @@ const DrawerMenu = ({ open, onClose, lang }: { open: boolean, onClose: () => voi
             <Link onClick={onClose} className={'h-10'} href={getParseRoute({ pathname: routes['route.home.index'], locale: lang })}>
               <Text typography={['md', 'md']} color={'grey.700'}>Home</Text>
             </Link>
-            <Link onClick={onClose} className={'h-10'} href={getParseRoute({ pathname: routes['route.shop.index'], locale: lang })}>
+            <Link onClick={onClose} className={'h-10'} href={getParseRoute({ pathname: routes['route.products.index'], locale: lang })}>
               <Text typography={['md', 'md']} color={'grey.700'}>Shop</Text>
             </Link>
             <Link onClick={onClose} className={'h-10'} href={'/en'}>

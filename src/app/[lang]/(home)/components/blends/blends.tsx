@@ -47,7 +47,7 @@ const Blends = () => {
         </Div>
         <Media greaterThan={'sm'}>
           <Button
-            href={getParseRoute({ pathname: routes['route.shop.index'], locale: 'en' })}
+            href={getParseRoute({ pathname: routes['route.products.index'], locale: 'en' })}
             startAdornment={<ArrowRightIcon />} color={'secondary'} size={'large'} className={'w-[183px]'}>
             Shop now
           </Button>
