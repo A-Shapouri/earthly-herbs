@@ -3,14 +3,15 @@ import React from 'react';
 import Div from '@elements/div';
 import Text from '@elements/text';
 import Button from '@elements/button';
-import Media from '@elements/media'
+import Media from '@elements/media';
 import ArrowRightIcon from '@icons-components/arrow-right';
 import ArticleItem from './sub-components/article-item';
 import NatureImage from '../../../../../../public/images/articles/nature.png';
 import FieldImage from '../../../../../../public/images/articles/field.png';
 import GreenTeaImage from '../../../../../../public/images/articles/green-tea.png';
-import getParseRoute from "@utils/helpers/parse-route";
-import routes from "@routes";
+import getParseRoute from '@utils/helpers/parse-route';
+import routes from '@routes';
+
 const Articles = () => {
   return (
     <Div className={'bg-flurries-500 w-full justify-center items-center px-5'}>
@@ -18,12 +19,12 @@ const Articles = () => {
         <Div className={'items-center justify-between'}>
           <Text typography={['xxl', 'xxl']} type={'bold'}>Latest Articles</Text>
           <Media greaterThan={'sm'}>
-            <Button href={getParseRoute({pathname: routes['route.blog.index'], locale: 'en'})} size={'large'} className={'w-44'} startAdornment={<ArrowRightIcon />}>
+            <Button href={getParseRoute({ pathname: routes['route.blog.index'], locale: 'en' })} size={'large'} className={'w-44'} startAdornment={<ArrowRightIcon />}>
               Our blog
             </Button>
           </Media>
           <Media lessThan={'md'}>
-            <Button href={getParseRoute({pathname: routes['route.blog.index'], locale: 'en'})} size={'large'} variant={'text'} startAdornment={<ArrowRightIcon />}>
+            <Button href={getParseRoute({ pathname: routes['route.blog.index'], locale: 'en' })} size={'large'} variant={'text'} startAdornment={<ArrowRightIcon />}>
               Our blog
             </Button>
           </Media>

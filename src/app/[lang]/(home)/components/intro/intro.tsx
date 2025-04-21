@@ -4,13 +4,13 @@ import Text from '@elements/text';
 import Div from '@elements/div';
 import Button from '@elements/button';
 import Chip from '@elements/chip';
-// import FlowerOneImage from '@images-components/flower_one';
+// import FlowerOneImage from '@images-components/flower_one'
 import ArrowRightIcon from '@icons-components/arrow-right';
 import Services from './sub-components/services';
 import DaySymphony from '../../../../../../public/images/home/day-symphony.png';
 import Image from 'next/image';
-import getParseRoute from "@utils/helpers/parse-route";
-import routes from "@routes";
+import getParseRoute from '@utils/helpers/parse-route';
+import routes from '@routes';
 
 const Intro = () => {
   return (
@@ -32,7 +32,7 @@ const Intro = () => {
             </Div>
           </Div>
           <Button
-            href={getParseRoute({pathname: routes['route.shop.index'], locale: 'en'})}
+            href={getParseRoute({ pathname: routes['route.products.index'], locale: 'en' })}
             startAdornment={<ArrowRightIcon />}
             color={'secondary'}
             rounded={'full'}

@@ -9,8 +9,9 @@ import CheckIcon from '@icons-components/check';
 import ArrowRightIcon from '@icons-components/arrow-right';
 import Button from '@elements/button';
 import Media from '@elements/media';
-import getParseRoute from "@utils/helpers/parse-route";
-import routes from "@routes";
+import getParseRoute from '@utils/helpers/parse-route';
+import routes from '@routes';
+
 const Blends = () => {
   return (
     <Wrapper className={'md:py-[120px] pt-8 pb-6 justify-between gap-2 flex-col-reverse md:flex-row px-5'}>
@@ -46,7 +47,7 @@ const Blends = () => {
         </Div>
         <Media greaterThan={'sm'}>
           <Button
-            href={getParseRoute({pathname: routes['route.shop.index'], locale: 'en'})}
+            href={getParseRoute({ pathname: routes['route.products.index'], locale: 'en' })}
             startAdornment={<ArrowRightIcon />} color={'secondary'} size={'large'} className={'w-[183px]'}>
             Shop now
           </Button>

@@ -32,7 +32,7 @@ const Profile = () => {
           }]}/>
         </Wrapper>
       </Div>
-      <Wrapper className={'px-5 md:flex-row-reverse flex-col pt-10 gap-5 pb-24'}>
+      <Wrapper className={'px-5 flex-col pt-10 gap-5 pb-24'}>
         <Div className={'gap-1 w-full items-center justify-between'}>
           <Div className={'flex-col w-full'}>
             <Text typography={['lg', 'lg']} type={'normal'}>Ali Refahi</Text>

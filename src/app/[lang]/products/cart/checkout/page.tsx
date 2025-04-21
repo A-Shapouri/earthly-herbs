@@ -6,29 +6,29 @@ import Wrapper from '@layouts/wrapper';
 import Text from '@elements/text';
 import ArrowRightIcon from '@icons-components/arrow-right';
 import Button from '@elements/button';
-import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '@store/root-reducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@store/root-reducer';
 import ProductItem from './components/product-item';
-import {useRouter} from 'next-nprogress-bar';
+import { useRouter } from 'next-nprogress-bar';
 import PriceInfo from '../components/price-info';
 import AddressItem from './components/address-item';
 import AddAddressModal from './components/add-address-modal';
-import {AddressActions} from '@store/address/address-actions';
-import AddressListModal from './components/address-list-modal'
-import FormControlLabel from "@elements/form-control-label";
-import Checkbox from "@elements/checkbox";
-import ShippingOptionItem from "./components/shipping-option-item";
-import ShippingOptionListModal from "./components/shipping-option-list-modal";
-import {ShopActions} from "@store/shop/shop-actions";
-import CardInfo from "./components/card-info";
-import Bank1 from "@images-components/banks/bank-1";
-import Bank2 from "@images-components/banks/bank-2";
-import Bank3 from "@images-components/banks/bank-3";
-import Bank4 from "@images-components/banks/bank-4";
-import Bank5 from "@images-components/banks/bank-5";
-import TextField from "@elements/text-field";
-import Media from "@elements/media";
-import {motion, AnimatePresence} from 'motion/react';
+import { AddressActions } from '@store/address/address-actions';
+import AddressListModal from './components/address-list-modal';
+import FormControlLabel from '@elements/form-control-label';
+import Checkbox from '@elements/checkbox';
+import ShippingOptionItem from './components/shipping-option-item';
+import ShippingOptionListModal from './components/shipping-option-list-modal';
+import { ShopActions } from '@store/shop/shop-actions';
+import CardInfo from './components/card-info';
+import Bank1 from '@images-components/banks/bank-1';
+import Bank2 from '@images-components/banks/bank-2';
+import Bank3 from '@images-components/banks/bank-3';
+import Bank4 from '@images-components/banks/bank-4';
+import Bank5 from '@images-components/banks/bank-5';
+import TextField from '@elements/text-field';
+import Media from '@elements/media';
+import { motion, AnimatePresence } from 'motion/react';
 
 const Checkout = () => {
   const router = useRouter();
@@ -38,7 +38,7 @@ const Checkout = () => {
     shippingOption,
     shippingOptionListModal,
     totalPrice,
-    currency
+    currency,
   } = useSelector((state: RootState) => state.shop);
   const {
     shippingAddress,
@@ -46,7 +46,7 @@ const Checkout = () => {
     addressListModal,
     billingSameAsShipping,
     billingAddress,
-    addressModalType
+    addressModalType,
   } = useSelector((state: RootState) => state.address);
 
   const handleBackButton = () => {
@@ -54,36 +54,36 @@ const Checkout = () => {
   };
 
   const handleAddAddressModal = () => {
-    dispatch(AddressActions.setAddressModal({open: !addressModal}));
+    dispatch(AddressActions.setAddressModal({ open: !addressModal }));
   };
 
   const handleAddressListModal = () => {
-    dispatch(AddressActions.setAddressListModal({open: !addressListModal, addressModalType: addressModalType}));
-  }
+    dispatch(AddressActions.setAddressListModal({ open: !addressListModal, addressModalType: addressModalType }));
+  };
 
   const handleSameAddress = () => {
-    dispatch(AddressActions.setBillingAsShipping())
-  }
+    dispatch(AddressActions.setBillingAsShipping());
+  };
 
   const handleShippingOptionListModal = () => {
-    dispatch(ShopActions.setShippingOptionListModal({open: !shippingOptionListModal}));
-  }
+    dispatch(ShopActions.setShippingOptionListModal({ open: !shippingOptionListModal }));
+  };
 
   return (
     <Container>
       <Div className={'bg-flurries-500 w-full justify-center items-center'}>
         <Wrapper className={'px-5 md:px-0'}>
           <Breadcrumbs breadcrumbsData={[{
-            label: 'Shop',
-            path: '/en/shop',
+            label: 'products',
+            path: '/en/products',
           },
-            {
-              path: '/en/shop/cart',
-              label: 'Cart',
-            },
-            {
-              label: 'Checkout',
-            },
+          {
+            path: '/en/products/cart',
+            label: 'Cart',
+          },
+          {
+            label: 'Checkout',
+          },
           ]}/>
         </Wrapper>
       </Div>
@@ -91,7 +91,7 @@ const Checkout = () => {
         <Div className={'flex-col w-full'}>
           <Div className='w-full justify-between items-center'>
             <Button onClick={handleBackButton} color='control' variant='text' className='!p-0 rotate-180'
-                    startAdornment={<ArrowRightIcon/>}/>
+              startAdornment={<ArrowRightIcon/>}/>
             <Text typography={['xl', 'xl']}>Checkout</Text>
             <Div className='w-6 h-10'/>
           </Div>
@@ -121,9 +121,9 @@ const Checkout = () => {
                 {shippingAddress && billingAddress && !billingSameAsShipping ? (
                   <motion.div
                     className='w-full flex'
-                    exit={{opacity: 0, height: 0, transition: {duration: 0.3}}}
-                    initial={{opacity: 0, height: 0}}
-                    animate={{opacity: 1, height: 'auto', transition: {duration: 0.5}}}
+                    exit={{ opacity: 0, height: 0, transition: { duration: 0.3 } }}
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto', transition: { duration: 0.5 } }}
                   >
                     <Div className={'flex-col mt-4 md:gap-4 gap-3 w-full'}>
                       <Text>Billing Address</Text>
@@ -171,12 +171,12 @@ const Checkout = () => {
                 {cart && cart.length ? cart.map((item: any, index: number) => (
                   <motion.div
                     key={index}
-                    initial={{opacity: 0, translateX: '400px'}}
-                    animate={{opacity: 1, translateX: 0}}
-                    transition={{duration: 0.3, delay: 0.3 * (index + 1)}}
+                    initial={{ opacity: 0, translateX: '400px' }}
+                    animate={{ opacity: 1, translateX: 0 }}
+                    transition={{ duration: 0.3, delay: 0.3 * (index + 1) }}
                   >
                     <ProductItem key={index} amount={item.amount} id={item.id} image={item.image} price={item.price}
-                                 name={item.name}/>
+                      name={item.name}/>
                   </motion.div>
                 )) : null}
                 <PriceInfo/>
@@ -192,8 +192,8 @@ const Checkout = () => {
         <Div className={'bg-white h-24 px-5 items-center w-full justify-between'}>
           <Div className={'flex-col gap-1'}>
             <Text color={'grey.700'} typography={['lg', 'lg']}>Total Amount</Text>
-            <Text type={"bold"}
-                  typography={['xl', 'xl']}>${(parseFloat(totalPrice) + parseFloat('14.99')).toFixed(2)} {currency}</Text>
+            <Text type={'bold'}
+              typography={['xl', 'xl']}>${(parseFloat(totalPrice) + parseFloat('14.99')).toFixed(2)} {currency}</Text>
           </Div>
           <Button className='!h-14 w-[120px]' color='secondary' size='large'>
             Place Order

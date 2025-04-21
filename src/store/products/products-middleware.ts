@@ -1,18 +1,25 @@
-import {all, put, takeEvery, select, debounce} from 'redux-saga/effects';
-import {ProductsActionTypes} from './products-actions'
+import { all, put, takeEvery, select, debounce } from 'redux-saga/effects';
+import { ProductsActionTypes } from './products-actions';
 import {
   productsData,
   searchProductsByTagsAndOptionalCategory,
   filterProductsByPriceRange,
   filterProductsByCaffeineLevel,
   sortProductsByPrice,
-  sortByDiscount
-} from '../temp/products-data'
-import {productsStore} from './products-store'
+  sortByDiscount,
+} from '../temp/products-data';
+import { productsStore } from './products-store';
+import productsListApi from '@api/products/list';
 
 function* getProductsListWatcher() {
   try {
-    const {selectedTags, priceRange, selectedCategory, caffeineLevel, sortBy} = yield select(productsStore);
+    const { selectedTags, priceRange, selectedCategory, caffeineLevel, sortBy } = yield select(productsStore);
+    const response = yield productsListApi({
+      page: 0,
+      sort: sortBy,
+      perPage: 10,
+    });
+    console.log(response);
     let tempProducts = searchProductsByTagsAndOptionalCategory(productsData, selectedTags, selectedCategory);
     tempProducts = filterProductsByPriceRange(tempProducts, priceRange.min, priceRange.max);
     tempProducts = filterProductsByCaffeineLevel(tempProducts, caffeineLevel);
@@ -23,27 +30,26 @@ function* getProductsListWatcher() {
     yield put({
       type: ProductsActionTypes.SET_PRODUCTS_LIST,
       payload: {
-        data: tempProducts
-      }
-    })
+        data: tempProducts,
+      },
+    });
   } catch (error: any) {
   }
 }
 
 function* getProductDetailsWatcher() {
   try {
-    const {productItemId} = yield select(productsStore);
+    const { productItemId } = yield select(productsStore);
     const productItem = productsData.find((value) => value.id.toString() === productItemId);
     yield put({
       type: ProductsActionTypes.SET_PRODUCT_DETAILS,
       payload: {
-        productItem: productItem
-      }
-    })
+        productItem: productItem,
+      },
+    });
   } catch (error: any) {
   }
 }
-
 
 function* watchRapidAction() {
   yield debounce(700, ProductsActionTypes.SET_PRICE_RANGE, getProductsListWatcher);

@@ -1,11 +1,11 @@
-import {homeRoutes} from './home';
-import {shopRoutes} from './shop';
-import {blogRoutes} from './blog';
-import {profileRoutes} from './profile';
+import { homeRoutes } from './home';
+import { productsRoutes } from './products';
+import { blogRoutes } from './blog';
+import { profileRoutes } from './profile';
 
 const routes = {
   ...homeRoutes,
-  ...shopRoutes,
+  ...productsRoutes,
   ...blogRoutes,
   ...profileRoutes,
 };
