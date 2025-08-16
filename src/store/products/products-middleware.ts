@@ -10,13 +10,14 @@ import {
 } from '../temp/products-data';
 import { productsStore } from './products-store';
 import productsListApi from '@api/products/list';
+import categoiresListApi from '@api/categories/list';
 
 function* getProductsListWatcher() {
   try {
     const { selectedTags, priceRange, selectedCategory, caffeineLevel, sortBy } = yield select(productsStore);
     const response = yield productsListApi({
       page: 0,
-      sort: sortBy,
+      sort: 'id',
       perPage: 10,
     });
     console.log(response);
@@ -51,6 +52,18 @@ function* getProductDetailsWatcher() {
   }
 }
 
+function* getCategoriesListWatcher() {
+  try {
+    const response = yield categoiresListApi({});
+  
+    yield put({
+      type: ProductsActionTypes.SET_CATEGORIES_LIST,
+      payload: response,
+    });
+  } catch (error: any) {
+  }
+}
+
 function* watchRapidAction() {
   yield debounce(700, ProductsActionTypes.SET_PRICE_RANGE, getProductsListWatcher);
 }
@@ -65,6 +78,7 @@ function* productsMiddleware() {
     yield takeEvery(ProductsActionTypes.SET_SORT_BY, getProductsListWatcher),
     yield takeEvery(ProductsActionTypes.CLEAR_FILTER_PRODUCTS, getProductsListWatcher),
     yield takeEvery(ProductsActionTypes.GET_PRODUCT_DETAILS, getProductDetailsWatcher),
+    yield takeEvery(ProductsActionTypes.GET_CATEGORIES_LIST, getCategoriesListWatcher),
     yield watchRapidAction(),
   ]);
 }

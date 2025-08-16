@@ -14,7 +14,7 @@ const HotSale = () => {
           <Text className={'leading-10 whitespace-nowrap'} align={'center'} color={'white'} type={'bold'} typography={['huge', 'xl']}>Save 37% on <br />Every Order</Text>
         </Div>
         <Button
-          href={getParseRoute({pathname: routes['route.shop.index'], locale: 'en'})}
+          href={getParseRoute({pathname: routes['route.products.index'], locale: 'en'})}
           startAdornment={<ArrowRightIcon />} color={'secondary'} size={'large'} className={'w-[183px]'}>
           Shop now
         </Button>

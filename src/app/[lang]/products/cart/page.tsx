@@ -35,7 +35,7 @@ const Cart = () => {
 
   const handleCheckout = () => {
     router.push(getParseRoute({
-      pathname: routes['route.shop.checkout'],
+      pathname: routes['route.products.checkout'],
       locale: lang,
     }));
   };

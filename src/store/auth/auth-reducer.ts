@@ -1,10 +1,11 @@
-import {AuthActionTypes} from './auth-actions';
-import {AuthReducerProps} from './auth'
+import { AuthActionTypes } from './auth-actions';
+import { AuthReducerProps } from './auth';
 
 export const initialState: AuthReducerProps = {
   isLoggedIn: false,
   email: '',
   password: '',
+  singUpLoading: false,
 };
 
 function authReducer(state = initialState, action: any) {
@@ -13,8 +14,6 @@ function authReducer(state = initialState, action: any) {
       return {
         ...state,
         isLoggedIn: true,
-        email: initialState.email,
-        password: initialState.password,
       };
     case AuthActionTypes.CLIENT_LOGOUT:
       return {
@@ -30,6 +29,11 @@ function authReducer(state = initialState, action: any) {
       return {
         ...state,
         password: action?.data?.password,
+      };
+    case AuthActionTypes.CLIENT_REGISTER:
+      return {
+        ...state,
+        singUpLoading: true,
       };
 
     default:

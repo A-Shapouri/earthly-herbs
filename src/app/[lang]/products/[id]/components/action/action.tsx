@@ -48,7 +48,7 @@ const Action = ({id}: { id: number }) => {
 
   const handleBuyNow = () => {
     router.push(getParseRoute({
-      pathname: routes['route.shop.cart'],
+      pathname: routes['route.products.cart'],
       query: {
         lang: 'en'
       }

@@ -3,6 +3,6 @@ export const productsRoutes = {
   'route.products.cart': '/products/cart',
   'route.products.checkout': '/products/cart/checkout',
 
-  'api.products.list': 'products',
-  'api.products.details': 'products/[id]',
+  'api.products.list': 'public/products/search',
+  'api.products.details': 'public/products/[id]',
 };

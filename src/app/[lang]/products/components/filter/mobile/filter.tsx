@@ -121,9 +121,9 @@ const MobileFilter = () => {
                   <FormControlLabel
                     key={`Category_${index}`}
                     className={'pl-0 pt-1.5'}
-                    label={`${category} (${counts[category] || 0})`}
+                    label={`${category.name} (${counts[category?.id] || 0})`}
                   >
-                    <RadioButton checked={selectedCategory === category} value={category} size={'small'} name={category}/>
+                    <RadioButton checked={selectedCategory === category?.id} value={category?.id} size={'small'} name={category?.name}/>
                   </FormControlLabel>
                 ))}
               </RadioGroup>

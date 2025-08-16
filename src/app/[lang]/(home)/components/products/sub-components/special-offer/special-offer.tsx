@@ -14,7 +14,7 @@ const SpecialOffer = () => {
         <Text className={'leading-10 !text-black md:!text-white'} color={'white'} type={'bold'} typography={['huge', 'xl']}>75% off</Text>
       </Div>
       <Button
-        href={getParseRoute({pathname: routes['route.shop.index'], locale: 'en'})}
+        href={getParseRoute({pathname: routes['route.products.index'], locale: 'en'})}
         startAdornment={<ArrowRightIcon />} color={'secondary'} rounded={'full'} size={'large'} className={'w-full'}>
         Shop now
       </Button>

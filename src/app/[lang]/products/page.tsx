@@ -22,12 +22,13 @@ const Products = () => {
 
   useEffect(() => {
     dispatch(ProductsActions.getProductsList());
+    dispatch(ProductsActions.getCategoriesList());
   }, []);
 
   const handleSortBy = (newValue: any) => {
     dispatch(ProductsActions.setSortBy({ sort: newValue }));
   };
-
+  console.log(products);
   return (
     <Container>
       <Div className={'bg-flurries-500 w-full justify-center items-center'}>
