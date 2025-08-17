@@ -6,7 +6,7 @@ const getParseUrl = (URL: string | { pathname: string; query: any }): string => 
       if (typeof parseUrl === 'string') {
         if (parseUrl.indexOf(key) !== -1) {
           parseUrl = parseUrl.replace(`[${key}]`, URL.query[key]);
-        } else if (URL.query[key]) {
+        } else if (URL.query[key] !== undefined && URL.query[key] !== null) {
           if (typeof URL.query[key] === 'object') {
             URL.query[key].forEach((item: string) => {
               parseUrl = `${parseUrl}&${key}[]=${item}`;

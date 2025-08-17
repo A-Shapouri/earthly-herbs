@@ -3,6 +3,7 @@ export interface ProductsReducerProps {
   listLoading: boolean;
   tags: Array<string>;
   categories: Array<string>;
+  categoryLoading: boolean
   selectedTags: string[];
   selectedCategory: string | null;
   sortBy: string | null;

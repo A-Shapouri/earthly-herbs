@@ -9,9 +9,9 @@ export interface ProductsListProps extends CacheProps{
   perPage?: number
 }
 
-const productsListApi = ({ page = 0, sort = 'id', perPage = 10 }: ProductsListProps) => {
+const productsListApi = ({ page = 0, sort = 'id,desc', perPage = 10 }: ProductsListProps) => {
   return fetchApi({
-    method: 'GET',
+    method: 'POST',
     url: {
       pathname: routes['api.products.list'],
       query: {
@@ -20,7 +20,8 @@ const productsListApi = ({ page = 0, sort = 'id', perPage = 10 }: ProductsListPr
         size: perPage,
       },
     },
-    withToken: true,
+    payload: {
+    },
     withPagination: true,
   });
 };

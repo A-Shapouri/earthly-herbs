@@ -1,11 +1,12 @@
-import {ProductsActionTypes} from './products-actions';
-import {ProductsReducerProps} from './products';
+import { ProductsActionTypes } from './products-actions';
+import { ProductsReducerProps } from './products';
 
 export const initialState: ProductsReducerProps = {
   products: [],
   listLoading: true,
-  tags: ["insider", "tonic", "premium", "new", "classic", "fresh", "essential", "night", "floral", "gold"],
-  categories: ["chai", "smoothie", "spices", "hibiscus", "immunity", "organic", "lemonade", "tonic"],
+  tags: ['insider', 'tonic', 'premium', 'new', 'classic', 'fresh', 'essential', 'night', 'floral', 'gold'],
+  categories: [],
+  categoryLoading: false,
   selectedTags: [],
   selectedCategory: null,
   sortBy: null,
@@ -17,7 +18,7 @@ export const initialState: ProductsReducerProps = {
   productItem: null,
   productsDetailsLoading: true,
   productItemId: null,
-  surveyProducts: []
+  surveyProducts: [],
 };
 
 function productsReducer(state = initialState, action: { payload: any, type: any }) {
@@ -32,12 +33,12 @@ function productsReducer(state = initialState, action: { payload: any, type: any
       return {
         ...state,
         listLoading: false,
-        products: action.payload.data
+        products: action.payload.data,
       };
     }
     case ProductsActionTypes.REMOVE_FILTER_TAG: {
       const tags = state.selectedTags.map((value) => value);
-      console.log(tags.indexOf(action.payload.tag))
+      console.log(tags.indexOf(action.payload.tag));
       tags.splice(tags.indexOf(action.payload.tag), 1);
       return {
         ...state,
@@ -117,10 +118,10 @@ function productsReducer(state = initialState, action: { payload: any, type: any
         ...state,
         productsDetailsLoading: false,
         productItem: action.payload.productItem,
-      }
+      };
     }
     case ProductsActionTypes.GET_SURVEY_PRODUCTS: {
-      const amount = Math.floor(Math.random() * 3)
+      const amount = Math.floor(Math.random() * 3);
       const temp = [];
       for (let i = 0; i < amount; i++) {
         temp.push(state.products[i]);
@@ -128,7 +129,20 @@ function productsReducer(state = initialState, action: { payload: any, type: any
       return {
         ...state,
         surveyProducts: temp,
-      }
+      };
+    }
+    case ProductsActionTypes.GET_CATEGORIES_LIST: {
+      return {
+        ...state,
+        categoryLoading: true,
+      };
+    }
+    case ProductsActionTypes.SET_CATEGORIES_LIST: {
+      return {
+        ...state,
+        categoryLoading: false,
+        categories: action?.payload || [],
+      };
     }
     default:
       return state;

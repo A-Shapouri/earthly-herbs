@@ -3,8 +3,8 @@ import Text from '@elements/text';
 import Button from '@elements/button';
 import Div from '@elements/div';
 import ArrowRightIcon from '@icons-components/arrow-right';
-import getParseRoute from '@utils/helpers/parse-route';
-import routes from '@routes';
+import getParseRoute from "@utils/helpers/parse-route";
+import routes from "@routes";
 const HotSale = () => {
   return (
     <Div className={'w-full md:w-auto px-5'}>
@@ -14,7 +14,7 @@ const HotSale = () => {
           <Text className={'leading-10 whitespace-nowrap'} align={'center'} color={'white'} type={'bold'} typography={['huge', 'xl']}>Save 37% on <br />Every Order</Text>
         </Div>
         <Button
-          href={getParseRoute({ pathname: routes['route.products.index'], locale: 'en' })}
+          href={getParseRoute({pathname: routes['route.products.index'], locale: 'en'})}
           startAdornment={<ArrowRightIcon />} color={'secondary'} size={'large'} className={'w-[183px]'}>
           Shop now
         </Button>
