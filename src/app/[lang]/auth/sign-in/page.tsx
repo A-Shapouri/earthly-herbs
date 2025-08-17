@@ -21,7 +21,7 @@ const SignIn = () => {
   const dispatch = useDispatch();
   const { lang } = useParams<{ lang: DictionariesTypes }>();
   const { email, password } = useSelector((state: RootState) => state.auth);
-  console.log(email);
+
   const handleUserEmail = (value: string) => {
     dispatch(AuthActions.setEmail({ email: value }));
   };

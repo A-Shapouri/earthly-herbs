@@ -7,6 +7,8 @@ export const AuthActionTypes = {
   CLIENT_REGISTER: `${preType}CLIENT_REGISTER`,
   SET_EMAIL: `${preType}SET_EMAIL`,
   SET_PASSWORD: `${preType}SET_PASSWORD`,
+  GET_INFO: `${preType}GET_INFO`,
+  SET_INFO: `${preType}SET_INFO`,
 };
 
 const saveToken = (data: { accessToken: string, tokenType: string }) => ({
@@ -28,10 +30,15 @@ const setPassword = (data: { password: string }) => ({
   data: data,
 });
 
+const getInfo = () => ({
+  type: AuthActionTypes.GET_INFO,
+});
+
 export const AuthActions = {
   saveToken: saveToken,
   clientLogin: clientLogin,
   setPassword: setPassword,
   setEmail: setEmail,
   clientRegister: clientRegister,
+  getInfo: getInfo,
 };

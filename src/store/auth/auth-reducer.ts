@@ -6,6 +6,13 @@ export const initialState: AuthReducerProps = {
   email: '',
   password: '',
   singUpLoading: false,
+  firstName: '',
+  lastName: '',
+  imageUrl: '',
+  activated: false,
+  state: '',
+  userId: '',
+  langKey: 'en',
 };
 
 function authReducer(state = initialState, action: any) {
@@ -35,7 +42,18 @@ function authReducer(state = initialState, action: any) {
         ...state,
         singUpLoading: true,
       };
-
+    case AuthActionTypes.SET_INFO:
+      return {
+        ...state,
+        email: action?.data?.email,
+        firstName: action?.data?.firstName,
+        lastName: action?.data?.lastName,
+        imageUrl: action?.data?.imageUrl,
+        activated: action?.data?.activated,
+        state: action?.data?.state,
+        userId: action?.data?.id,
+        langKey: action?.data?.langKey,
+      };
     default:
       return state;
   }

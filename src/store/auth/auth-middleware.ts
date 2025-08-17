@@ -8,6 +8,7 @@ import loginApi from '@api/auth/login';
 import { navigationStore } from '@store/navigation/navigation-store';
 import routes from '@routes';
 import getParseRoute from '@utils/helpers/parse-route';
+import getInfoApi from '@api/auth/get-info';
 
 function* clientLoginWatcher() {
   const { email, password } = yield select(authStore);
@@ -85,11 +86,32 @@ function* clientLogoutWatcher() {
   }
 }
 
+function* getInfoWatcher() {
+  try {
+    const response = yield getInfoApi();
+
+    yield put({
+      type: AuthActionTypes.SET_INFO,
+      data: response,
+    });
+  } catch (error: any) {
+    yield put({
+      type: AlertActionType.SHOW_ALERT,
+      data: {
+        text: error?.message || 'Something went wrong',
+        description: 'Please try again later',
+        severity: 'danger',
+      },
+    });
+  }
+}
+
 function* authMiddleware() {
   yield all([
     takeLatest(AuthActionTypes.CLIENT_LOGIN, clientLoginWatcher),
     takeLatest(AuthActionTypes.CLIENT_LOGOUT, clientLogoutWatcher),
     takeLatest(AuthActionTypes.CLIENT_REGISTER, clientRegisterWatcher),
+    takeLatest(AuthActionTypes.GET_INFO, getInfoWatcher),
   ]);
 }
 

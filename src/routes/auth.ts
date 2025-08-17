@@ -3,6 +3,7 @@ export const authRoutes = {
   'route.auth.sign-in': '/auth/sign-in',
   'route.auth.sign-up': '/auth/sign-up',
 
-  'api.auth.register': 'public/customers',
-  'api.auth.login': 'authenticate',
+  'api.auth.register': 'public/customers/register',
+  'api.auth.login': 'public/authenticate',
+  'api.auth.get-info': 'public/account',
 };

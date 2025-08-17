@@ -19,7 +19,7 @@ const Wrapper = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const token = getFromCookie('token');
     if (token) {
-      dispatch(AuthActions.clientLogin());
+      dispatch(AuthActions.getInfo());
     }
   }, []);
 
