@@ -83,7 +83,7 @@ const DesktopFilter = () => {
             <MultiRangeSlider min={0} max={100} step={1} value={priceRange} onChange={handlePriceRange}/>
           </Div>
         </Collapsible>
-        <Divider/>
+        {/* <Divider/>
         <Collapsible className='w-[400px]' open={true} header={'Caffeine level'}>
           <Div className={'flex-col w-full py-4 gap-2'}>
             {[5, 4, 3, 2, 1].map((item, index) => (
@@ -107,7 +107,7 @@ const DesktopFilter = () => {
               />
             ))}
           </Div>
-        </Collapsible>
+        </Collapsible> */}
       </Div>
     </Div>
   );

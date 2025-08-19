@@ -28,7 +28,7 @@ const Products = () => {
   const handleSortBy = (newValue: any) => {
     dispatch(ProductsActions.setSortBy({ sort: newValue }));
   };
-  console.log(products);
+
   return (
     <Container>
       <Div className={'bg-flurries-500 w-full justify-center items-center'}>
@@ -70,11 +70,11 @@ const Products = () => {
             </Text>
           </Div>
           <Div className={'grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-x-5 md:gap-y-10'}>
-            {products && products.length > 0 ? products.map((item, index) => (
+            {products && products.length > 0 ? products.map((item, _index) => (
               <AnimatePresence key={`${item.title}_index`} mode={'wait'}>
                 {item?.id && (
                   <motion.div
-                    key={`${item.title}_index`}
+                    key={`${item.id}_index`}
                     className={'flex flex-1'}
                     initial={{ opacity: 0, scale: 0 }}
                     exit={{ opacity: 0, scale: 0 }}
@@ -84,7 +84,10 @@ const Products = () => {
                       id={item.id}
                       isHealthy={item.isHealthy}
                       isNew={item.isNew}
-                      image={item.image} price={item.price} rate={item.rate} title={item.title}/>
+                      image={'/images/temp/products/turmeric-tonic-organic/turmeric-tonic-sachet-steeped-x21_bc2a3df9-5b6f-4a24-b2c7-7e043bd849c0-xa_550x.webp'}
+                      price={item.price}
+                      rate={item.rate}
+                      title={item.model}/>
                   </motion.div>
                 )}
               </AnimatePresence>

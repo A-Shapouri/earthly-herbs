@@ -18,11 +18,12 @@ function* clientLoginWatcher() {
       email: email,
       password: password,
     });
-    console.log(response)
+
     yield saveToCookie('token', response.id_token);
     yield saveToCookie('user_id', response.user_id);
+
     yield put({
-      type: AuthActionTypes.SET_LOGGED_IN,
+      type: AuthActionTypes.GET_INFO,
     });
 
     navigation.push(getParseRoute({
@@ -92,7 +93,7 @@ function* clientLogoutWatcher() {
 function* getInfoWatcher() {
   try {
     const response = yield getInfoApi();
-
+    console.log(response);
     yield put({
       type: AuthActionTypes.SET_INFO,
       data: response,

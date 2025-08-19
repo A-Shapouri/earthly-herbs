@@ -36,10 +36,12 @@ const ProductItem = ({ image, title, price, rate, isHealthy, isNew, id }: Produc
           rounded={'full'}
         />
       </Link>
-      <Link href={getParseRoute({ pathname: '/products/[id]', query: { id: id } })} className={'flex rounded-t-xl md:rounded-t-2xl'}>
-        <Image className={'rounded-t-xl md:rounded-t-2xl'} src={image} alt={title}/>
-      </Link>
-      <Div className={'w-full items-start rounded-b-xl md:rounded-b-2xl bg-white justify-between md:px-4 px-3 h-full pb-2 md:pt-3 pt-2 flex-col'}>
+      {image ? (
+        <Link href={getParseRoute({ pathname: '/products/[id]', query: { id: id } })} className={'flex rounded-t-xl md:rounded-t-2xl h-[190px] relative w-[200px]'}>
+          <Image className={'rounded-t-xl md:rounded-t-2xl'} fill src={image} alt={title}/>
+        </Link>
+      ) : null}
+      <Div className={'w-full items-start rounded-b-xl md:rounded-b-2xl bg-white justify-between md:px-4 px-3 h-fit pb-2 md:pt-3 pt-2 flex-col'}>
         <Link href={getParseRoute({ pathname: '/products/[id]', query: { id: id } })} className={'items-start'}>
           <Text color={'grey.900'} type={'medium'} typography={['xs', 'xs']}>{title}</Text>
         </Link>

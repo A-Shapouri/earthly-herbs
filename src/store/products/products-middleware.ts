@@ -2,36 +2,24 @@ import { all, put, takeEvery, select, debounce } from 'redux-saga/effects';
 import { ProductsActionTypes } from './products-actions';
 import {
   productsData,
-  searchProductsByTagsAndOptionalCategory,
-  filterProductsByPriceRange,
-  filterProductsByCaffeineLevel,
-  sortProductsByPrice,
-  sortByDiscount,
 } from '../temp/products-data';
 import { productsStore } from './products-store';
 import productsListApi from '@api/products/list';
 import categoiresListApi from '@api/categories/list';
+import productDetailsApi from '@api/products/show';
 
 function* getProductsListWatcher() {
   try {
-    const { selectedTags, priceRange, selectedCategory, caffeineLevel, sortBy } = yield select(productsStore);
     const response = yield productsListApi({
       page: 0,
       sort: 'id',
       perPage: 10,
     });
-    console.log(response);
-    let tempProducts = searchProductsByTagsAndOptionalCategory(productsData, selectedTags, selectedCategory);
-    tempProducts = filterProductsByPriceRange(tempProducts, priceRange.min, priceRange.max);
-    tempProducts = filterProductsByCaffeineLevel(tempProducts, caffeineLevel);
-    if (sortBy) {
-      tempProducts = sortBy === 'PLH' || sortBy === 'PHL' ? sortProductsByPrice(tempProducts, sortBy === 'PLH' ? 'asc' : 'desc') : sortByDiscount(tempProducts);
-    }
 
     yield put({
       type: ProductsActionTypes.SET_PRODUCTS_LIST,
       payload: {
-        data: tempProducts,
+        data: response,
       },
     });
   } catch (error: any) {
@@ -41,7 +29,9 @@ function* getProductsListWatcher() {
 function* getProductDetailsWatcher() {
   try {
     const { productItemId } = yield select(productsStore);
-    const productItem = productsData.find((value) => value.id.toString() === productItemId);
+    const productItem = productDetailsApi({
+      id: productItemId,
+    });
     yield put({
       type: ProductsActionTypes.SET_PRODUCT_DETAILS,
       payload: {
@@ -55,7 +45,7 @@ function* getProductDetailsWatcher() {
 function* getCategoriesListWatcher() {
   try {
     const response = yield categoiresListApi({});
-  
+
     yield put({
       type: ProductsActionTypes.SET_CATEGORIES_LIST,
       payload: response,

@@ -53,6 +53,7 @@ function authReducer(state = initialState, action: any) {
         state: action?.data?.state,
         userId: action?.data?.id,
         langKey: action?.data?.langKey,
+        isLoggedIn: true,
       };
     default:
       return state;

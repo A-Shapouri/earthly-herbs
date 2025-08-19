@@ -9,7 +9,9 @@ import Button from '@elements/button';
 import Link from 'next/link';
 import ArrowRightIcon from '@icons-components/arrow-right';
 import Divider from '@elements/divider';
-import routes from '@routes'
+import routes from '@routes';
+import { useSelector } from 'react-redux';
+import { RootState } from '@store/root-reducer';
 
 const menu = [
   {
@@ -23,6 +25,8 @@ const menu = [
 ];
 
 const Profile = () => {
+  const { firstName, lastName, email } = useSelector((state: RootState) => state.auth);
+
   return (
     <Container>
       <Div className={'bg-flurries-500 w-full justify-center items-center'}>
@@ -35,8 +39,8 @@ const Profile = () => {
       <Wrapper className={'px-5 flex-col pt-10 gap-5 pb-24'}>
         <Div className={'gap-1 w-full items-center justify-between'}>
           <Div className={'flex-col w-full'}>
-            <Text typography={['lg', 'lg']} type={'normal'}>Ali Refahi</Text>
-            <Text color={'grey.700'} typography={['md', 'md']} type={'medium'}>refahi@gmail.com</Text>
+            <Text typography={['lg', 'lg']} type={'normal'}>{firstName} {lastName}</Text>
+            <Text color={'grey.700'} typography={['md', 'md']} type={'medium'}>{email}</Text>
           </Div>
           <Button shape={'square'} startAdornment={<PencilIcon/>} variant={'text'}/>
         </Div>
