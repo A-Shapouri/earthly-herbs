@@ -9,6 +9,7 @@ export const AuthActionTypes = {
   SET_PASSWORD: `${preType}SET_PASSWORD`,
   GET_INFO: `${preType}GET_INFO`,
   SET_INFO: `${preType}SET_INFO`,
+  SET_LOGGED_IN: `${preType}SET_LOGGED_IN`,
 };
 
 const saveToken = (data: { accessToken: string, tokenType: string }) => ({
@@ -34,6 +35,10 @@ const getInfo = () => ({
   type: AuthActionTypes.GET_INFO,
 });
 
+const setLoggedIn = () => ({
+  type: AuthActionTypes.SET_LOGGED_IN,
+});
+
 export const AuthActions = {
   saveToken: saveToken,
   clientLogin: clientLogin,
@@ -41,4 +46,5 @@ export const AuthActions = {
   setEmail: setEmail,
   clientRegister: clientRegister,
   getInfo: getInfo,
+  setLoggedIn: setLoggedIn,
 };

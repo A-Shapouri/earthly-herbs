@@ -17,7 +17,7 @@ export const initialState: AuthReducerProps = {
 
 function authReducer(state = initialState, action: any) {
   switch (action.type) {
-    case AuthActionTypes.CLIENT_LOGIN:
+    case AuthActionTypes.SET_LOGGED_IN:
       return {
         ...state,
         isLoggedIn: true,

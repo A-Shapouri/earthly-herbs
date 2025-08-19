@@ -12,7 +12,7 @@ const loginApi = ({ email, password }: LoginProps) => {
     method: 'POST',
     url: routes['api.auth.login'],
     payload: {
-      email: email,
+      username: email,
       password: password,
       rememberMe: false,
     },

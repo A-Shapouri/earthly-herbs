@@ -18,9 +18,12 @@ function* clientLoginWatcher() {
       email: email,
       password: password,
     });
-
-    saveToCookie('token', response.id_token);
-    saveToCookie('user_id', response.user_id);
+    console.log(response)
+    yield saveToCookie('token', response.id_token);
+    yield saveToCookie('user_id', response.user_id);
+    yield put({
+      type: AuthActionTypes.SET_LOGGED_IN,
+    });
 
     navigation.push(getParseRoute({
       pathname: routes['route.home.index'],
@@ -37,7 +40,7 @@ function* clientLoginWatcher() {
     yield put({
       type: AlertActionType.SHOW_ALERT,
       data: {
-        text: error?.message || 'Something went wrong',
+        text: 'Something went wrong',
         description: 'Please try again later',
         severity: 'danger',
       },
