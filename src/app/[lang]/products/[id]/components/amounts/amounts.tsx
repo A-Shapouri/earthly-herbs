@@ -1,3 +1,4 @@
+'use client';
 import React from 'react'
 import Div from "@elements/div";
 import Button from "@elements/button";

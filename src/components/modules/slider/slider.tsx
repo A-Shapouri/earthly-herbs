@@ -1,3 +1,4 @@
+'use client';
 import React, { useEffect, useState } from 'react';
 import { SliderProps } from './slider.props';
 import Button from '@elements/button'
