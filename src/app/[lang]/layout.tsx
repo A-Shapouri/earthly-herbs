@@ -7,6 +7,7 @@ import { AuthActions } from '@store/auth/auth-actions';
 import { useParams, useRouter } from 'next/navigation';
 import { DictionariesTypes } from '@dictionaries';
 import { NavigationActions } from '@store/navigation/navigation-actions';
+import { ShopActions } from '@store/shop/shop-actions';
 
 const Wrapper = ({ children }: { children: ReactNode }) => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const Wrapper = ({ children }: { children: ReactNode }) => {
     const token = getFromCookie('token');
     if (token) {
       dispatch(AuthActions.getInfo());
+      dispatch(ShopActions.getCart());
     }
     dispatch(NavigationActions.setNavigation({ navigation: router }));
   }, []);

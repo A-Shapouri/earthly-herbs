@@ -1,19 +1,20 @@
 import { all, put, takeEvery, select, debounce } from 'redux-saga/effects';
 import { ProductsActionTypes } from './products-actions';
-import {
-  productsData,
-} from '../temp/products-data';
 import { productsStore } from './products-store';
 import productsListApi from '@api/products/list';
 import categoiresListApi from '@api/categories/list';
 import productDetailsApi from '@api/products/show';
 
 function* getProductsListWatcher() {
+  const { priceRange } = yield select(productsStore);
+  console.log(priceRange)
   try {
     const response = yield productsListApi({
       page: 0,
       sort: 'id',
       perPage: 10,
+      minPrice: priceRange.min,
+      maxPrice: priceRange.max,
     });
 
     yield put({

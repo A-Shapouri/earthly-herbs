@@ -7,4 +7,5 @@ export const productsRoutes = {
   'api.products.details': 'public/products/[id]',
 
   'api.products.create-cart': 'public/customer-carts',
+  'api.products.list-cart': 'public/customer-carts',
 };

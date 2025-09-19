@@ -113,13 +113,13 @@ const ProductDetails = async ({ params }: ProductDetailsPageProps) => {
                 <Div className='col-span-1 grid grid-cols-1 gap-4 max-h-[670px]'>
                   {imageList?.map((image: any, index: number) => (
                     <Div key={index} className={'relative rounded-2xl shadow-md w-full h-full'}>
-                      <Image className={'rounded-2xl'} fill={true} src={image} alt={productItem.model}/>
+                      <Image className={'rounded-2xl'} fill={true} src={image} alt={productItem.model || 'MODEL_1'}/>
                     </Div>
                   ))}
                 </Div>
                 <Div
                   className="w-full justify-between items-center relative h-full col-span-4 rounded-2xl shadow-md max-h-[670px]">
-                  <Image className={'rounded-2xl'} fill={true} src={imageList[0]} alt={productItem.model}/>
+                  <Image className={'rounded-2xl'} fill={true} src={imageList[0]} alt={productItem.model || 'MODEL_1'}/>
                 </Div>
               </Div>
             </Media>
@@ -127,24 +127,24 @@ const ProductDetails = async ({ params }: ProductDetailsPageProps) => {
               <Slider direction={'ltr'} slides={1}>
                 {imageList?.map((image: any, index: number) => (
                   <Div key={index} className={'relative w-full h-60 bg-yellow-500'}>
-                    <Image fill={true} src={image} alt={productItem.model} className="object-cover"/>
+                    <Image fill={true} src={image} alt={productItem.model || 'MODEL_1'} className="object-cover"/>
                   </Div>
                 ))}
               </Slider>
             </Media>
             <Div className={'md:col-span-2 flex-col'}>
-              <Text typography={['lg', 'lg']} type={'medium'} color={'grey.700'}>{productItem.model}</Text>
-              <Text typography={['xl', 'xl']} type={'normal'} color={'black'}>${productItem.price}</Text>
+              <Text typography={['lg', 'lg']} type={'medium'} color={'grey.700'}>{productItem.model || 'MODEL_1'}</Text>
+              <Text typography={['xl', 'xl']} type={'normal'} color={'black'}>${productItem.price || '100'}</Text>
               <Div className={'mt-4 md:gap-8 gap-4'}>
                 <Rating size={['xxs', 'xxs']} value={parseFloat(productItem.rate) || 0}/>
-                <Text typography={['md', 'md']} type={'medium'}>Category: {productItem.category}</Text>
-                <Text typography={['md', 'md']} type={'medium'}>Tag: {productItem.tag}</Text>
+                <Text typography={['md', 'md']} type={'medium'}>Category: {productItem.category || 'CATEGOY_1'}</Text>
+                <Text typography={['md', 'md']} type={'medium'}>Tag: {productItem.tag || 'TAG_1'}</Text>
               </Div>
               <Text typography={['md', 'md']} type={'medium'} align={'start'}
-                className={'mt-8'}>{productItem.description}</Text>
+                className={'mt-8'}>{productItem.description || 'description description description description description description description description description description'}</Text>
               <Div className={'mt-11 flex-col gap-4'}>
                 <Text typography={['md', 'md']} type={'medium'}>Amount:</Text>
-                <Amounts data={productItem.amounts || ['100', '500', '1000', '2000']}/>
+                <Amounts data={productItem.amounts || ['amount_1', 'amount_2', 'amount_3']}/>
               </Div>
               <Media greaterThan={'sm'} className={'w-full'}>
                 <Action id={parseInt(id, 10)}/>

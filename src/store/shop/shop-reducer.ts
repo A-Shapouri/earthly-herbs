@@ -8,13 +8,13 @@ export const initialState: ShopReducerProps = {
   couponModal: false,
   couponValue: '',
   isCouponValid: false,
-  shippingOption: {title: 'Expedited Parcel', description: 'Est delivery: November 22, 2024 – November 23, 2024', id: '1'},
+  shippingOption: { title: 'Expedited Parcel', description: 'Est delivery: November 22, 2024 – November 23, 2024', id: '1' },
   shippingOptionList: [
-    {title: 'Expedited Parcel', description: 'Est delivery: November 22, 2024 – November 23, 2024', id: '1'},
-    {title: 'Expedited Parcel', description: 'Est delivery: November 24, 2024 – November 25, 2024', id: '2'},
-    {title: 'Expedited Parcel', description: 'Est delivery: November 26, 2024 – November 27, 2024', id: '3'},
-    {title: 'Expedited Parcel', description: 'Est delivery: November 28, 2024 – November 29, 2024', id: '4'},
-    {title: 'Expedited Parcel', description: 'Est delivery: November 30, 2024 – December 01, 2024', id: '5'},
+    { title: 'Expedited Parcel', description: 'Est delivery: November 22, 2024 – November 23, 2024', id: '1' },
+    { title: 'Expedited Parcel', description: 'Est delivery: November 24, 2024 – November 25, 2024', id: '2' },
+    { title: 'Expedited Parcel', description: 'Est delivery: November 26, 2024 – November 27, 2024', id: '3' },
+    { title: 'Expedited Parcel', description: 'Est delivery: November 28, 2024 – November 29, 2024', id: '4' },
+    { title: 'Expedited Parcel', description: 'Est delivery: November 30, 2024 – December 01, 2024', id: '5' },
   ],
   shippingOptionListModal: false,
 };
@@ -26,6 +26,8 @@ function shopReducer(state = initialState, action: any) {
       item.amount = 1;
       const cart = JSON.parse(JSON.stringify(state.cart));
       cart.push(item);
+      console.log(cart);
+
       return {
         ...state,
         cart: cart,
@@ -87,14 +89,14 @@ function shopReducer(state = initialState, action: any) {
       return {
         ...state,
         couponValue: action.data.value,
-      }
+      };
 
     case ShopActionTypes.VALIDATE_COUPON_CODE:
       return {
         ...state,
         isCouponValid: true,
         couponModal: false,
-      }
+      };
     case ShopActionTypes.SET_SHIPPING_OPTION: {
       return {
         ...state,
@@ -106,7 +108,14 @@ function shopReducer(state = initialState, action: any) {
       return {
         ...state,
         shippingOptionListModal: action.data.open,
-      }
+      };
+
+    case ShopActionTypes.SET_CART:
+      console.log('reducer', action);
+      return {
+        ...state,
+        cart: action.payload.data || [],
+      };
 
     default:
       return state;
