@@ -14,7 +14,7 @@ import productDetailsServerApi from '@api/products/show-server';
 import { notFound } from 'next/navigation';
 import BackButton from './components/back-button';
 import { Metadata } from 'next';
-import ImageTemp from '../../../../../public/images/temp/products/turmeric-tonic-organic/turmeric-tonic-sachet-steeped-x21_bc2a3df9-5b6f-4a24-b2c7-7e043bd849c0-xa_550x.webp'
+import ImageTemp from '../../../../../public/images/temp/products/turmeric-tonic-organic/turmeric-tonic-sachet-steeped-x21_bc2a3df9-5b6f-4a24-b2c7-7e043bd849c0-xa_550x.webp';
 
 interface ProductDetailsPageProps {
   params: {
@@ -27,37 +27,37 @@ const imageList = [
   ImageTemp,
   ImageTemp,
   ImageTemp,
-  ImageTemp
+  ImageTemp,
 ];
-// Generate metadata for SEO
+
 export async function generateMetadata({ params }: ProductDetailsPageProps): Promise<Metadata> {
   const { id } = params;
 
   try {
-    const productItem = await productDetailsServerApi({ 
+    const productItem = await productDetailsServerApi({
       id,
       cache: 'force-cache',
       next: { revalidate: 3600 },
     });
 
     return {
-      title: `${productItem.title} - Earthly Herbs`,
-      description: productItem.description || `Buy ${productItem.title} at the best price. High-quality herbal products from Earthly Herbs.`,
+      title: `${productItem.model} - Earthly Herbs`,
+      description: productItem.description || `Buy ${productItem.model} at the best price. High-quality herbal products from Earthly Herbs.`,
       openGraph: {
-        title: `${productItem.title} - Earthly Herbs`,
+        title: `${productItem.model} - Earthly Herbs`,
         description: productItem.description,
         images: [
           {
             url: productItem.image,
             width: 800,
             height: 600,
-            alt: productItem.title,
+            alt: productItem.model,
           },
         ],
       },
       twitter: {
         card: 'summary_large_image',
-        title: `${productItem.title} - Earthly Herbs`,
+        title: `${productItem.model} - Earthly Herbs`,
         description: productItem.description,
         images: [productItem.image],
       },
@@ -73,13 +73,12 @@ export async function generateMetadata({ params }: ProductDetailsPageProps): Pro
 const ProductDetails = async ({ params }: ProductDetailsPageProps) => {
   const { id } = params;
 
-  // Fetch product data on the server side
   let productItem;
   try {
     productItem = await productDetailsServerApi({
       id,
       cache: 'force-cache',
-      next: { revalidate: 3600 }, // Revalidate every hour
+      next: { revalidate: 3600 },
     });
   } catch (error) {
     console.error('Failed to fetch product details:', error);
@@ -114,13 +113,13 @@ const ProductDetails = async ({ params }: ProductDetailsPageProps) => {
                 <Div className='col-span-1 grid grid-cols-1 gap-4 max-h-[670px]'>
                   {imageList?.map((image: any, index: number) => (
                     <Div key={index} className={'relative rounded-2xl shadow-md w-full h-full'}>
-                      <Image className={'rounded-2xl'} fill={true} src={image} alt={productItem.title}/>
+                      <Image className={'rounded-2xl'} fill={true} src={image} alt={productItem.model}/>
                     </Div>
                   ))}
                 </Div>
                 <Div
                   className="w-full justify-between items-center relative h-full col-span-4 rounded-2xl shadow-md max-h-[670px]">
-                  <Image className={'rounded-2xl'} fill={true} src={imageList[0]} alt={productItem.title}/>
+                  <Image className={'rounded-2xl'} fill={true} src={imageList[0]} alt={productItem.model}/>
                 </Div>
               </Div>
             </Media>
@@ -128,7 +127,7 @@ const ProductDetails = async ({ params }: ProductDetailsPageProps) => {
               <Slider direction={'ltr'} slides={1}>
                 {imageList?.map((image: any, index: number) => (
                   <Div key={index} className={'relative w-full h-60 bg-yellow-500'}>
-                    <Image fill={true} src={image} alt={productItem.title} className="object-cover"/>
+                    <Image fill={true} src={image} alt={productItem.model} className="object-cover"/>
                   </Div>
                 ))}
               </Slider>

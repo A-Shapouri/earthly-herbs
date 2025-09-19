@@ -5,4 +5,6 @@ export const productsRoutes = {
 
   'api.products.list': 'public/products/search',
   'api.products.details': 'public/products/[id]',
+
+  'api.products.create-cart': 'public/customer-carts',
 };
