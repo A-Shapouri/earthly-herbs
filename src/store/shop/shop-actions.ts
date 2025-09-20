@@ -17,7 +17,7 @@ export const ShopActionTypes = {
   SET_SHIPPING_OPTION: `${preType}SET_SHIPPING_OPTION`,
 };
 
-const addToCart = (data: { name: string, price: string, id: number, image: any }) => ({ type: ShopActionTypes.ADD_TO_CART, data: data });
+const addToCart = (data: { name: string, price: string, id: any, image: any }) => ({ type: ShopActionTypes.ADD_TO_CART, data: data });
 const getCart = () => ({ type: ShopActionTypes.GET_CART });
 const increaseProductAmount = (data: { id: number }) => ({ type: ShopActionTypes.INCREASE_PRODUCT_AMOUNT, data: data });
 const decreaseProductAmount = (data: { id: number }) => ({ type: ShopActionTypes.DECREASE_PRODUCT_AMOUNT, data: data });

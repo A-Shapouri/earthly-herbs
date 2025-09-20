@@ -10,4 +10,10 @@ export interface AuthReducerProps {
   state: string
   userId: string
   langKey: string
+  favoriteProductId: string
+  addToWishListLoading: boolean
+  wishListLoading: boolean
+  wishList: any[]
+  removeFromWishListLoading: boolean
+  removeFromWishListId: string
 }

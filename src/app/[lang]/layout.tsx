@@ -13,19 +13,20 @@ const Wrapper = ({ children }: { children: ReactNode }) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const { lang } = useParams<{ lang: DictionariesTypes }>();
+  const token = getFromCookie('token');
 
   useEffect(() => {
     dispatch(NavigationActions.setLang({ lang: lang }));
   }, [lang]);
 
   useEffect(() => {
-    const token = getFromCookie('token');
+    console.log(token, 'here');
     if (token) {
       dispatch(AuthActions.getInfo());
       dispatch(ShopActions.getCart());
     }
     dispatch(NavigationActions.setNavigation({ navigation: router }));
-  }, []);
+  }, [token]);
 
   return (
     <Layout>

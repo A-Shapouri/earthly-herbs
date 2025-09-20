@@ -10,6 +10,13 @@ export const AuthActionTypes = {
   GET_INFO: `${preType}GET_INFO`,
   SET_INFO: `${preType}SET_INFO`,
   SET_LOGGED_IN: `${preType}SET_LOGGED_IN`,
+
+  ADD_TO_WISH_LIST: `${preType}ADD_TO_WISH_LIST`,
+  SET_ADD_TO_WISH_LIST_LOADING: `${preType}SET_ADD_TO_WISH_LIST_LOADING`,
+  REMOVE_FROM_WISH_LIST: `${preType}REMOVE_FROM_WISH_LIST`,
+  GET_WISH_LIST: `${preType}GET_WISH_LIST`,
+  SET_WISH_LIST: `${preType}SET_WISH_LIST`,
+  SET_REMOVE_FROM_WISH_LIST_LOADING: `${preType}SET_REMOVE_FROM_WISH_LIST_LOADING`,
 };
 
 const saveToken = (data: { accessToken: string, tokenType: string }) => ({
@@ -39,6 +46,20 @@ const setLoggedIn = () => ({
   type: AuthActionTypes.SET_LOGGED_IN,
 });
 
+const addToWishList = (data: { productId: number }) => ({
+  type: AuthActionTypes.ADD_TO_WISH_LIST,
+  data: data,
+});
+
+const removeFromWishList = (data: { productId: number }) => ({
+  type: AuthActionTypes.REMOVE_FROM_WISH_LIST,
+  data: data,
+});
+
+const getWishList = () => ({
+  type: AuthActionTypes.GET_WISH_LIST,
+});
+
 export const AuthActions = {
   saveToken: saveToken,
   clientLogin: clientLogin,
@@ -47,4 +68,7 @@ export const AuthActions = {
   clientRegister: clientRegister,
   getInfo: getInfo,
   setLoggedIn: setLoggedIn,
+  addToWishList: addToWishList,
+  removeFromWishList: removeFromWishList,
+  getWishList: getWishList,
 };

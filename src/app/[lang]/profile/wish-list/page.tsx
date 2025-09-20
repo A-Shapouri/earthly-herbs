@@ -7,7 +7,7 @@ import ThumbnailImage2 from '../../../../../public/images/products/thumbnail-2.p
 
 import Button from '@elements/button';
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Text from '@elements/text';
 import CartIcon from '@icons-components/cart';
 import routes from '@routes';
@@ -16,47 +16,10 @@ import classNames from '@utils/helpers/class-names';
 import Divider from '@elements/divider';
 import PencilIcon from '@icons-components/pencil';
 import ArrowRightIcon from '@icons-components/arrow-right';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@store/root-reducer';
-
-const items = [
-  {
-    name: 'Indian Malta',
-    price: 14.99,
-    image: ThumbnailImage2,
-    date: '21 Jun 2025',
-  },
-  {
-    name: 'Indian Malta',
-    price: 14.99,
-    image: ThumbnailImage2,
-    date: '21 Jun 2025',
-  },
-  {
-    name: 'Indian Malta',
-    price: 14.99,
-    image: ThumbnailImage2,
-    date: '21 Jun 2025',
-  },
-  {
-    name: 'Indian Malta',
-    price: 14.99,
-    image: ThumbnailImage2,
-    date: '21 Jun 2025',
-  },
-  {
-    name: 'Indian Malta',
-    price: 14.99,
-    image: ThumbnailImage2,
-    date: '21 Jun 2025',
-  },
-  {
-    name: 'Indian Malta',
-    price: 14.99,
-    image: ThumbnailImage2,
-    date: '21 Jun 2025',
-  },
-];
+import { AuthActions } from '@store/auth/auth-actions';
+import { ShopActions } from '@store/shop/shop-actions';
 
 const menu = [
   {
@@ -70,7 +33,11 @@ const menu = [
 ];
 
 const WishList = () => {
-  const { firstName, lastName, email } = useSelector((state: RootState) => state.auth);
+  const { firstName, lastName, email, wishList } = useSelector((state: RootState) => state.auth);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(AuthActions.getWishList());
+  }, []);
 
   return (
     <Container>
@@ -81,7 +48,7 @@ const WishList = () => {
             path: '/en/profile',
           }, {
             label: 'Wish List',
-          }]}/>
+          }]} />
         </Wrapper>
       </Div>
       <Wrapper className={'px-5 pt-4 gap-5 pb-10 md:flex-row flex-col'}>
@@ -91,14 +58,14 @@ const WishList = () => {
               <Text typography={['sm', 'sm']} type={'normal'}>{firstName} {lastName}</Text>
               <Text color={'grey.700'} typography={['xs', 'xs']} type={'medium'}>{email}</Text>
             </Div>
-            <Button shape={'square'} startAdornment={<PencilIcon/>} variant={'text'}/>
+            <Button shape={'square'} startAdornment={<PencilIcon />} variant={'text'} />
           </Div>
           <Div className={'flex-col w-full'}>
             {menu.map((item, index) => (
               <Div key={`menu_${index}`} className={'w-full flex-col'}>
                 <Link href={item.route} className={'flex justify-between items-center py-4 cursor-pointer'}>
                   <Text color={item.title === 'Wishlist' ? 'primary' : 'black'} typography={['sm', 'sm']} type={'normal'}>{item.title}</Text>
-                  <Button className={classNames('!text-black', item.title === 'Wishlist' ? '!text-primary' : '')} startAdornment={<ArrowRightIcon/>} shape={'square'} variant={'text'}/>
+                  <Button className={classNames('!text-black', item.title === 'Wishlist' ? '!text-primary' : '')} startAdornment={<ArrowRightIcon />} shape={'square'} variant={'text'} />
                 </Link>
                 {index !== menu.length - 1 && <Divider color={'control'} />}
               </Div>
@@ -106,23 +73,23 @@ const WishList = () => {
           </Div>
         </Div>
         <Div className='flex-col gap-5 w-full'>
-          {items.map((item, index) => (
+          {wishList.map((item, index) => (
             <Div key={index} className={'w-full p-3 flex-col gap-6 border border-gray-300 rounded-2xl'}>
               <Div className={'gap-6'}>
                 <Div className={'h-24 w-24 relative'} key={`image_${index}`}>
                   <Image fill={true} src={ThumbnailImage2} alt={'image'} />
                 </Div>
                 <Div className={'flex-col gap-1'}>
-                  <Text color={'grey.700'} typography={['xs', 'xs']} type={'medium'}>{item.name}</Text>
-                  <Text typography={['sm', 'sm']} type={'normal'}>${item.price}</Text>
+                  <Text color={'grey.700'} typography={['xs', 'xs']} type={'medium'}>{item.name || 'product name'}</Text>
+                  <Text typography={['sm', 'sm']} type={'normal'}>${item.price || 'product price'}</Text>
                 </Div>
               </Div>
               <Div className={'grid grid-cols-3 gap-2'}>
-                <Button size={'large'} color={'flurries'}>
-              Remove
+                <Button onClick={() => dispatch(AuthActions.removeFromWishList({ productId: item.id }))} size={'large'} color={'flurries'}>
+                  Remove
                 </Button>
-                <Button startAdornment={<CartIcon />} className={'col-span-2'} size={'large'} color={'secondary'}>
-                Add To Cart
+                <Button onClick={() => dispatch(ShopActions.addToCart({ id: item.productId, name: item.name || 'product name', price: item.price || 'product price', image: item.image || 'product image' }))} startAdornment={<CartIcon />} className={'col-span-2'} size={'large'} color={'secondary'}>
+                  Add To Cart
                 </Button>
               </Div>
             </Div>

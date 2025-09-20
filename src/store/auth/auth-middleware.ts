@@ -9,6 +9,9 @@ import { navigationStore } from '@store/navigation/navigation-store';
 import routes from '@routes';
 import getParseRoute from '@utils/helpers/parse-route';
 import getInfoApi from '@api/auth/get-info';
+import addToWishListApi from '@api/wish-list/create';
+import getWishListApi from '@api/wish-list/list';
+import removeFromWishListApi from '@api/wish-list/delete';
 
 function* clientLoginWatcher() {
   const { email, password } = yield select(authStore);
@@ -110,12 +113,106 @@ function* getInfoWatcher() {
   }
 }
 
+function* addToWishListWatcher() {
+  const { favoriteProductId, userId } = yield select(authStore);
+  try {
+    yield addToWishListApi({
+      productId: favoriteProductId,
+      customerId: userId,
+    });
+    yield put({
+      type: AuthActionTypes.SET_ADD_TO_WISH_LIST_LOADING,
+    });
+    yield put({
+      type: AlertActionType.SHOW_ALERT,
+      data: {
+        text: 'Added to Wish List!',
+        severity: 'success',
+      },
+    });
+  } catch (error: any) {
+    yield put({
+      type: AlertActionType.SHOW_ALERT,
+      data: {
+        text: error?.message || 'Something went wrong',
+        description: 'Please try again later',
+        severity: 'danger',
+      },
+    });
+  }
+}
+
+function* getWishListWatcher() {
+  try {
+    const response = yield getWishListApi({
+      page: 0,
+      sort: 'id,desc',
+      perPage: 20,
+    });
+    console.log(response);
+    yield put({
+      type: AuthActionTypes.SET_WISH_LIST,
+      data: response?.data,
+    });
+    yield put({
+      type: AlertActionType.SHOW_ALERT,
+      data: {
+        text: 'Added to Wish List!',
+        severity: 'success',
+      },
+    });
+  } catch (error: any) {
+    yield put({
+      type: AlertActionType.SHOW_ALERT,
+      data: {
+        text: error?.message || 'Something went wrong',
+        description: 'Please try again later',
+        severity: 'danger',
+      },
+    });
+  }
+}
+
+function* removeFromWishListWatcher() {
+  const { removeFromWishListId } = yield select(authStore);
+  try {
+    yield removeFromWishListApi({
+      id: removeFromWishListId,
+    });
+    yield put({
+      type: AuthActionTypes.SET_REMOVE_FROM_WISH_LIST_LOADING,
+    });
+    yield put({
+      type: AlertActionType.SHOW_ALERT,
+      data: {
+        text: 'Removed from Wish List!',
+        severity: 'success',
+      },
+    });
+    yield put({
+      type: AuthActionTypes.GET_WISH_LIST,
+    });
+  } catch (error: any) {
+    yield put({
+      type: AlertActionType.SHOW_ALERT,
+      data: {
+        text: error?.message || 'Something went wrong',
+        description: 'Please try again later',
+        severity: 'danger',
+      },
+    });
+  }
+}
+
 function* authMiddleware() {
   yield all([
     takeLatest(AuthActionTypes.CLIENT_LOGIN, clientLoginWatcher),
     takeLatest(AuthActionTypes.CLIENT_LOGOUT, clientLogoutWatcher),
     takeLatest(AuthActionTypes.CLIENT_REGISTER, clientRegisterWatcher),
     takeLatest(AuthActionTypes.GET_INFO, getInfoWatcher),
+    takeLatest(AuthActionTypes.ADD_TO_WISH_LIST, addToWishListWatcher),
+    takeLatest(AuthActionTypes.GET_WISH_LIST, getWishListWatcher),
+    takeLatest(AuthActionTypes.REMOVE_FROM_WISH_LIST, removeFromWishListWatcher),
   ]);
 }
 

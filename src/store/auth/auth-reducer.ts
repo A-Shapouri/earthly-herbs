@@ -13,6 +13,12 @@ export const initialState: AuthReducerProps = {
   state: '',
   userId: '',
   langKey: 'en',
+  favoriteProductId: '',
+  addToWishListLoading: false,
+  wishListLoading: false,
+  wishList: [],
+  removeFromWishListLoading: false,
+  removeFromWishListId: '',
 };
 
 function authReducer(state = initialState, action: any) {
@@ -54,6 +60,41 @@ function authReducer(state = initialState, action: any) {
         userId: action?.data?.id,
         langKey: action?.data?.langKey,
         isLoggedIn: true,
+      };
+    case AuthActionTypes.ADD_TO_WISH_LIST:
+      return {
+        ...state,
+        favoriteProductId: action?.data?.productId,
+        addToWishListLoading: true,
+      };
+    case AuthActionTypes.SET_ADD_TO_WISH_LIST_LOADING:
+      return {
+        ...state,
+        addToWishListLoading: false,
+        favoriteProductId: '',
+      };
+    case AuthActionTypes.REMOVE_FROM_WISH_LIST:
+      return {
+        ...state,
+        removeFromWishListId: action?.data?.productId,
+        removeFromWishListLoading: true,
+      };
+    case AuthActionTypes.GET_WISH_LIST:
+      return {
+        ...state,
+        wishListLoading: true,
+      };
+    case AuthActionTypes.SET_WISH_LIST:
+      return {
+        ...state,
+        wishListLoading: false,
+        wishList: action?.data,
+      };
+    case AuthActionTypes.SET_REMOVE_FROM_WISH_LIST_LOADING:
+      return {
+        ...state,
+        removeFromWishListLoading: false,
+        removeFromWishListId: '',
       };
     default:
       return state;
