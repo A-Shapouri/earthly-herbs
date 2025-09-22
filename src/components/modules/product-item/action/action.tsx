@@ -10,8 +10,6 @@ import { RootState } from '@store/root-reducer';
 import MinusIcon from '@icons-components/minus';
 import PlusIcon from '@icons-components/plus';
 import TrashIcon from '@icons-components/trash';
-import AnimatedNumber from '../../animated-number'
-
 
 const ProductAction = ({ id, title, price, image }: { id: number, title: string, price: string, image: any }) => {
   const dispatch = useDispatch();

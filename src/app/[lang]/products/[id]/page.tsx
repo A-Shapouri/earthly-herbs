@@ -1,41 +1,93 @@
-'use client';
-import React, { useEffect } from 'react';
+import React from 'react';
 import Container from '@elements/container';
 import Div from '@elements/div';
 import Wrapper from '@layouts/wrapper';
 import Breadcrumbs from '@elements/breadcrumbs';
-import Button from '@elements/button';
-import ArrowRightIcon from '@icons-components/arrow-right';
 import Text from '@elements/text';
-import { useRouter } from 'next-nprogress-bar';
-import { useParams } from 'next/navigation';
-import { useDispatch, useSelector } from 'react-redux';
-import { ProductsActions } from '@store/products/products-actions';
-import { RootState } from '@store/root-reducer';
 import Image from 'next/image';
 import Rating from '@elements/rating';
 import Amounts from './components/amounts';
 import Action from './components/action';
 import Media from '@elements/media';
 import Slider from '@modules/slider';
+import productDetailsServerApi from '@api/products/show-server';
+import { notFound } from 'next/navigation';
+import BackButton from './components/back-button';
+import { Metadata } from 'next';
+import ImageTemp from '../../../../../public/images/temp/products/turmeric-tonic-organic/turmeric-tonic-sachet-steeped-x21_bc2a3df9-5b6f-4a24-b2c7-7e043bd849c0-xa_550x.webp';
 
-const ProductDetails = () => {
-  const router = useRouter();
-  const dispatch = useDispatch();
-  const { productItem, productsDetailsLoading } = useSelector((state: RootState) => state.products);
-  const { cart, currency } = useSelector((state: RootState) => state.shop);
-  const { id } = useParams<{ id: any }>();
-  const cartItem = cart.find((item: any) => item.id.toString() === id.toString());
-
-  const handleBackButton = () => {
-    router.back();
+interface ProductDetailsPageProps {
+  params: {
+    id: string;
+    lang: string;
   };
+}
 
-  useEffect(() => {
-    if (id && typeof id === 'string') {
-      dispatch(ProductsActions.getProductDetails({ productId: id }));
-    }
-  }, [id]);
+const imageList = [
+  ImageTemp,
+  ImageTemp,
+  ImageTemp,
+  ImageTemp,
+];
+
+export async function generateMetadata({ params }: ProductDetailsPageProps): Promise<Metadata> {
+  const { id } = params;
+
+  try {
+    const productItem = await productDetailsServerApi({
+      id,
+      cache: 'force-cache',
+      next: { revalidate: 3600 },
+    });
+
+    return {
+      title: `${productItem.model} - Earthly Herbs`,
+      description: productItem.description || `Buy ${productItem.model} at the best price. High-quality herbal products from Earthly Herbs.`,
+      openGraph: {
+        title: `${productItem.model} - Earthly Herbs`,
+        description: productItem.description,
+        images: [
+          {
+            url: productItem.image,
+            width: 800,
+            height: 600,
+            alt: productItem.model,
+          },
+        ],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: `${productItem.model} - Earthly Herbs`,
+        description: productItem.description,
+        images: [productItem.image],
+      },
+    };
+  } catch (error) {
+    return {
+      title: 'Product Not Found - Earthly Herbs',
+      description: 'The requested product could not be found.',
+    };
+  }
+}
+
+const ProductDetails = async ({ params }: ProductDetailsPageProps) => {
+  const { id } = params;
+
+  let productItem;
+  try {
+    productItem = await productDetailsServerApi({
+      id,
+      cache: 'force-cache',
+      next: { revalidate: 3600 },
+    });
+  } catch (error) {
+    console.error('Failed to fetch product details:', error);
+    notFound();
+  }
+
+  if (!productItem) {
+    notFound();
+  }
 
   return (
     <Container>
@@ -43,79 +95,73 @@ const ProductDetails = () => {
         <Wrapper className={'px-5 md:px-0'}>
           <Breadcrumbs breadcrumbsData={[{
             label: 'products',
-            path: '/en/products',
+            path: `/${params.lang}/products`,
           }, {
-            label: productItem?.title,
+            label: productItem?.model,
           }]}/>
         </Wrapper>
       </Div>
       <Wrapper className={'px-5 md:flex-row-reverse flex-col pt-4 gap-4 pb-24 md:gap-16 md:pt-16'}>
         <Div className={'gap-4 md:gap-28 flex-col w-full'}>
           <Div className='w-full justify-between items-center hidden md:visible'>
-            <Button onClick={handleBackButton} color='control' variant='text' className='!p-0 rotate-180'
-              startAdornment={<ArrowRightIcon/>}/>
+            <BackButton />
             <Div className='w-6 h-10'/>
           </Div>
-          {!productsDetailsLoading ? (
-            <Div className={'grid md:grid-cols-5 gap-8 md:gap-16 flex-col grid-cols-1'}>
-              <Media className={'w-full col-span-3'} greaterThan={'sm'}>
-                <Div className='grid grid-cols-5 gap-4 w-full'>
-                  <Div className='col-span-1 grid grid-cols-1 gap-4 max-h-[670px]'>
-                    {productItem.imageList.map((image, index) => (
-                      <Div className={'relative w-full h-full rounded-2xl shadow-md'}>
-                        <Image className={'rounded-2xl'} fill={true} src={image} alt={productItem.title}/>
-                      </Div>
-                    ))}
-                  </Div>
-                  <Div
-                    className="w-full justify-between items-center relative h-full col-span-4 rounded-2xl shadow-md max-h-[670px]">
-                    <Image className={'rounded-2xl'} fill={true} src={productItem.image} alt={productItem.title}/>
-                  </Div>
-                </Div>
-              </Media>
-              <Media className={'w-full'} lessThan={'md'}>
-                <Slider direction={'ltr'} slides={1}>
-                  {productItem.imageList.map((image, index) => (
-                    <Div key={index} className={'relative w-full h-60 bg-yellow-500'}>
-                      <Image objectFit={'cover'} fill={true} src={image} alt={productItem.title}/>
+          <Div className={'grid md:grid-cols-5 gap-8 md:gap-16 flex-col grid-cols-1'}>
+            <Media className={'w-full col-span-3'} greaterThan={'sm'}>
+              <Div className='grid grid-cols-5 gap-4 w-full'>
+                <Div className='col-span-1 grid grid-cols-1 gap-4 max-h-[670px]'>
+                  {imageList?.map((image: any, index: number) => (
+                    <Div key={index} className={'relative rounded-2xl shadow-md w-full h-full'}>
+                      <Image className={'rounded-2xl'} fill={true} src={image} alt={productItem.model || 'MODEL_1'}/>
                     </Div>
                   ))}
-                </Slider>
-              </Media>
-              <Div className={'md:col-span-2 flex-col'}>
-                <Text typography={['lg', 'lg']} type={'medium'} color={'grey.700'}>{productItem.title}</Text>
-                <Text typography={['xl', 'xl']} type={'normal'} color={'black'}>${productItem.price}</Text>
-                <Div className={'mt-4 md:gap-8 gap-4'}>
-                  <Rating size={['xxs', 'xxs']} value={productItem.rate}/>
-                  <Text typography={['md', 'md']} type={'medium'}>Category: {productItem.category}</Text>
-                  <Text typography={['md', 'md']} type={'medium'}>Tag: {productItem.tag}</Text>
                 </Div>
-                <Text typography={['md', 'md']} type={'medium'} align={'start'}
-                  className={'mt-8'}>{productItem.description}</Text>
-                <Div className={'mt-11 flex-col gap-4'}>
-                  <Text typography={['md', 'md']} type={'medium'}>Amount:</Text>
-                  <Amounts data={['100', '500', '1000', '2000']}/>
+                <Div
+                  className="w-full justify-between items-center relative h-full col-span-4 rounded-2xl shadow-md max-h-[670px]">
+                  <Image className={'rounded-2xl'} fill={true} src={imageList[0]} alt={productItem.model || 'MODEL_1'}/>
                 </Div>
-                <Media greaterThan={'sm'} className={'w-full'}>
-                  <Action id={id}/>
-                </Media>
               </Div>
+            </Media>
+            <Media className={'w-full'} lessThan={'md'}>
+              <Slider direction={'ltr'} slides={1}>
+                {imageList?.map((image: any, index: number) => (
+                  <Div key={index} className={'relative w-full h-60 bg-yellow-500'}>
+                    <Image fill={true} src={image} alt={productItem.model || 'MODEL_1'} className="object-cover"/>
+                  </Div>
+                ))}
+              </Slider>
+            </Media>
+            <Div className={'md:col-span-2 flex-col'}>
+              <Text typography={['lg', 'lg']} type={'medium'} color={'grey.700'}>{productItem.model || 'MODEL_1'}</Text>
+              <Text typography={['xl', 'xl']} type={'normal'} color={'black'}>${productItem.price || '100'}</Text>
+              <Div className={'mt-4 md:gap-8 gap-4'}>
+                <Rating size={['xxs', 'xxs']} value={parseFloat(productItem.rate) || 0}/>
+                <Text typography={['md', 'md']} type={'medium'}>Category: {productItem.category || 'CATEGOY_1'}</Text>
+                <Text typography={['md', 'md']} type={'medium'}>Tag: {productItem.tag || 'TAG_1'}</Text>
+              </Div>
+              <Text typography={['md', 'md']} type={'medium'} align={'start'}
+                className={'mt-8'}>{productItem.description || 'description description description description description description description description description description'}</Text>
+              <Div className={'mt-11 flex-col gap-4'}>
+                <Text typography={['md', 'md']} type={'medium'}>Amount:</Text>
+                <Amounts data={productItem.amounts || ['amount_1', 'amount_2', 'amount_3']}/>
+              </Div>
+              <Media greaterThan={'sm'} className={'w-full'}>
+                <Action id={parseInt(id, 10)}/>
+              </Media>
             </Div>
-          ) : null}
+          </Div>
         </Div>
       </Wrapper>
       <Media lessThan={'md'} className={'shadow-2xl drop-shadow-2xl w-full fixed bottom-0 z-20'}>
         <Div className={'bg-white h-24 px-5 items-center justify-between w-full gap-4'}>
-          {cartItem ? (
-            <Div className={'flex-col gap-1 whitespace-nowrap'}>
-              <Text className={'whiteSpace-nowrap'} color={'grey.700'} typography={['lg', 'lg']}>Total Amount</Text>
-              <Text type={'bold'}
-                typography={['lg', 'lg']}>
-                ${(parseFloat(cartItem.price) * cartItem.amount).toFixed(2)} {currency}
-              </Text>
-            </Div>
-          ) : null}
-          <Action id={id}/>
+          <Div className={'flex-col gap-1 whitespace-nowrap'}>
+            <Text className={'whiteSpace-nowrap'} color={'grey.700'} typography={['lg', 'lg']}>Add to Cart</Text>
+            <Text type={'bold'} typography={['lg', 'lg']}>
+              ${productItem.price}
+            </Text>
+          </Div>
+          <Action id={parseInt(id, 10)}/>
         </Div>
       </Media>
     </Container>

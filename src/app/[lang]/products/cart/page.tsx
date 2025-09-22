@@ -43,6 +43,8 @@ const Cart = () => {
   const handleCouponModal = () => {
     dispatch(ShopActions.setCouponModal({ open: !couponModal }));
   };
+
+  console.log(cart);
   return (
     <Container>
       <Div className={'bg-flurries-500 w-full justify-center items-center'}>
@@ -53,16 +55,16 @@ const Cart = () => {
           },
           {
             label: 'Cart',
-          }]}/>
+          }]} />
         </Wrapper>
       </Div>
       <Wrapper className={'px-5 md:flex-row-reverse flex-col pt-4 md:pb-24 pb-36 md:pt-16'}>
         <Div className={'flex-col w-full'}>
           <Div className='w-full justify-between items-center'>
             <Button onClick={handleBackButton} color='control' variant='text' className='!p-0 rotate-180'
-              startAdornment={<ArrowRightIcon/>}/>
+              startAdornment={<ArrowRightIcon />} />
             <Text typography={['xl', 'xl']}>Your Cart</Text>
-            <Div className='w-6 h-10'/>
+            <Div className='w-6 h-10' />
           </Div>
           <Div className='mt-6 md:mt-28 grid md:grid-cols-3 grid-cols-1 md:gap-16 gap-5 relative overflow-visible'>
             <Div className='flex-col gap-4 md:col-span-2'>
@@ -74,7 +76,7 @@ const Cart = () => {
                   transition={{ duration: 0.3, delay: 0.3 * (index + 1) }}
                 >
                   <ProductItem
-                    amount={item.amount}
+                    amount={item.quantity}
                     id={item.id}
                     image={item.image}
                     price={item.price}
@@ -86,9 +88,9 @@ const Cart = () => {
                 <Div className={'flex-col gap-2 md:mt-9 mt-5'}>
                   <Text typography={['base', 'base']} type={'medium'} color={'black'}>Coupon Number</Text>
                   <Div className='items-center md:gap-5 gap-3'>
-                    <TextField className='w-full' value={couponValue}/>
+                    <TextField className='w-full' value={couponValue} />
                     <Button onClick={handleCouponModal} rounded={'medium'} size={'large'} shape={'square'}
-                      color={'flurries'} startAdornment={<EditIcon/>}/>
+                      color={'flurries'} startAdornment={<EditIcon />} />
                   </Div>
                 </Div>
               ) : (
@@ -100,7 +102,7 @@ const Cart = () => {
             </Div>
             <Div className='flex-col w-full md:gap-6 gap-3 md:top-36 self-center md:!sticky md:self-start'>
               <Text type='normal' typography={['md', 'md']}>Price Details</Text>
-              <PriceInfo/>
+              <PriceInfo />
               <Media greaterThan={'sm'}>
                 <Button onClick={handleCheckout} className='w-full !h-20' color='secondary' size='large'>
                   Continue
@@ -110,7 +112,7 @@ const Cart = () => {
           </Div>
         </Div>
       </Wrapper>
-      <CouponModal closeModal={handleCouponModal} isShow={couponModal}/>
+      <CouponModal closeModal={handleCouponModal} isShow={couponModal} />
       <Media lessThan={'md'} className={'shadow-2xl drop-shadow-2xl w-full fixed bottom-0 z-20'}>
         <Div className={'bg-white h-24 px-5 items-center justify-between w-full'}>
           <Div className={'flex-col gap-1'}>

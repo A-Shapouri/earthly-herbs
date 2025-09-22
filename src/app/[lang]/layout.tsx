@@ -1,18 +1,32 @@
 'use client';
-import React, {ReactNode, useEffect} from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import Layout from '@layouts/layout';
-import {getFromCookie} from "@utils/helpers/cookie";
-import {useDispatch} from "react-redux";
-import {AuthActions} from "@store/auth/auth-actions";
+import { getFromCookie } from '@utils/helpers/cookie';
+import { useDispatch } from 'react-redux';
+import { AuthActions } from '@store/auth/auth-actions';
+import { useParams, useRouter } from 'next/navigation';
+import { DictionariesTypes } from '@dictionaries';
+import { NavigationActions } from '@store/navigation/navigation-actions';
+import { ShopActions } from '@store/shop/shop-actions';
 
-const Wrapper = ({children}: { children: ReactNode }) => {
+const Wrapper = ({ children }: { children: ReactNode }) => {
   const dispatch = useDispatch();
+  const router = useRouter();
+  const { lang } = useParams<{ lang: DictionariesTypes }>();
+  const token = getFromCookie('token');
+
   useEffect(() => {
-    const token = getFromCookie('token')
+    dispatch(NavigationActions.setLang({ lang: lang }));
+  }, [lang]);
+
+  useEffect(() => {
+    console.log(token, 'here');
     if (token) {
-      dispatch(AuthActions.clientLogin())
+      dispatch(AuthActions.getInfo());
+      dispatch(ShopActions.getCart());
     }
-  }, []);
+    dispatch(NavigationActions.setNavigation({ navigation: router }));
+  }, [token]);
 
   return (
     <Layout>

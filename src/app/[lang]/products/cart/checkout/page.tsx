@@ -29,6 +29,7 @@ import Bank5 from '@images-components/banks/bank-5';
 import TextField from '@elements/text-field';
 import Media from '@elements/media';
 import { motion, AnimatePresence } from 'motion/react';
+import { useEffect } from 'react';
 
 const Checkout = () => {
   const router = useRouter();
@@ -52,6 +53,10 @@ const Checkout = () => {
   const handleBackButton = () => {
     router.back();
   };
+
+  useEffect(() => {
+    dispatch(AddressActions.getAddresses());
+  }, []);
 
   const handleAddAddressModal = () => {
     dispatch(AddressActions.setAddressModal({ open: !addressModal }));
@@ -84,16 +89,16 @@ const Checkout = () => {
           {
             label: 'Checkout',
           },
-          ]}/>
+          ]} />
         </Wrapper>
       </Div>
       <Wrapper className={'px-5 md:flex-row-reverse flex-col pt-4 md:pb-24 pb-36 md:pt-16'}>
         <Div className={'flex-col w-full'}>
           <Div className='w-full justify-between items-center'>
             <Button onClick={handleBackButton} color='control' variant='text' className='!p-0 rotate-180'
-              startAdornment={<ArrowRightIcon/>}/>
+              startAdornment={<ArrowRightIcon />} />
             <Text typography={['xl', 'xl']}>Checkout</Text>
-            <Div className='w-6 h-10'/>
+            <Div className='w-6 h-10' />
           </Div>
           <Div className='mt-6 md:mt-28 grid md:grid-cols-5 grid-cols-1 gap-16 relative'>
             <Div className='flex-col gap-4 md:col-span-3 w-full'>
@@ -114,7 +119,7 @@ const Checkout = () => {
               </Div>
               {shippingAddress ? (
                 <FormControlLabel label={'Use same address for billing'}>
-                  <Checkbox onChange={handleSameAddress} checked={billingSameAsShipping} color={'secondary'}/>
+                  <Checkbox onChange={handleSameAddress} checked={billingSameAsShipping} color={'secondary'} />
                 </FormControlLabel>
               ) : null}
               <AnimatePresence>
@@ -145,14 +150,14 @@ const Checkout = () => {
                 <Div className={'items-center justify-between'}>
                   <Text>Credit / debit card</Text>
                   <Div className={'items-center gap-1'}>
-                    <Bank1/>
-                    <Bank2/>
-                    <Bank3/>
-                    <Bank4/>
-                    <Bank5/>
+                    <Bank1 />
+                    <Bank2 />
+                    <Bank3 />
+                    <Bank4 />
+                    <Bank5 />
                   </Div>
                 </Div>
-                <CardInfo/>
+                <CardInfo />
               </Div>
               <Div className={'flex-col mt-4 md:gap-4 gap-3'}>
                 <Text>Notes</Text>
@@ -175,11 +180,11 @@ const Checkout = () => {
                     animate={{ opacity: 1, translateX: 0 }}
                     transition={{ duration: 0.3, delay: 0.3 * (index + 1) }}
                   >
-                    <ProductItem key={index} amount={item.amount} id={item.id} image={item.image} price={item.price}
-                      name={item.name}/>
+                    <ProductItem key={index} amount={item.quantity} id={item.id} image={item.image} price={item.price}
+                      name={item.name} />
                   </motion.div>
                 )) : null}
-                <PriceInfo/>
+                <PriceInfo />
                 <Button className='w-full !h-20' color='secondary' size='large'>
                   Place Order
                 </Button>
@@ -200,9 +205,9 @@ const Checkout = () => {
           </Button>
         </Div>
       </Media>
-      <AddAddressModal closeModal={handleAddAddressModal} isShow={addressModal}/>
-      <AddressListModal type={addressModalType} closeModal={handleAddressListModal} isShow={addressListModal}/>
-      <ShippingOptionListModal isShow={shippingOptionListModal} closeModal={handleShippingOptionListModal}/>
+      <AddAddressModal closeModal={handleAddAddressModal} isShow={addressModal} />
+      <AddressListModal type={addressModalType} closeModal={handleAddressListModal} isShow={addressListModal} />
+      <ShippingOptionListModal isShow={shippingOptionListModal} closeModal={handleShippingOptionListModal} />
     </Container>
   );
 };

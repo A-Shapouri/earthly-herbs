@@ -64,27 +64,27 @@ const DesktopFilter = () => {
         Clear Filters
       </Button>
       <Div className={'flex-col w-full gap-6'}>
-        <Collapsible open={true} header={'All Categories'}>
+        <Collapsible className='w-[400px]' open={true} header={'All Categories'}>
           <RadioGroup onChange={handleCategory} value={selectedCategory} className={'flex-col w-full py-1.5 gap-3'}>
             {categories.map((category, index: number) => (
               <FormControlLabel
                 key={`Category_${index}`}
                 className={'pl-0 pt-1.5'}
-                label={`${category} (${counts[category] || 0})`}
+                label={`${category?.name} (${counts[category] || 0})`}
               >
-                <RadioButton checked={selectedCategory === category} value={category} size={'small'} name={category}/>
+                <RadioButton checked={selectedCategory === category?.id} value={category?.id} size={'small'} name={category?.name}/>
               </FormControlLabel>
             ))}
           </RadioGroup>
         </Collapsible>
         <Divider/>
-        <Collapsible open={true} header={'Price'}>
+        <Collapsible className='w-[400px]' open={true} header={'Price'}>
           <Div className={'flex-col w-full pt-5 px-3'}>
             <MultiRangeSlider min={0} max={100} step={1} value={priceRange} onChange={handlePriceRange}/>
           </Div>
         </Collapsible>
-        <Divider/>
-        <Collapsible open={true} header={'Caffeine level'}>
+        {/* <Divider/>
+        <Collapsible className='w-[400px]' open={true} header={'Caffeine level'}>
           <Div className={'flex-col w-full py-4 gap-2'}>
             {[5, 4, 3, 2, 1].map((item, index) => (
               <label key={`Caffeine_${index}`} className={'gap-2 flex'}>
@@ -95,7 +95,7 @@ const DesktopFilter = () => {
           </Div>
         </Collapsible>
         <Divider/>
-        <Collapsible open={true} header={'Popular Tag'}>
+        <Collapsible className='w-[400px]' open={true} header={'Popular Tag'}>
           <Div className={'w-full py-3 gap-2 flex-wrap'}>
             {tags.map((tag, index) => (
               <Tag
@@ -107,7 +107,7 @@ const DesktopFilter = () => {
               />
             ))}
           </Div>
-        </Collapsible>
+        </Collapsible> */}
       </Div>
     </Div>
   );

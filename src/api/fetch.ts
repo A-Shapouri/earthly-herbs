@@ -23,7 +23,7 @@ export interface CacheProps {
 
 export async function fetchApi({ method, payload, withToken, url, cache = 'no-cache', next, uploadFile = false, download, withPagination }: ConfigProps): Promise<any> {
   const parseUrl: string = getParseUrl(url);
-  const baseURL = `http://74.208.77.41:8080/api/v1/public`;
+  const baseURL = `http://74.208.77.41:8080/api/v1`;
 
   const CatchFunction = async (error: any) => {
     const errorObject = {
@@ -34,7 +34,7 @@ export async function fetchApi({ method, payload, withToken, url, cache = 'no-ca
       removeFromCookie('token');
       if (window.location.pathname) {
         setTimeout(() => {
-          window.location.replace(`${routes['route.auth.login']}?redirect=${encodeURIComponent(window.location.pathname)}`);
+          // window.location.replace(`${routes['route.auth.login']}?redirect=${encodeURIComponent(window.location.pathname)}`);
         }, 1000);
       }
     }
@@ -128,7 +128,7 @@ export async function fetchApi({ method, payload, withToken, url, cache = 'no-ca
               throw response;
             }
             return {
-              message: 'حذف با موفقیت انجام شد.',
+              message: 'Deleted successfully',
             };
           })
           .catch((reason) => reason.name === 'TypeError' ? controller.abort() : CatchFunction(reason))

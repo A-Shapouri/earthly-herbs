@@ -13,9 +13,9 @@ export const alertReducer = (state = initialState, action: any) => {
       return {
         ...state,
         isShow: true,
-        text: action.text,
-        description: action?.description || '',
-        severity: action.severity || 'info',
+        text: action.data?.text,
+        description: action?.data?.description || '',
+        severity: action.data?.severity || 'info',
       };
     }
 

@@ -78,6 +78,12 @@ const DrawerMenu = ({ open, onClose, lang }: { open: boolean, onClose: () => voi
             <Link onClick={onClose} className={'h-10'} href={'/en'}>
               <Text typography={['md', 'md']} color={'grey.700'}>About Us</Text>
             </Link>
+            <Link onClick={onClose} className={'h-10'} href={getParseRoute({ pathname: routes['route.home.faq'], locale: lang })}>
+              <Text typography={['md', 'md']} color={'grey.700'}>FAQ</Text>
+            </Link>
+            <Link onClick={onClose} className={'h-10'} href={getParseRoute({ pathname: routes['route.home.terms'], locale: lang })}>
+              <Text typography={['md', 'md']} color={'grey.700'}>Terms & Conditions</Text>
+            </Link>
           </Div>
         ) : null}
       </Div>

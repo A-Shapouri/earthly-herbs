@@ -7,9 +7,9 @@ import CrossIcon from '@icons-components/cross';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@store/root-reducer';
 import { AddressActions } from '@store/address/address-actions';
-import AddressItem from "../address-item";
+import AddressItem from '../address-item';
 
-const AddressListModal = ({ isShow, closeModal, type }: { isShow: boolean, closeModal: () => void, type: 'Shipping'| 'Billing' }) => {
+const AddressListModal = ({ isShow, closeModal, type }: { isShow: boolean, closeModal: () => void, type: 'Shipping' | 'Billing' }) => {
   const dispatch = useDispatch();
   const { addresses } = useSelector((state: RootState) => state.address);
 
@@ -26,7 +26,7 @@ const AddressListModal = ({ isShow, closeModal, type }: { isShow: boolean, close
         </Div>
         <Div className={'grid grid-cols-1 gap-x-4 gap-y-5 w-full'}>
           {addresses && addresses.length > 0 ? addresses.map((address: any) => (
-            <AddressItem inList={true} shipping={type === 'Shipping'} selectable={true} address={address} />
+            <AddressItem key={address.id} inList={true} shipping={type === 'Shipping'} selectable={true} address={address} />
           )) : null}
         </Div>
         <Button

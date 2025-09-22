@@ -3,47 +3,43 @@ import Container from '@elements/container';
 import Div from '@elements/div';
 import Wrapper from '@layouts/wrapper';
 import Text from '@elements/text';
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "@store/root-reducer";
-import TextField from "@elements/text-field";
-import Button from "@elements/button";
-import Divider from "@elements/divider";
-import Link from "next/link";
-import EyeIcon from "@icons-components/eye";
-import {AuthActions} from "@store/auth/auth-actions";
-import {AlertActions} from "@store/alert/alert-action";
-import {useRouter} from "next-nprogress-bar";
-import getParseRoute from "@utils/helpers/parse-route";
-import routes from "@routes";
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@store/root-reducer';
+import TextField from '@elements/text-field';
+import Button from '@elements/button';
+import Divider from '@elements/divider';
+import Link from 'next/link';
+import EyeIcon from '@icons-components/eye';
+import { AuthActions } from '@store/auth/auth-actions';
+import { AlertActions } from '@store/alert/alert-action';
+import getParseRoute from '@utils/helpers/parse-route';
+import routes from '@routes';
+import { useParams } from 'next/navigation';
+import { DictionariesTypes } from '@dictionaries';
 
 const SignIn = () => {
   const dispatch = useDispatch();
-  const router = useRouter();
-
-  const {email, password} = useSelector((state: RootState) => state.auth);
+  const { lang } = useParams<{ lang: DictionariesTypes }>();
+  const { email, password } = useSelector((state: RootState) => state.auth);
 
   const handleUserEmail = (value: string) => {
-    dispatch(AuthActions.setEmail({email: value}));
-  }
+    dispatch(AuthActions.setEmail({ email: value }));
+  };
 
   const handleUserPassword = (value: string) => {
-    dispatch(AuthActions.setPassword({password: value}));
-  }
+    dispatch(AuthActions.setPassword({ password: value }));
+  };
 
   const handleUserLogin = () => {
-    if(email && password) {
+    if (email && password) {
       dispatch(AuthActions.clientLogin());
-      router.push(getParseRoute({
-        pathname: routes['route.home.index'],
-        locale: 'en'
-      }));
     } else {
       dispatch(AlertActions.showAlert({
         text: 'Please fill the required fields',
         severity: 'danger',
-      }))
+      }));
     }
-  }
+  };
 
   return (
     <Container>
@@ -61,8 +57,11 @@ const SignIn = () => {
           <Div className={'flex-col gap-2'}>
             <Div className={'items-center justify-between sm:w-[400px] w-full'}>
               <Text typography={['base', 'base']} type={'medium'}>Password</Text>
-              <Link href={'/en/auth/forgot-password'}>
-              <Text typography={['base', 'base']} color={'primary'} type={'normal'}>forgot?</Text>
+              <Link href={getParseRoute({
+                pathname: routes['route.auth.forgot-password'],
+                locale: lang,
+              })}>
+                <Text typography={['base', 'base']} color={'primary'} type={'normal'}>forgot?</Text>
               </Link>
             </Div>
             <TextField
@@ -78,8 +77,11 @@ const SignIn = () => {
             />
           </Div>
           <Div className={'gap-2 items-center mt-3'}>
-            <Text typography={['sm', 'sm']}>You don't have an account?</Text>
-            <Link href={'/en/auth/sign-up'}>
+            <Text typography={['sm', 'sm']}>You don&apos;t have an account?</Text>
+            <Link href={getParseRoute({
+              pathname: routes['route.auth.sign-up'],
+              locale: lang,
+            })}>
               <Text typography={['sm', 'sm']} color={'primary'} type={'normal'}>
                 Sign Up
               </Text>
@@ -90,13 +92,13 @@ const SignIn = () => {
           </Button>
           <Div className={'sm:w-[400px] w-full items-center gap-4 mt-3'}>
             <Divider color={'control'} type={'solid'} className={'border-t-2'}/>
-            <Text color={"grey.400"} typography={['sm', 'sm']} type={'medium'}>or</Text>
+            <Text color={'grey.400'} typography={['sm', 'sm']} type={'medium'}>or</Text>
             <Divider color={'control'} type={'solid'} className={'border-t-2'}/>
           </Div>
-          <Button className={'!h-16 sm:w-[400px] w-full mt-3 !text-black'} variant={'outlined'} color={'control'}>
+          <Button disabled className={'!h-16 sm:w-[400px] w-full mt-3 !text-black'} variant={'outlined'} color={'control'}>
             Google
           </Button>
-          <Button className={'!h-16 sm:w-[400px] w-full mt-3 !text-black'} variant={'outlined'} color={'control'}>
+          <Button disabled className={'!h-16 sm:w-[400px] w-full mt-3 !text-black'} variant={'outlined'} color={'control'}>
             Facebook
           </Button>
         </Div>
