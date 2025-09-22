@@ -22,6 +22,8 @@ import { AuthActions } from '@store/auth/auth-actions';
 import { ShopActions } from '@store/shop/shop-actions';
 import WishlistSkeleton from './components/wishlist-skeleton';
 import EmptyWishlist from './components/empty-wishlist';
+import Logout from '../logout';
+import { AlertActions } from '@store/alert/alert-action';
 
 const menu = [
   {
@@ -39,10 +41,10 @@ const menu = [
 ];
 
 const WishList = () => {
-  const { firstName, lastName, email, wishList, wishListLoading } = useSelector((state: RootState) => state.auth);
+  const { firstName, lastName, email, wishList, wishListLoading, userId } = useSelector((state: RootState) => state.auth);
+  const { cart } = useSelector((state: RootState) => state.shop);
   const dispatch = useDispatch();
   const [hasLoadedOnce, setHasLoadedOnce] = React.useState(false);
-
   useEffect(() => {
     dispatch(AuthActions.getWishList());
   }, []);
@@ -53,6 +55,15 @@ const WishList = () => {
       setHasLoadedOnce(true);
     }
   }, [wishListLoading, wishList.length]);
+
+  const handleAddToCart = (item: any, isInCart: boolean) => {
+    console.log(isInCart)
+    if (isInCart) {
+      dispatch(AlertActions.showAlert({ text: 'Item is already in cart', severity: 'danger' }));
+    } else {
+      dispatch(ShopActions.addToCart({ productId: item.productId, customerId: userId, quantity: '1' }));
+    }
+  };
 
   return (
     <Container>
@@ -82,9 +93,10 @@ const WishList = () => {
                   <Text color={item.title === 'Wishlist' ? 'primary' : 'black'} typography={['sm', 'sm']} type={'normal'}>{item.title}</Text>
                   <Button className={classNames('!text-black', item.title === 'Wishlist' ? '!text-primary' : '')} startAdornment={<ArrowRightIcon />} shape={'square'} variant={'text'} />
                 </Link>
-                {index !== menu.length - 1 && <Divider color={'control'} />}
+                <Divider color={'control'} />
               </Div>
             ))}
+            <Logout />
           </Div>
         </Div>
         <Div className='flex-col gap-5 w-full'>
@@ -96,27 +108,30 @@ const WishList = () => {
             </Div>
           ) : wishList && wishList.length > 0 ? (
             <Div className="space-y-4 flex-col">
-              {wishList.map((item, index) => (
-                <Div key={index} className={'w-full p-3 flex-col gap-6 border border-gray-300 rounded-2xl'}>
-                  <Div className={'gap-6'}>
-                    <Div className={'h-24 w-24 relative'} key={`image_${index}`}>
-                      <Image fill={true} src={ThumbnailImage2} alt={'image'} />
+              {wishList.map((item, index) => {
+                const cartItem = cart.find(cartValue => item.productId.toString() === cartValue.productId.toString());
+                return (
+                  <Div key={index} className={'w-full p-3 flex-col gap-6 border border-gray-300 rounded-2xl'}>
+                    <Div className={'gap-6'}>
+                      <Div className={'h-24 w-24 relative'} key={`image_${index}`}>
+                        <Image fill={true} src={ThumbnailImage2} alt={'image'} />
+                      </Div>
+                      <Div className={'flex-col gap-1'}>
+                        <Text color={'grey.700'} typography={['xs', 'xs']} type={'medium'}>{item.name || 'product name'}</Text>
+                        <Text typography={['sm', 'sm']} type={'normal'}>${item.price || 'product price'}</Text>
+                      </Div>
                     </Div>
-                    <Div className={'flex-col gap-1'}>
-                      <Text color={'grey.700'} typography={['xs', 'xs']} type={'medium'}>{item.name || 'product name'}</Text>
-                      <Text typography={['sm', 'sm']} type={'normal'}>${item.price || 'product price'}</Text>
+                    <Div className={'grid grid-cols-3 gap-2'}>
+                      <Button onClick={() => dispatch(AuthActions.removeFromWishList({ productId: item.id }))} size={'large'} color={'flurries'}>
+                        Remove
+                      </Button>
+                      <Button onClick={() => handleAddToCart(item, !!cartItem?.id)} startAdornment={<CartIcon />} className={'col-span-2'} size={'large'} color={'secondary'}>
+                        Add To Cart
+                      </Button>
                     </Div>
                   </Div>
-                  <Div className={'grid grid-cols-3 gap-2'}>
-                    <Button onClick={() => dispatch(AuthActions.removeFromWishList({ productId: item.id }))} size={'large'} color={'flurries'}>
-                      Remove
-                    </Button>
-                    <Button onClick={() => dispatch(ShopActions.addToCart({ id: item.productId, name: item.name || 'product name', price: item.price || 'product price', image: item.image || 'product image' }))} startAdornment={<CartIcon />} className={'col-span-2'} size={'large'} color={'secondary'}>
-                      Add To Cart
-                    </Button>
-                  </Div>
-                </Div>
-              ))}
+                )
+              })}
             </Div>
           ) : (
             <EmptyWishlist />

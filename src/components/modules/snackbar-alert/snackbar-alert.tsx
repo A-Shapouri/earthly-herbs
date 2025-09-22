@@ -12,7 +12,7 @@ function SnackbarAlert() {
   function handleClose() {
     dispatch(AlertActions.hideAlert());
   }
-
+  console.log(alert)
   if (!alert) {
     return null;
   }

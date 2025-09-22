@@ -8,6 +8,7 @@ export const initialState: ShopReducerProps = {
   couponModal: false,
   couponValue: '',
   isCouponValid: false,
+  addToCartLoading: false,
   shippingOption: { title: 'Expedited Parcel', description: 'Est delivery: November 22, 2024 – November 23, 2024', id: '1' },
   shippingOptionList: [
     { title: 'Expedited Parcel', description: 'Est delivery: November 22, 2024 – November 23, 2024', id: '1' },
@@ -17,27 +18,79 @@ export const initialState: ShopReducerProps = {
     { title: 'Expedited Parcel', description: 'Est delivery: November 30, 2024 – December 01, 2024', id: '5' },
   ],
   shippingOptionListModal: false,
+  updateCartItem: null,
+  newCartItem: null,
+  deleteCartItemId: null,
+  deleteCartItemLoading: false,
 };
 
 function shopReducer(state = initialState, action: any) {
   switch (action.type) {
     case ShopActionTypes.ADD_TO_CART: {
-      const item = action.data;
-      item.amount = 1;
-      const cart = JSON.parse(JSON.stringify(state.cart));
-      cart.push(item);
-      console.log(cart);
-
       return {
         ...state,
-        cart: cart,
-        totalPrice: (parseFloat(state.totalPrice) + parseFloat(item.price)).toFixed(2),
+        newCartItem: action.data,
+        addToCartLoading: true,
+      };
+    }
+    case ShopActionTypes.ADD_TO_CART_SUCCESS: {
+      
+      return {
+        ...state,
+        addToCartLoading: false,
+      };
+    }
+    case ShopActionTypes.ADD_TO_CART_FAILURE: {
+      return {
+        ...state,
+        addToCartLoading: false,
+      };
+    }
+    case ShopActionTypes.UPDATE_CART_ITEM: {
+      return {
+        ...state,
+        addToCartLoading: true,
+        updateCartItem: action.data,
+      };
+    }
+    case ShopActionTypes.UPDATE_CART_ITEM_SUCCESS: {
+      return {
+        ...state,
+        addToCartLoading: false,
+      };
+    }
+    case ShopActionTypes.UPDATE_CART_ITEM_FAILURE: {
+      return {
+        ...state,
+        addToCartLoading: false,
+      };
+    }
+    case ShopActionTypes.DELETE_CART_ITEM: {
+      return {
+        ...state,
+        deleteCartItemLoading: true,
+        deleteCartItemId: action.data.cartId,
+      };
+    }
+    case ShopActionTypes.DELETE_CART_ITEM_SUCCESS: {
+    
+      return {
+        ...state,
+        deleteCartItemLoading: false,
+        deleteCartItemId: null,
+      };
+    }
+    case ShopActionTypes.DELETE_CART_ITEM_FAILURE: {
+      return {
+        ...state,
+        deleteCartItemLoading: false,
+        deleteCartItemId: null,
       };
     }
     case ShopActionTypes.REMOVE_FROM_CART: {
       const id = action.data.id;
       const cart = JSON.parse(JSON.stringify(state.cart));
-      const index = cart.findIndex(item => item.id.toString() === id.toString());
+      const index = cart.findIndex(item => item.productId.toString() === id.toString());
       const productPrice = cart[index].price;
       cart.splice(index, 1);
       return {
@@ -50,8 +103,8 @@ function shopReducer(state = initialState, action: any) {
     case ShopActionTypes.INCREASE_PRODUCT_AMOUNT: {
       const productId = action.data.id;
       const cart = JSON.parse(JSON.stringify(state.cart));
-      const product = cart.find(item => item.id.toString() === productId.toString());
-      product.amount = product.amount + 1;
+      const product = cart.find(item => item.productId.toString() === productId.toString());
+      product.quantity = product.quantity + 1;
       return {
         ...state,
         cart: cart,
@@ -63,8 +116,8 @@ function shopReducer(state = initialState, action: any) {
     case ShopActionTypes.DECREASE_PRODUCT_AMOUNT: {
       const productId = action.data.id;
       const cart = JSON.parse(JSON.stringify(state.cart));
-      const product = cart.find(item => item.id.toString() === productId.toString());
-      product.amount = product.amount - 1;
+      const product = cart.find(item => item.productId.toString() === productId.toString());
+      product.quantity = product.quantity - 1;
       return {
         ...state,
         cart: cart,
@@ -116,6 +169,8 @@ function shopReducer(state = initialState, action: any) {
         ...state,
         cart: action.payload.data || [],
       };
+    case ShopActionTypes.SET_SHOP_INITIAL_STATE:
+      return initialState;
 
     default:
       return state;

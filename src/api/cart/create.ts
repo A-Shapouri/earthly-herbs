@@ -10,12 +10,13 @@ export interface CreateCartProps extends CacheProps {
 const createCartApi = ({ productId, quantity, recurringId = '1' }: CreateCartProps) => {
   return fetchApi({
     method: 'POST',
-    url: routes['api.cart.create'],
+    url: routes['api.products.create-cart'],
     payload: {
       productId,
       quantity,
       recurringId,
     },
+    withToken: true,
   });
 };
 

@@ -12,6 +12,8 @@ import getInfoApi from '@api/auth/get-info';
 import addToWishListApi from '@api/wish-list/create';
 import getWishListApi from '@api/wish-list/list';
 import removeFromWishListApi from '@api/wish-list/delete';
+import { ShopActionTypes } from '@store/shop/shop-actions';
+import { AddressActionTypes } from '@store/address/address-actions';
 
 function* clientLoginWatcher() {
   const { email, password } = yield select(authStore);
@@ -40,7 +42,11 @@ function* clientLoginWatcher() {
         severity: 'success',
       },
     });
+    yield put({
+      type: AuthActionTypes.SET_LOGIN_LOADING,
+    });
   } catch (error: any) {
+    console.log(error);
     yield put({
       type: AlertActionType.SHOW_ALERT,
       data: {
@@ -48,6 +54,9 @@ function* clientLoginWatcher() {
         description: 'Please try again later',
         severity: 'danger',
       },
+    });
+    yield put({
+      type: AuthActionTypes.SET_LOGIN_LOADING,
     });
   }
 }
@@ -59,7 +68,6 @@ function* clientRegisterWatcher() {
       email: email,
       password: password,
     });
-    console.log(response);
     yield put({
       type: AlertActionType.SHOW_ALERT,
       data: {
@@ -80,8 +88,19 @@ function* clientRegisterWatcher() {
 }
 
 function* clientLogoutWatcher() {
+  const { navigation, lang } = yield select(navigationStore);
   try {
     removeFromCookie('token');
+    navigation.push(getParseRoute({
+      pathname: routes['route.home.index'],
+      locale: lang,
+    }));
+    yield put({
+      type: ShopActionTypes.SET_SHOP_INITIAL_STATE,
+    });
+    yield put({
+      type: AddressActionTypes.SET_ADDRESS_INITIAL_STATE,
+    });
     yield put({
       type: AlertActionType.SHOW_ALERT,
       data: {
@@ -96,7 +115,6 @@ function* clientLogoutWatcher() {
 function* getInfoWatcher() {
   try {
     const response = yield getInfoApi();
-    console.log(response);
     yield put({
       type: AuthActionTypes.SET_INFO,
       data: response,
@@ -129,6 +147,9 @@ function* addToWishListWatcher() {
         text: 'Added to Wish List!',
         severity: 'success',
       },
+    });
+    yield put({
+      type: AuthActionTypes.GET_WISH_LIST,
     });
   } catch (error: any) {
     yield put({

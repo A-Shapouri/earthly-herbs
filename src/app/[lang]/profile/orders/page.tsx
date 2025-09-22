@@ -18,6 +18,7 @@ import ArrowRightIcon from '@icons-components/arrow-right';
 import classNames from '@utils/helpers/class-names';
 import { useSelector } from 'react-redux';
 import { RootState } from '@store/root-reducer';
+import Logout from '../logout';
 
 const items = [
   {
@@ -82,9 +83,10 @@ const MyOrders = () => {
                   <Text color={item.title === 'My Orders' ? 'primary' : 'black'} typography={['sm', 'sm']} type={'normal'}>{item.title}</Text>
                   <Button className={classNames('!text-black', item.title === 'My Orders' ? '!text-primary' : '')} startAdornment={<ArrowRightIcon />} shape={'square'} variant={'text'} />
                 </Link>
-                {index !== menu.length - 1 && <Divider color={'control'} />}
+                <Divider color={'control'} />
               </Div>
             ))}
+            <Logout />
           </Div>
         </Div>
         <Div className='flex-col gap-5 w-full'>
