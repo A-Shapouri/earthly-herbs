@@ -50,3 +50,5 @@ const productDetailsServerApi = async ({ id, cache = 'no-cache', next }: Product
 };
 
 export default productDetailsServerApi;
+
+

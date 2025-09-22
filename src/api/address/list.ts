@@ -11,7 +11,7 @@ export interface AddressListProps extends CacheProps{
 
 const addressListApi = ({ page = 0, sort = 'id,desc', perPage = 10 }: AddressListProps) => {
   return fetchApi({
-    method: 'POST',
+    method: 'GET',
     url: {
       pathname: routes['api.address.list'],
       query: {

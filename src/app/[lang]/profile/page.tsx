@@ -23,6 +23,10 @@ const menu = [
     title: 'Wishlist',
     route: '/en' + routes['route.profile.wish-list'],
   },
+  {
+    title: 'addresses',
+    route: '/en' + routes['route.profile.addresses'],
+  },
 ];
 
 const Profile = () => {
@@ -34,7 +38,7 @@ const Profile = () => {
         <Wrapper className={'px-5 md:px-0'}>
           <Breadcrumbs breadcrumbsData={[{
             label: 'Profile',
-          }]}/>
+          }]} />
         </Wrapper>
       </Div>
       <Div className={'w-full py-14 max-w-[1440px]'}>
@@ -44,14 +48,14 @@ const Profile = () => {
               <Text typography={['sm', 'sm']} type={'normal'}>{firstName} {lastName}</Text>
               <Text color={'grey.700'} typography={['xs', 'xs']} type={'medium'}>{email}</Text>
             </Div>
-            <Button shape={'square'} startAdornment={<PencilIcon/>} variant={'text'}/>
+            <Button shape={'square'} startAdornment={<PencilIcon />} variant={'text'} />
           </Div>
           <Div className={'flex-col w-full'}>
             {menu.map((item, index) => (
               <Div key={`menu_${index}`} className={'w-full flex-col'}>
                 <Link href={item.route} className={'flex justify-between items-center py-4 cursor-pointer'}>
                   <Text color={'black'} typography={['sm', 'sm']} type={'normal'}>{item.title}</Text>
-                  <Button className={classNames('!text-black')} startAdornment={<ArrowRightIcon/>} shape={'square'} variant={'text'}/>
+                  <Button className={classNames('!text-black')} startAdornment={<ArrowRightIcon />} shape={'square'} variant={'text'} />
                 </Link>
                 {index !== menu.length - 1 && <Divider color={'control'} />}
               </Div>

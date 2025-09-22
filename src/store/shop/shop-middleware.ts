@@ -9,7 +9,7 @@ function* getCartsListWatcher() {
       sort: 'id',
       perPage: 100,
     });
-    console.log('middleware', response.data);
+
     if (response?.data?.length > 0) {
       yield put({
         type: ShopActionTypes.SET_CART,

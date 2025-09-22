@@ -149,17 +149,9 @@ function* getWishListWatcher() {
       sort: 'id,desc',
       perPage: 20,
     });
-    console.log(response);
     yield put({
       type: AuthActionTypes.SET_WISH_LIST,
       data: response?.data,
-    });
-    yield put({
-      type: AlertActionType.SHOW_ALERT,
-      data: {
-        text: 'Added to Wish List!',
-        severity: 'success',
-      },
     });
   } catch (error: any) {
     yield put({

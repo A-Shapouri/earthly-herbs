@@ -29,6 +29,7 @@ import Bank5 from '@images-components/banks/bank-5';
 import TextField from '@elements/text-field';
 import Media from '@elements/media';
 import { motion, AnimatePresence } from 'motion/react';
+import { useEffect } from 'react';
 
 const Checkout = () => {
   const router = useRouter();
@@ -52,6 +53,10 @@ const Checkout = () => {
   const handleBackButton = () => {
     router.back();
   };
+
+  useEffect(() => {
+    dispatch(AddressActions.getAddresses());
+  }, []);
 
   const handleAddAddressModal = () => {
     dispatch(AddressActions.setAddressModal({ open: !addressModal }));

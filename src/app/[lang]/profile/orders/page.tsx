@@ -45,6 +45,10 @@ const menu = [
     title: 'Wishlist',
     route: '/en' + routes['route.profile.wish-list'],
   },
+  {
+    title: 'addresses',
+    route: '/en' + routes['route.profile.addresses'],
+  },
 ];
 
 const MyOrders = () => {
@@ -59,7 +63,7 @@ const MyOrders = () => {
             path: '/en/profile',
           }, {
             label: 'My Orders',
-          }]}/>
+          }]} />
         </Wrapper>
       </Div>
       <Wrapper className={'px-5 pt-4 gap-5 pb-10 md:flex-row flex-col'}>
@@ -69,14 +73,14 @@ const MyOrders = () => {
               <Text typography={['sm', 'sm']} type={'normal'}>{firstName} {lastName}</Text>
               <Text color={'grey.700'} typography={['xs', 'xs']} type={'medium'}>{email}</Text>
             </Div>
-            <Button shape={'square'} startAdornment={<PencilIcon/>} variant={'text'}/>
+            <Button shape={'square'} startAdornment={<PencilIcon />} variant={'text'} />
           </Div>
           <Div className={'flex-col w-full'}>
             {menu.map((item, index) => (
               <Div key={`menu_${index}`} className={'w-full flex-col'}>
                 <Link href={item.route} className={'flex justify-between items-center py-4 cursor-pointer'}>
                   <Text color={item.title === 'My Orders' ? 'primary' : 'black'} typography={['sm', 'sm']} type={'normal'}>{item.title}</Text>
-                  <Button className={classNames('!text-black', item.title === 'My Orders' ? '!text-primary' : '')} startAdornment={<ArrowRightIcon/>} shape={'square'} variant={'text'}/>
+                  <Button className={classNames('!text-black', item.title === 'My Orders' ? '!text-primary' : '')} startAdornment={<ArrowRightIcon />} shape={'square'} variant={'text'} />
                 </Link>
                 {index !== menu.length - 1 && <Divider color={'control'} />}
               </Div>
@@ -85,9 +89,9 @@ const MyOrders = () => {
         </Div>
         <Div className='flex-col gap-5 w-full'>
           <Div className={'gap-4 w-full items-center justify-between overflow-x-auto'}>
-            <Section title={'Delivered'} selected={true} onClick={() => {}}/>
-            <Section title={'Canceled'} selected={false} onClick={() => {}}/>
-            <Section title={'Processing'} selected={false} onClick={() => {}}/>
+            <Section title={'Delivered'} selected={true} onClick={() => { }} />
+            <Section title={'Canceled'} selected={false} onClick={() => { }} />
+            <Section title={'Processing'} selected={false} onClick={() => { }} />
           </Div>
           <Div className={'flex-col w-full gap-5'}>
             {items.map((item, index) => (
@@ -97,7 +101,7 @@ const MyOrders = () => {
                 price={item.price}
                 route={item.route}
                 date={item.date}
-                key={`order_${index}`}/>
+                key={`order_${index}`} />
             ))}
           </Div>
         </Div>

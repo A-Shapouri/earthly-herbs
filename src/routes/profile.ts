@@ -5,4 +5,5 @@ export const profileRoutes = {
   'route.profile.order-details': '/profile/orders/[id]',
 
   'route.profile.wish-list': '/profile/wish-list',
+  'route.profile.addresses': '/profile/addresses',
 };

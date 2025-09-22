@@ -3,13 +3,9 @@ import Breadcrumbs from '@elements/breadcrumbs';
 import Container from '@elements/container';
 import Div from '@elements/div';
 import Wrapper from '@layouts/wrapper';
-import ThumbnailImage2 from '../../../../../public/images/products/thumbnail-2.png';
-
 import Button from '@elements/button';
-import Image from 'next/image';
 import React, { useEffect } from 'react';
 import Text from '@elements/text';
-import CartIcon from '@icons-components/cart';
 import routes from '@routes';
 import Link from 'next/link';
 import classNames from '@utils/helpers/class-names';
@@ -18,10 +14,12 @@ import PencilIcon from '@icons-components/pencil';
 import ArrowRightIcon from '@icons-components/arrow-right';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@store/root-reducer';
-import { AuthActions } from '@store/auth/auth-actions';
-import { ShopActions } from '@store/shop/shop-actions';
-import WishlistSkeleton from './components/wishlist-skeleton';
-import EmptyWishlist from './components/empty-wishlist';
+import { AddressActions } from '@store/address/address-actions';
+import AddressItem from './address-item';
+import AddAddressModal from './add-address-modal';
+import EditAddressModal from './edit-address-modal';
+import AddressSkeleton from './components/address-skeleton';
+import EmptyAddresses from './components/empty-addresses';
 
 const menu = [
   {
@@ -33,26 +31,26 @@ const menu = [
     route: '/en' + routes['route.profile.wish-list'],
   },
   {
-    title: 'addresses',
+    title: 'Addresses',
     route: '/en' + routes['route.profile.addresses'],
   },
 ];
 
-const WishList = () => {
-  const { firstName, lastName, email, wishList, wishListLoading } = useSelector((state: RootState) => state.auth);
+const Addresses = () => {
+  const { addresses, addressModal, editAddressModal, addressListLoading } = useSelector((state: RootState) => state.address);
+  const { firstName, lastName, email } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
   const [hasLoadedOnce, setHasLoadedOnce] = React.useState(false);
 
   useEffect(() => {
-    dispatch(AuthActions.getWishList());
+    dispatch(AddressActions.getAddresses());
   }, []);
 
-  // Track when wish list has been loaded at least once
   useEffect(() => {
-    if (!wishListLoading && wishList.length >= 0) {
+    if (!addressListLoading && addresses.length >= 0) {
       setHasLoadedOnce(true);
     }
-  }, [wishListLoading, wishList.length]);
+  }, [addressListLoading, addresses.length]);
 
   return (
     <Container>
@@ -62,7 +60,7 @@ const WishList = () => {
             label: 'Profile',
             path: '/en/profile',
           }, {
-            label: 'Wish List',
+            label: 'Addresses',
           }]} />
         </Wrapper>
       </Div>
@@ -79,8 +77,8 @@ const WishList = () => {
             {menu.map((item, index) => (
               <Div key={`menu_${index}`} className={'w-full flex-col'}>
                 <Link href={item.route} className={'flex justify-between items-center py-4 cursor-pointer'}>
-                  <Text color={item.title === 'Wishlist' ? 'primary' : 'black'} typography={['sm', 'sm']} type={'normal'}>{item.title}</Text>
-                  <Button className={classNames('!text-black', item.title === 'Wishlist' ? '!text-primary' : '')} startAdornment={<ArrowRightIcon />} shape={'square'} variant={'text'} />
+                  <Text color={item.title === 'Addresses' ? 'primary' : 'black'} typography={['sm', 'sm']} type={'normal'}>{item.title}</Text>
+                  <Button className={classNames('!text-black', item.title === 'Addresses' ? '!text-primary' : '')} startAdornment={<ArrowRightIcon />} shape={'square'} variant={'text'} />
                 </Link>
                 {index !== menu.length - 1 && <Divider color={'control'} />}
               </Div>
@@ -88,43 +86,41 @@ const WishList = () => {
           </Div>
         </Div>
         <Div className='flex-col gap-5 w-full'>
-          {wishListLoading || !hasLoadedOnce ? (
+          {addressListLoading || !hasLoadedOnce ? (
             <Div className="space-y-4 flex-col">
-              {[1, 2].map((index) => (
-                <WishlistSkeleton key={`skeleton-${index}`} />
+              {[1, 2, 3].map((index) => (
+                <AddressSkeleton key={`skeleton-${index}`} />
               ))}
             </Div>
-          ) : wishList && wishList.length > 0 ? (
+          ) : addresses && addresses.length > 0 ? (
             <Div className="space-y-4 flex-col">
-              {wishList.map((item, index) => (
-                <Div key={index} className={'w-full p-3 flex-col gap-6 border border-gray-300 rounded-2xl'}>
-                  <Div className={'gap-6'}>
-                    <Div className={'h-24 w-24 relative'} key={`image_${index}`}>
-                      <Image fill={true} src={ThumbnailImage2} alt={'image'} />
-                    </Div>
-                    <Div className={'flex-col gap-1'}>
-                      <Text color={'grey.700'} typography={['xs', 'xs']} type={'medium'}>{item.name || 'product name'}</Text>
-                      <Text typography={['sm', 'sm']} type={'normal'}>${item.price || 'product price'}</Text>
-                    </Div>
-                  </Div>
-                  <Div className={'grid grid-cols-3 gap-2'}>
-                    <Button onClick={() => dispatch(AuthActions.removeFromWishList({ productId: item.id }))} size={'large'} color={'flurries'}>
-                      Remove
-                    </Button>
-                    <Button onClick={() => dispatch(ShopActions.addToCart({ id: item.productId, name: item.name || 'product name', price: item.price || 'product price', image: item.image || 'product image' }))} startAdornment={<CartIcon />} className={'col-span-2'} size={'large'} color={'secondary'}>
-                      Add To Cart
-                    </Button>
-                  </Div>
-                </Div>
+              {addresses.map((item) => (
+                <AddressItem key={item.id} address={item} />
               ))}
+              <Button
+                rounded='medium'
+                color={'secondary'}
+                onClick={() => dispatch(AddressActions.setAddressModal({ open: true }))}
+                className="mt-4"
+              >
+                Add New Address
+              </Button>
             </Div>
           ) : (
-            <EmptyWishlist />
+            <EmptyAddresses />
           )}
         </Div>
       </Wrapper>
+      <AddAddressModal
+        isShow={addressModal}
+        closeModal={() => dispatch(AddressActions.setAddressModal({ open: false }))}
+      />
+      <EditAddressModal
+        isShow={editAddressModal}
+        closeModal={() => dispatch(AddressActions.setEditAddressModal({ open: false }))}
+      />
     </Container>
   );
 };
 
-export default WishList;
+export default Addresses;

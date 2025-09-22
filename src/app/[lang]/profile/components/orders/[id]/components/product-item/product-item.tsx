@@ -1,9 +1,7 @@
 import React from 'react';
 import Div from '@elements/div'
 import Text from '@elements/text'
-import DeliveredIcon from '@icons-components/delivered';
-import classNames from "@utils/helpers/class-names";
-import ThumbnailImage2 from '../../../../../../../../public/images/products/thumbnail-2.png';
+import ThumbnailImage2 from '../../../../../../../../../public/images/products/thumbnail-2.png';
 import Image from "next/image";
 
 const ProductItem = () => {
