@@ -3,17 +3,17 @@ import Div from '@elements/div';
 import Text from '@elements/text';
 import Button from '@elements/button';
 import { useDispatch, useSelector } from 'react-redux';
-import { AddressItemProps } from './address-item.props'
-import { AddressActions } from "@store/address/address-actions";
-import classNames from "@utils/helpers/class-names";
-import { RootState } from "@store/root-reducer";
+import { AddressItemProps } from './address-item.props';
+import { AddressActions } from '@store/address/address-actions';
+import classNames from '@utils/helpers/class-names';
+import { RootState } from '@store/root-reducer';
 const AddressItem = ({ address, selectable = false, shipping = true, inList = false }: AddressItemProps) => {
   const dispatch = useDispatch();
   const { shippingAddress, billingAddress } = useSelector((state: RootState) => state.address);
   const isSelected = inList && ((shipping && address.id === shippingAddress.id) || (!shipping && address.id === billingAddress.id));
   const handleOnChange = () => {
     dispatch(AddressActions.setAddressListModal({ open: true, addressModalType: shipping ? 'Shipping' : 'Billing' }));
-  }
+  };
 
   const handleOnSelect = () => {
     if (shipping) {
@@ -21,7 +21,7 @@ const AddressItem = ({ address, selectable = false, shipping = true, inList = fa
     } else {
       dispatch(AddressActions.setBillingAddress({ address: address }));
     }
-  }
+  };
   return (
     <Div className={classNames('rounded-3xl justify-between border p-4 w-full md:gap-2 gap-1 items-center',
       isSelected ? 'border-primary-100' : 'border-grey-100'
