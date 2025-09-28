@@ -10,7 +10,7 @@ import classNames from '@utils/helpers/class-names';
 const AddToWishlistAction = ({ id }: { id: number }) => {
   const dispatch = useDispatch();
   const { wishList, addToWishListLoading, removeFromWishListLoading, wishListLoading } = useSelector((state: RootState) => state.auth);
-  const wishListItem = wishList.find(item => item.productId.toString() === id.toString());
+  const wishListItem = wishList?.find(item => item.productId.toString() === id.toString());
   const handleAddProduct = () => {
     if (wishListItem?.id) {
       dispatch(AuthActions.removeFromWishList({ productId: wishListItem.id }));

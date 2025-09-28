@@ -72,7 +72,7 @@ const Products = () => {
             ) : (
               <Text color={'grey.900'} typography={['lg', 'sm']} type={'medium'}>
                 <Text type={'bold'} typography={['lg', 'sm']} variant={'span'} className={'mr-1'}>
-                  {products.length}
+                  {products?.length}
                 </Text>
                 Results Found!
               </Text>
@@ -84,7 +84,7 @@ const Products = () => {
                 <ProductItemSkeleton key={`skeleton_${index}`} />
               ))
             ) : (
-              products && products.length > 0 ? products.map((item, _index) => (
+              products && products?.length > 0 ? products.map((item, _index) => (
                 <AnimatePresence key={`${item.title}_index`} mode={'wait'}>
                   {item?.id && (
                     <motion.div
