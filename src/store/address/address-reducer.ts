@@ -195,6 +195,8 @@ function addressReducer(state = initialState, action: any) {
         deleteAddressId: false,
       };
     }
+    case AddressActionTypes.SET_ADDRESS_INITIAL_STATE:
+      return initialState;
     default:
       return state;
   }

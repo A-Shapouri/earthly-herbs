@@ -20,6 +20,7 @@ import AddAddressModal from './add-address-modal';
 import EditAddressModal from './edit-address-modal';
 import AddressSkeleton from './components/address-skeleton';
 import EmptyAddresses from './components/empty-addresses';
+import Logout from '../logout';
 
 const menu = [
   {
@@ -80,9 +81,10 @@ const Addresses = () => {
                   <Text color={item.title === 'Addresses' ? 'primary' : 'black'} typography={['sm', 'sm']} type={'normal'}>{item.title}</Text>
                   <Button className={classNames('!text-black', item.title === 'Addresses' ? '!text-primary' : '')} startAdornment={<ArrowRightIcon />} shape={'square'} variant={'text'} />
                 </Link>
-                {index !== menu.length - 1 && <Divider color={'control'} />}
+                <Divider color={'control'} />
               </Div>
             ))}
+            <Logout />
           </Div>
         </Div>
         <Div className='flex-col gap-5 w-full'>

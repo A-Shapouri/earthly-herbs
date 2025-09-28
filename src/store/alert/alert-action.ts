@@ -7,9 +7,7 @@ export const AlertActionType = {
 
 const showAlert = (data: { text: string, description?: string, severity: 'info' | 'success' | 'danger' | 'warning' | 'primary' | 'secondary' }) => ({
   type: AlertActionType.SHOW_ALERT,
-  text: data?.text,
-  description: data?.description,
-  severity: data?.severity,
+  data: data,
 });
 const hideAlert = () => ({ type: AlertActionType.HIDE_ALERT });
 

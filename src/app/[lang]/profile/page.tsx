@@ -13,6 +13,7 @@ import routes from '@routes';
 import { useSelector } from 'react-redux';
 import { RootState } from '@store/root-reducer';
 import classNames from '@utils/helpers/class-names';
+import Logout from './logout';
 
 const menu = [
   {
@@ -57,9 +58,10 @@ const Profile = () => {
                   <Text color={'black'} typography={['sm', 'sm']} type={'normal'}>{item.title}</Text>
                   <Button className={classNames('!text-black')} startAdornment={<ArrowRightIcon />} shape={'square'} variant={'text'} />
                 </Link>
-                {index !== menu.length - 1 && <Divider color={'control'} />}
+                <Divider color={'control'} />
               </Div>
             ))}
+            <Logout />
           </Div>
         </Div>
       </Div>

@@ -8,13 +8,20 @@ export interface ShopReducerProps {
   shippingOption: ShippingOptionProps | null
   shippingOptionList: Array<ShippingOptionProps>
   shippingOptionListModal: boolean
+  addToCartLoading: boolean
+  updateCartItem: any
+  newCartItem: any
+  deleteCartItemId: string | null
+  deleteCartItemLoading: boolean
 }
 
 export interface CartProps {
-  name: string
-  amount: number
-  price: string
-  id: number
+  name?: string
+  quantity: string // API uses string for quantity
+  price?: string
+  id: string // API cart item ID
+  productId: number // Product ID for reference
+  [key: string]: any // Allow additional properties
 }
 
 export interface VerifyCodeResponse {
@@ -32,7 +39,6 @@ export interface SendVerificationCodeResponse {
     validation_code_lifetime: number
   }
 }
-
 
 export interface ShippingOptionProps {
   title: string,

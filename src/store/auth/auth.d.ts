@@ -16,4 +16,5 @@ export interface AuthReducerProps {
   wishList: any[]
   removeFromWishListLoading: boolean
   removeFromWishListId: string
+  loginLoading: boolean
 }
