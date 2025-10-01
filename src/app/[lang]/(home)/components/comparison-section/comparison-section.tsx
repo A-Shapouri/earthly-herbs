@@ -12,3 +12,4 @@ const ComparisonSection = () => {
 };
 
 export default ComparisonSection;
+
