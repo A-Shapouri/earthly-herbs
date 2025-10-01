@@ -15,6 +15,7 @@ import { notFound } from 'next/navigation';
 import BackButton from './components/back-button';
 import { Metadata } from 'next';
 import ImageTemp from '../../../../../public/images/temp/products/turmeric-tonic-organic/turmeric-tonic-sachet-steeped-x21_bc2a3df9-5b6f-4a24-b2c7-7e043bd849c0-xa_550x.webp';
+import { mainProducts } from '../../(home)/dummy-data';
 
 interface ProductDetailsPageProps {
   params: {
@@ -34,6 +35,34 @@ export async function generateMetadata({ params }: ProductDetailsPageProps): Pro
   const { id } = params;
 
   try {
+    // First check if it's a main product
+    const mainProduct = mainProducts.find(p => p.id.toString() === id);
+    if (mainProduct) {
+      return {
+        title: `${mainProduct.title} - Earthly Herbs`,
+        description: mainProduct.description || `Buy ${mainProduct.title} at the best price. High-quality herbal products from Earthly Herbs.`,
+        openGraph: {
+          title: `${mainProduct.title} - Earthly Herbs`,
+          description: mainProduct.description,
+          images: [
+            {
+              url: mainProduct.image,
+              width: 800,
+              height: 600,
+              alt: mainProduct.title,
+            },
+          ],
+        },
+        twitter: {
+          card: 'summary_large_image',
+          title: `${mainProduct.title} - Earthly Herbs`,
+          description: mainProduct.description,
+          images: [mainProduct.image],
+        },
+      };
+    }
+
+    // Otherwise, fetch from regular API
     const productItem = await productDetailsServerApi({
       id,
       cache: 'force-cache',
@@ -74,20 +103,33 @@ const ProductDetails = async ({ params }: ProductDetailsPageProps) => {
   const { id } = params;
 
   let productItem;
-  try {
-    productItem = await productDetailsServerApi({
-      id,
-      cache: 'force-cache',
-      next: { revalidate: 3600 },
-    });
-  } catch (error) {
-    console.error('Failed to fetch product details:', error);
-    notFound();
+  let isMainProduct = false;
+
+  // First check if it's a main product
+  const mainProduct = mainProducts.find(p => p.id.toString() === id);
+  if (mainProduct) {
+    productItem = mainProduct;
+    isMainProduct = true;
+  } else {
+    // Otherwise, fetch from regular API
+    try {
+      productItem = await productDetailsServerApi({
+        id,
+        cache: 'force-cache',
+        next: { revalidate: 3600 },
+      });
+    } catch (error) {
+      console.error('Failed to fetch product details:', error);
+      notFound();
+    }
   }
 
   if (!productItem) {
     notFound();
   }
+  console.log(productItem);
+  // Use main product image list or default
+  const productImageList = isMainProduct ? [productItem.image] : imageList;
 
   return (
     <Container>
@@ -97,7 +139,7 @@ const ProductDetails = async ({ params }: ProductDetailsPageProps) => {
             label: 'products',
             path: `/${params.lang}/products`,
           }, {
-            label: productItem?.model,
+            label: isMainProduct ? productItem.title : productItem.model,
           }]} />
         </Wrapper>
       </Div>
@@ -111,23 +153,23 @@ const ProductDetails = async ({ params }: ProductDetailsPageProps) => {
             <Media className={'w-full col-span-3'} greaterThan={'sm'}>
               <Div className='grid grid-cols-5 gap-4 w-full'>
                 <Div className='col-span-1 grid grid-cols-1 gap-4 max-h-[670px]'>
-                  {imageList?.map((image: any, index: number) => (
+                  {productImageList?.map((image: any, index: number) => (
                     <Div key={index} className={'relative rounded-2xl shadow-md w-full h-full'}>
-                      <Image className={'rounded-2xl'} fill={true} src={image} alt={productItem.model || 'MODEL_1'} />
+                      <Image className={'rounded-2xl object-contain'} fill={true} src={image} alt={isMainProduct ? productItem.title : productItem.model || 'MODEL_1'} />
                     </Div>
                   ))}
                 </Div>
                 <Div
                   className="w-full justify-between items-center relative h-full col-span-4 rounded-2xl shadow-md max-h-[670px]">
-                  <Image className={'rounded-2xl'} fill={true} src={imageList[0]} alt={productItem.model || 'MODEL_1'} />
+                  <Image className={'rounded-2xl'} fill={true} src={productImageList[0]} alt={isMainProduct ? productItem.title : productItem.model || 'MODEL_1'} />
                 </Div>
               </Div>
             </Media>
             <Media className={'w-full'} lessThan={'md'}>
               <Slider direction={'ltr'} slides={1}>
-                {imageList?.map((image: any, index: number) => (
+                {productImageList?.map((image: any, index: number) => (
                   <Div key={index} className={'relative w-full h-60 bg-yellow-500'}>
-                    <Image fill={true} src={image} alt={productItem.model || 'MODEL_1'} className="object-cover" />
+                    <Image fill={true} src={image} alt={isMainProduct ? productItem.title : productItem.model || 'MODEL_1'} className="object-cover" />
                   </Div>
                 ))}
               </Slider>

@@ -1,6 +1,8 @@
 import Container from '@elements/container';
 import Intro from './components/intro';
 import Products from './components/products';
+import MainProducts from './components/main-products';
+import ComparisonSection from './components/comparison-section';
 import Blends from './components/blends';
 import AboutEarthly from './components/about-earthly';
 import Articles from './components/articles';
@@ -10,6 +12,8 @@ const Home = () => {
   return (
     <Container>
       <Intro />
+      <MainProducts />
+      <ComparisonSection />
       <Products />
       <Blends />
       <AboutEarthly />
