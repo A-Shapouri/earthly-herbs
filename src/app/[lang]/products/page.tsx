@@ -3,7 +3,7 @@ import Breadcrumbs from '@elements/breadcrumbs';
 import Container from '@elements/container';
 import Div from '@elements/div';
 import Wrapper from '@layouts/wrapper';
-import ProductItem from '@modules/product-item';
+import ProductItem, { ProductItemSkeleton } from '@modules/product-item';
 import Text from '@elements/text';
 import Filter from './components/filter';
 import Newsletter from '../(home)/components/newsletter';
@@ -14,11 +14,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@store/root-reducer';
 import { ProductsActions } from '@store/products/products-actions';
 import { motion, AnimatePresence } from 'motion/react';
+import Skeleton from '@elements/skeleton';
 
 const Products = () => {
   const dispatch = useDispatch();
 
-  const { products, sortBy } = useSelector((state: RootState) => state.products);
+  const { products, sortBy, listLoading } = useSelector((state: RootState) => state.products);
 
   useEffect(() => {
     dispatch(ProductsActions.getProductsList());
@@ -35,7 +36,7 @@ const Products = () => {
         <Wrapper className={'px-5 md:px-0'}>
           <Breadcrumbs breadcrumbsData={[{
             label: 'Products',
-          }]}/>
+          }]} />
         </Wrapper>
       </Div>
       <Wrapper className={'px-5 md:flex-row-reverse flex-col pt-4 gap-4 pb-24 md:gap-16 md:pt-16'}>
@@ -62,43 +63,57 @@ const Products = () => {
                 />
               </Div>
             </Media>
-            <Text color={'grey.900'} typography={['lg', 'sm']} type={'medium'}>
-              <Text type={'bold'} typography={['lg', 'sm']} variant={'span'} className={'mr-1'}>
-                {products.length}
+            {listLoading ? (
+              <Skeleton
+                className={'w-32 !max-h-6'}
+                color={'slate'}
+                shape={'rectangular'}
+              />
+            ) : (
+              <Text color={'grey.900'} typography={['lg', 'sm']} type={'medium'}>
+                <Text type={'bold'} typography={['lg', 'sm']} variant={'span'} className={'mr-1'}>
+                  {products?.length}
+                </Text>
+                Results Found!
               </Text>
-              Results Found!
-            </Text>
+            )}
           </Div>
           <Div className={'grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-x-5 md:gap-y-10'}>
-            {products && products.length > 0 ? products.map((item, _index) => (
-              <AnimatePresence key={`${item.title}_index`} mode={'wait'}>
-                {item?.id && (
-                  <motion.div
-                    key={`${item.id}_index`}
-                    className={'flex flex-1'}
-                    initial={{ opacity: 0, scale: 0 }}
-                    exit={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.4 }}>
-                    <ProductItem
-                      id={item.id}
-                      isHealthy={item.isHealthy}
-                      isNew={item.isNew}
-                      image={'/images/temp/products/turmeric-tonic-organic/turmeric-tonic-sachet-steeped-x21_bc2a3df9-5b6f-4a24-b2c7-7e043bd849c0-xa_550x.webp'}
-                      price={item.price}
-                      rate={item.rate}
-                      title={item.model}/>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            )) : null}
+            {listLoading ? (
+              Array.from({ length: 4 }).map((_, index) => (
+                <ProductItemSkeleton key={`skeleton_${index}`} />
+              ))
+            ) : (
+              products && products?.length > 0 ? products.map((item, _index) => (
+                <AnimatePresence key={`${item.title}_index`} mode={'wait'}>
+                  {item?.id && (
+                    <motion.div
+                      key={`${item.id}_index`}
+                      className={'flex flex-1'}
+                      initial={{ opacity: 0, scale: 0 }}
+                      exit={{ opacity: 0, scale: 0 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.4 }}>
+                      <ProductItem
+                        id={item.id}
+                        isHealthy={item.isHealthy}
+                        isNew={item.isNew}
+                        image={'/images/temp/products/turmeric-tonic-organic/turmeric-tonic-sachet-steeped-x21_bc2a3df9-5b6f-4a24-b2c7-7e043bd849c0-xa_550x.webp'}
+                        price={item.price}
+                        rate={item.rate}
+                        title={item.model} />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              )) : null
+            )}
           </Div>
         </Div>
-        <Filter/>
+        <Filter />
       </Wrapper>
       <Wrapper>
         <Media className={'w-full'} greaterThan={'sm'}>
-          <Newsletter/>
+          <Newsletter />
         </Media>
       </Wrapper>
     </Container>

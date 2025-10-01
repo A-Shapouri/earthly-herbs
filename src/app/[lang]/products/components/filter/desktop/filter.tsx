@@ -18,7 +18,7 @@ import RadioGroup from '@elements/radio-group';
 function countProductsByCategory(products) {
   const categoryCount = {};
 
-  products.forEach(product => {
+  products?.forEach(product => {
     const category = product.category;
     if (categoryCount[category]) {
       categoryCount[category] += 1;
@@ -60,7 +60,7 @@ const DesktopFilter = () => {
   };
   return (
     <Div className={'flex-col gap-6'}>
-      <Button onClick={handleClearFilters} className={'w-44'} startAdornment={<FilterSimpleIcon/>}>
+      <Button onClick={handleClearFilters} className={'w-44'} startAdornment={<FilterSimpleIcon />}>
         Clear Filters
       </Button>
       <Div className={'flex-col w-full gap-6'}>
@@ -72,15 +72,15 @@ const DesktopFilter = () => {
                 className={'pl-0 pt-1.5'}
                 label={`${category?.name} (${counts[category] || 0})`}
               >
-                <RadioButton checked={selectedCategory === category?.id} value={category?.id} size={'small'} name={category?.name}/>
+                <RadioButton checked={selectedCategory === category?.id} value={category?.id} size={'small'} name={category?.name} />
               </FormControlLabel>
             ))}
           </RadioGroup>
         </Collapsible>
-        <Divider/>
+        <Divider />
         <Collapsible className='w-[400px]' open={true} header={'Price'}>
           <Div className={'flex-col w-full pt-5 px-3'}>
-            <MultiRangeSlider min={0} max={100} step={1} value={priceRange} onChange={handlePriceRange}/>
+            <MultiRangeSlider min={0} max={100} step={1} value={priceRange} onChange={handlePriceRange} />
           </Div>
         </Collapsible>
         {/* <Divider/>

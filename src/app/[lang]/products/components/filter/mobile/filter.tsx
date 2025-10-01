@@ -22,7 +22,7 @@ import RadioGroup from '@elements/radio-group';
 function countProductsByCategory(products) {
   const categoryCount = {};
 
-  products.forEach(product => {
+  products?.forEach(product => {
     const category = product.category;
     if (categoryCount[category]) {
       categoryCount[category] += 1;
@@ -123,7 +123,7 @@ const MobileFilter = () => {
                     className={'pl-0 pt-1.5'}
                     label={`${category.name} (${counts[category?.id] || 0})`}
                   >
-                    <RadioButton checked={selectedCategory === category?.id} value={category?.id} size={'small'} name={category?.name}/>
+                    <RadioButton checked={selectedCategory === category?.id} value={category?.id} size={'small'} name={category?.name} />
                   </FormControlLabel>
                 ))}
               </RadioGroup>
@@ -131,7 +131,7 @@ const MobileFilter = () => {
             <Divider />
             <Collapsible header={'Price'}>
               <Div className={'flex-col w-full pt-5 px-3'}>
-                <MultiRangeSlider min={0} max={100} step={1} value={priceRange} onChange={handlePriceRange}/>
+                <MultiRangeSlider min={0} max={100} step={1} value={priceRange} onChange={handlePriceRange} />
               </Div>
             </Collapsible>
             <Divider />
@@ -139,8 +139,8 @@ const MobileFilter = () => {
               <Div className={'flex-col w-full py-4 gap-2'}>
                 {[5, 4, 3, 2, 1].map((item, index) => (
                   <label key={`Caffeine_${index}`} className={'gap-2 flex'}>
-                    <Checkbox onChange={() => handleCaffeineLevel(item)} checked={caffeineLevel.includes(item)} size={'medium'}/>
-                    <Rating size={['xs', 'xs']} value={item}/>
+                    <Checkbox onChange={() => handleCaffeineLevel(item)} checked={caffeineLevel.includes(item)} size={'medium'} />
+                    <Rating size={['xs', 'xs']} value={item} />
                   </label>
                 ))}
               </Div>
@@ -163,7 +163,7 @@ const MobileFilter = () => {
           </Div>
           <Div className={'w-full gap-4'}>
             <Button onClick={() => handleClearFilters()} size={'large'} color={'frost'} className={'w-full'}>Clear All</Button>
-            <Button onClick={handleFilterModal} size={'large'} className={'w-full'}>View {products.length} Results</Button>
+            <Button onClick={handleFilterModal} size={'large'} className={'w-full'}>View {products?.length} Results</Button>
           </Div>
         </Div>
       </Modal>

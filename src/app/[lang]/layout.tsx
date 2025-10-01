@@ -20,10 +20,10 @@ const Wrapper = ({ children }: { children: ReactNode }) => {
   }, [lang]);
 
   useEffect(() => {
-    console.log(token, 'here');
     if (token) {
       dispatch(AuthActions.getInfo());
       dispatch(ShopActions.getCart());
+      dispatch(AuthActions.getWishList());
     }
     dispatch(NavigationActions.setNavigation({ navigation: router }));
   }, [token]);

@@ -19,6 +19,7 @@ export const initialState: AuthReducerProps = {
   wishList: [],
   removeFromWishListLoading: false,
   removeFromWishListId: '',
+  loginLoading: false,
 };
 
 function authReducer(state = initialState, action: any) {
@@ -29,10 +30,7 @@ function authReducer(state = initialState, action: any) {
         isLoggedIn: true,
       };
     case AuthActionTypes.CLIENT_LOGOUT:
-      return {
-        ...state,
-        isLoggedIn: false,
-      };
+      return initialState;
     case AuthActionTypes.SET_EMAIL:
       return {
         ...state,
@@ -95,6 +93,16 @@ function authReducer(state = initialState, action: any) {
         ...state,
         removeFromWishListLoading: false,
         removeFromWishListId: '',
+      };
+    case AuthActionTypes.CLIENT_LOGIN:
+      return {
+        ...state,
+        loginLoading: true,
+      };
+    case AuthActionTypes.SET_LOGIN_LOADING:
+      return {
+        ...state,
+        loginLoading: false,
       };
     default:
       return state;

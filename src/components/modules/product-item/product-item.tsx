@@ -44,9 +44,6 @@ const ProductItem = ({ image, title, price, rate, isHealthy, isNew, id }: Produc
           </Div>
           <ProductAction
             id={id}
-            image={image}
-            price={price}
-            title={title}
           />
         </Div>
       </Div>

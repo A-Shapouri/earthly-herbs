@@ -98,14 +98,14 @@ const ProductDetails = async ({ params }: ProductDetailsPageProps) => {
             path: `/${params.lang}/products`,
           }, {
             label: productItem?.model,
-          }]}/>
+          }]} />
         </Wrapper>
       </Div>
       <Wrapper className={'px-5 md:flex-row-reverse flex-col pt-4 gap-4 pb-24 md:gap-16 md:pt-16'}>
         <Div className={'gap-4 md:gap-28 flex-col w-full'}>
           <Div className='w-full justify-between items-center hidden md:visible'>
             <BackButton />
-            <Div className='w-6 h-10'/>
+            <Div className='w-6 h-10' />
           </Div>
           <Div className={'grid md:grid-cols-5 gap-8 md:gap-16 flex-col grid-cols-1'}>
             <Media className={'w-full col-span-3'} greaterThan={'sm'}>
@@ -113,13 +113,13 @@ const ProductDetails = async ({ params }: ProductDetailsPageProps) => {
                 <Div className='col-span-1 grid grid-cols-1 gap-4 max-h-[670px]'>
                   {imageList?.map((image: any, index: number) => (
                     <Div key={index} className={'relative rounded-2xl shadow-md w-full h-full'}>
-                      <Image className={'rounded-2xl'} fill={true} src={image} alt={productItem.model || 'MODEL_1'}/>
+                      <Image className={'rounded-2xl'} fill={true} src={image} alt={productItem.model || 'MODEL_1'} />
                     </Div>
                   ))}
                 </Div>
                 <Div
                   className="w-full justify-between items-center relative h-full col-span-4 rounded-2xl shadow-md max-h-[670px]">
-                  <Image className={'rounded-2xl'} fill={true} src={imageList[0]} alt={productItem.model || 'MODEL_1'}/>
+                  <Image className={'rounded-2xl'} fill={true} src={imageList[0]} alt={productItem.model || 'MODEL_1'} />
                 </Div>
               </Div>
             </Media>
@@ -127,7 +127,7 @@ const ProductDetails = async ({ params }: ProductDetailsPageProps) => {
               <Slider direction={'ltr'} slides={1}>
                 {imageList?.map((image: any, index: number) => (
                   <Div key={index} className={'relative w-full h-60 bg-yellow-500'}>
-                    <Image fill={true} src={image} alt={productItem.model || 'MODEL_1'} className="object-cover"/>
+                    <Image fill={true} src={image} alt={productItem.model || 'MODEL_1'} className="object-cover" />
                   </Div>
                 ))}
               </Slider>
@@ -136,7 +136,7 @@ const ProductDetails = async ({ params }: ProductDetailsPageProps) => {
               <Text typography={['lg', 'lg']} type={'medium'} color={'grey.700'}>{productItem.model || 'MODEL_1'}</Text>
               <Text typography={['xl', 'xl']} type={'normal'} color={'black'}>${productItem.price || '100'}</Text>
               <Div className={'mt-4 md:gap-8 gap-4'}>
-                <Rating size={['xxs', 'xxs']} value={parseFloat(productItem.rate) || 0}/>
+                <Rating size={['xxs', 'xxs']} value={parseFloat(productItem.rate) || 0} />
                 <Text typography={['md', 'md']} type={'medium'}>Category: {productItem.category || 'CATEGOY_1'}</Text>
                 <Text typography={['md', 'md']} type={'medium'}>Tag: {productItem.tag || 'TAG_1'}</Text>
               </Div>
@@ -144,10 +144,10 @@ const ProductDetails = async ({ params }: ProductDetailsPageProps) => {
                 className={'mt-8'}>{productItem.description || 'description description description description description description description description description description'}</Text>
               <Div className={'mt-11 flex-col gap-4'}>
                 <Text typography={['md', 'md']} type={'medium'}>Amount:</Text>
-                <Amounts data={productItem.amounts || ['amount_1', 'amount_2', 'amount_3']}/>
+                <Amounts data={productItem.amounts || ['amount_1', 'amount_2', 'amount_3']} />
               </Div>
               <Media greaterThan={'sm'} className={'w-full'}>
-                <Action id={parseInt(id, 10)}/>
+                <Action id={productItem.id} />
               </Media>
             </Div>
           </Div>
@@ -161,7 +161,7 @@ const ProductDetails = async ({ params }: ProductDetailsPageProps) => {
               ${productItem.price}
             </Text>
           </Div>
-          <Action id={parseInt(id, 10)}/>
+          <Action id={productItem.id} />
         </Div>
       </Media>
     </Container>

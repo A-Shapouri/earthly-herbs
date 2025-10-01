@@ -20,7 +20,7 @@ import { DictionariesTypes } from '@dictionaries';
 const SignIn = () => {
   const dispatch = useDispatch();
   const { lang } = useParams<{ lang: DictionariesTypes }>();
-  const { email, password } = useSelector((state: RootState) => state.auth);
+  const { email, password, loginLoading } = useSelector((state: RootState) => state.auth);
 
   const handleUserEmail = (value: string) => {
     dispatch(AuthActions.setEmail({ email: value }));
@@ -52,7 +52,7 @@ const SignIn = () => {
               value={email}
               onChange={(e) => handleUserEmail(e.target.value)}
               placeholder={'example@gmail.com'}
-              className={'sm:w-[400px] w-full'}/>
+              className={'sm:w-[400px] w-full'} />
           </Div>
           <Div className={'flex-col gap-2'}>
             <Div className={'items-center justify-between sm:w-[400px] w-full'}>
@@ -71,9 +71,10 @@ const SignIn = () => {
               type={'password'}
               placeholder={'* * * * * *'}
               className={'sm:w-[400px] w-full'}
-              endAdornment={<EyeIcon/>}
+              endAdornment={<EyeIcon />}
               endAdornmentClassName={'mr-2'}
               inputClassName={'!text-center sm:!text-t-lg tracking-[10px] sm:tracking-[16px] placeholder-shown:tracking-normal'}
+              disabled={loginLoading}
             />
           </Div>
           <Div className={'gap-2 items-center mt-3'}>
@@ -87,13 +88,13 @@ const SignIn = () => {
               </Text>
             </Link>
           </Div>
-          <Button onClick={handleUserLogin} className={'sm:w-[400px] w-full !h-16 mt-3'} color={'secondary'}>
+          <Button onClick={handleUserLogin} className={'sm:w-[400px] w-full !h-16 mt-3'} color={'secondary'} disabled={loginLoading} loading={loginLoading}>
             Sign in
           </Button>
           <Div className={'sm:w-[400px] w-full items-center gap-4 mt-3'}>
-            <Divider color={'control'} type={'solid'} className={'border-t-2'}/>
+            <Divider color={'control'} type={'solid'} className={'border-t-2'} />
             <Text color={'grey.400'} typography={['sm', 'sm']} type={'medium'}>or</Text>
-            <Divider color={'control'} type={'solid'} className={'border-t-2'}/>
+            <Divider color={'control'} type={'solid'} className={'border-t-2'} />
           </Div>
           <Button disabled className={'!h-16 sm:w-[400px] w-full mt-3 !text-black'} variant={'outlined'} color={'control'}>
             Google

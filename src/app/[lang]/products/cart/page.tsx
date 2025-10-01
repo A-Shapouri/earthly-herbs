@@ -76,9 +76,7 @@ const Cart = () => {
                   transition={{ duration: 0.3, delay: 0.3 * (index + 1) }}
                 >
                   <ProductItem
-                    amount={item.quantity}
-                    id={item.id}
-                    image={item.image}
+                    id={item.productId}
                     price={item.price}
                     name={item.name}
                   />

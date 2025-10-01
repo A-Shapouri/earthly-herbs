@@ -17,6 +17,7 @@ export const AuthActionTypes = {
   GET_WISH_LIST: `${preType}GET_WISH_LIST`,
   SET_WISH_LIST: `${preType}SET_WISH_LIST`,
   SET_REMOVE_FROM_WISH_LIST_LOADING: `${preType}SET_REMOVE_FROM_WISH_LIST_LOADING`,
+  SET_LOGIN_LOADING: `${preType}SET_LOGIN_LOADING`,
 };
 
 const saveToken = (data: { accessToken: string, tokenType: string }) => ({
@@ -60,6 +61,10 @@ const getWishList = () => ({
   type: AuthActionTypes.GET_WISH_LIST,
 });
 
+const clientLogout = () => ({
+  type: AuthActionTypes.CLIENT_LOGOUT,
+});
+
 export const AuthActions = {
   saveToken: saveToken,
   clientLogin: clientLogin,
@@ -71,4 +76,5 @@ export const AuthActions = {
   addToWishList: addToWishList,
   removeFromWishList: removeFromWishList,
   getWishList: getWishList,
+  clientLogout: clientLogout,
 };

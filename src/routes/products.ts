@@ -8,4 +8,6 @@ export const productsRoutes = {
 
   'api.products.create-cart': 'public/customer-carts',
   'api.products.list-cart': 'public/customer-carts',
+  'api.products.update-cart': 'public/customer-carts/[id]',
+  'api.products.delete-cart': 'public/customer-carts/[id]',
 };

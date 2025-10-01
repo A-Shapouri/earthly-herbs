@@ -24,6 +24,7 @@ export const AddressActionTypes = {
   SET_EDIT_ADDRESS_VALUES: `${preType}SET_EDIT_ADDRESS_VALUES`,
   SET_DELETE_ADDRESS_ID: `${preType}SET_DELETE_ADDRESS_ID`,
   SET_DELETE_ADDRESS_LOADING: `${preType}SET_DELETE_ADDRESS_LOADING`,
+  SET_ADDRESS_INITIAL_STATE: `${preType}SET_ADDRESS_INITIAL_STATE`,
 };
 
 const addNewAddress = () => ({ type: AddressActionTypes.ADD_NEW_ADDRESS });
