@@ -4,19 +4,10 @@ import Text from '@elements/text';
 import Div from '@elements/div';
 import SignatureProductCard from './signature-product-card';
 import { mainProducts } from '../../dummy-data';
-import FlowerTwoImage from '@images-components/flower_two';
-import FlowerThreeImage from '@images-components/flower-three';
 
 const MainProducts = () => {
   return (
     <Wrapper className={'flex-col md:pt-24 pt-5 items-center md:pb-32 pb-5 relative'}>
-      <Div className={'absolute top-[145px] -left-40'}>
-        <FlowerTwoImage />
-      </Div>
-      <Div className={'absolute bottom-40 -right-32'}>
-        <FlowerThreeImage />
-      </Div>
-
       <Div className={'flex-col items-center w-full justify-center md:gap-2 gap-1'}>
         <Text color={'primary'} type={'normal'} typography={['xxs', 'xs']}>FEATURED</Text>
         <Text type={'bold'} typography={['xl', 'xxl']}>Our Signature Blends</Text>

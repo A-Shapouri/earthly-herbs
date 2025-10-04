@@ -189,16 +189,16 @@ const Home = () => {
     }
   }
 
-  const handleAddProduct = () => {
-    for (const id in surveyProducts) {
-      dispatch(ShopActions.addToCart({
-        id: surveyProducts[id].id,
-        name: surveyProducts[id].title,
-        price: surveyProducts[id].price,
-        image: surveyProducts[id].image,
-      }));
-    }
-  };
+  // const handleAddProduct = () => {
+  //   for (const id in surveyProducts) {
+  //     dispatch(ShopActions.addToCart({
+  //       id: surveyProducts[id].id,
+  //       name: surveyProducts[id].title,
+  //       price: surveyProducts[id].price,
+  //       image: surveyProducts[id].image,
+  //     }));
+  //   }
+  // };
     console.log(surveyProducts)
   return (
     <Container>
@@ -238,7 +238,6 @@ const Home = () => {
                   </Div>
                 </Div>
                 <Button
-                  onClick={() => handleAddProduct()}
                   className={'w-2/5 !h-16'}
                   color={'secondary'}
                 >
