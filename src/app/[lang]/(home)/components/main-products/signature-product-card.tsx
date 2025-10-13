@@ -28,35 +28,35 @@ interface SignatureProductCardProps {
 
 const SignatureProductCard = ({ product, reverse }: SignatureProductCardProps) => {
   return (
-    <Div className={classNames('bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300', reverse ? 'flex-row-reverse' : 'flex-row')}>
+    <Div className={classNames('bg-white rounded-xl md:rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300 flex flex-col', reverse ? 'lg:flex-row-reverse' : 'lg:flex-row')}>
       {/* Product Image Section */}
-      <Div className="relative w-3/4 bg-gradient-to-br from-yellow-50 to-orange-50 p-8">
+      <Div className="relative w-full lg:w-1/2 bg-gradient-to-br from-yellow-50 to-orange-50 p-6 md:p-8 lg:p-10 min-h-[300px] md:min-h-[350px] lg:min-h-[400px]">
         <Div className="flex items-center justify-center h-full w-full">
           <Image
             src={product.image}
             alt={product.title}
             height={320}
             width={200}
-            className="object-contain"
+            className="object-contain max-h-[250px] md:max-h-[300px] lg:max-h-[350px]"
           />
         </Div>
 
         {/* Product Badges */}
-        <Div className="absolute top-4 left-4 flex flex-col gap-2">
+        <Div className="absolute top-3 left-3 md:top-4 md:left-4 flex flex-col gap-2">
           {product.isHealthy && (
-            <Div className="bg-green-100 px-3 py-1 rounded-full items-center justify-center">
+            <Div className="bg-green-100 px-2 py-1 md:px-3 md:py-1 rounded-full items-center justify-center">
               <Text typography={['xs', 'xs']} color="tertiary">Healthy</Text>
             </Div>
           )}
           {product.isNew && (
-            <Div className="bg-blue-100 px-3 py-1 rounded-full items-center justify-center">
+            <Div className="bg-blue-100 px-2 py-1 md:px-3 md:py-1 rounded-full items-center justify-center">
               <Text typography={['xs', 'xs']} color="blue">New</Text>
             </Div>
           )}
         </Div>
 
         {/* Rating */}
-        <Div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full">
+        <Div className="absolute top-3 right-3 md:top-4 md:right-4 bg-white/90 backdrop-blur-sm px-2 py-1 md:px-3 md:py-1 rounded-full">
           <Text typography={['xs', 'xs']} className="flex items-center gap-1">
             ⭐ {product.rate}
           </Text>
@@ -64,7 +64,7 @@ const SignatureProductCard = ({ product, reverse }: SignatureProductCardProps) =
       </Div>
 
       {/* Product Information Section */}
-      <Div className="p-6 flex flex-col gap-4">
+      <Div className="p-4 md:p-6 lg:p-8 flex flex-col gap-3 md:gap-4 w-full lg:w-1/2">
         {/* Product Title and Category */}
         <Div className="flex flex-col gap-1">
           <Text typography={['lg', 'lg']} type="bold" color="black">
@@ -112,7 +112,7 @@ const SignatureProductCard = ({ product, reverse }: SignatureProductCardProps) =
         </Div>
 
         {/* Pricing Section */}
-        <Div className="bg-gradient-to-r from-yellow-50 to-orange-50 p-4 rounded-lg flex flex-col gap-4">
+        <Div className="bg-gradient-to-r from-yellow-50 to-orange-50 p-3 md:p-4 rounded-lg flex flex-col gap-3 md:gap-4">
           <Div className="flex items-center justify-between">
             <Text typography={['sm', 'sm']} type="bold" color="grey.800">
               {product.moto}
@@ -137,10 +137,10 @@ const SignatureProductCard = ({ product, reverse }: SignatureProductCardProps) =
           </Div>
 
           {/* Action Buttons */}
-          <Div className="flex gap-3 items-center">
+          <Div className="flex flex-col sm:flex-row gap-2 md:gap-3 items-center">
             <Link
               href={`/en/products/${product.id}`}
-              className="flex-1"
+              className="w-full sm:flex-1"
             >
               <Button
                 color="secondary"
@@ -150,14 +150,14 @@ const SignatureProductCard = ({ product, reverse }: SignatureProductCardProps) =
                 Learn More
               </Button>
             </Link>
-            <Div className="flex-1">
+            <Div className="w-full sm:flex-1">
               <Action id={product.id} />
             </Div>
           </Div>
         </Div>
 
         {/* Product Attributes */}
-        <Div className="flex items-center justify-center gap-4 pt-2">
+        <Div className="flex flex-wrap items-center justify-center gap-2 md:gap-4 pt-2">
           <Div className="flex items-center gap-1">
             <Text typography={['xs', 'xs']} color="grey.600">100% Organic</Text>
           </Div>

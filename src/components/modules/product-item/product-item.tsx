@@ -29,7 +29,7 @@ const ProductItem = ({ image, title, price, rate, isHealthy, isNew, id }: Produc
         <AddToWishlistAction id={id} />
       </Div>
       {image ? (
-        <Link href={getParseRoute({ pathname: '/products/[id]', query: { id: id } })} className={'flex rounded-t-xl md:rounded-t-2xl h-[190px] relative w-[200px]'}>
+        <Link href={getParseRoute({ pathname: '/products/[id]', query: { id: id } })} className={'flex rounded-t-xl md:rounded-t-2xl h-[190px] relative w-full'}>
           <Image className={'rounded-t-xl md:rounded-t-2xl'} fill src={image} alt={title} />
         </Link>
       ) : null}

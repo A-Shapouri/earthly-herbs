@@ -74,7 +74,7 @@ const CoffeeVsDaySymphony = () => {
   };
 
   return (
-    <Wrapper className="flex-col md:pt-16 pt-8 items-center md:pb-16 pb-8">
+    <Wrapper className="flex-col md:pt-16 pt-8 items-center md:pb-16 pb-8 px-2">
       <Div className="flex-col items-center w-full justify-center md:gap-2 gap-1 mb-8">
         <Text color="primary" type="normal" typography={['xxs', 'xs']}>COMPARISON</Text>
         <Text type="bold" typography={['xl', 'xxl']}>Coffee VS Day Symphony</Text>
