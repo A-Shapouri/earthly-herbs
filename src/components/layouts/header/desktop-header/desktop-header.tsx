@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import Div from '@elements/div';
 import Text from '@elements/text';
 import PhoneIcon from '@icons-components/phone';
-import LocationIcon from '@icons-components/location';
 import Image from 'next/image';
 import Button from '@elements/button';
 import Link from 'next/link';
@@ -54,16 +53,12 @@ const DesktopHeader = () => {
         <Div className={'bg-flurries w-full h-12 justify-center items-center'}>
           <Div className={'w-full max-w-[1440px] items-center justify-between'}>
             <Div className={'gap-2 items-center'}>
-              <Div className={'w-4 h-4 items-center justify-center'}>
-                <LocationIcon/>
-              </Div>
-              <Text color={'brown'} type={'medium'} typography={['xxs', 'xxs']}>Store Location: 156 king St, York, ON,
-                M9N 1L5, Toronto, Canada</Text>
+              <Text color={'brown'} type={'medium'} typography={['xxs', 'xxs']}>Load your cart now — free delivery unlocks at $50. Your cup of calm awaits!</Text>
             </Div>
             <Div className={'gap-[72px] items-center'}>
               <Div className={'gap-2'}>
                 <Div className={'w-4 h-4 justify-center items-center'}>
-                  <PhoneIcon/>
+                  <PhoneIcon />
                 </Div>
                 <Text type={'normal'} color={'brown'} typography={['xxs', 'xxs']}>437-833-3379</Text>
               </Div>
@@ -100,7 +95,7 @@ const DesktopHeader = () => {
           <Div className={'w-full max-w-[1440px] items-center justify-between'}>
             <Link href={getParseRoute({ pathname: routes['route.home.index'], locale: lang })}
               className={'relative w-[300px] h-10'}>
-              <Image quality={100} fill={true} alt={'earthly logo'} src={'/images/earthly-logo-desktop.png'}/>
+              <Image quality={100} fill={true} alt={'earthly logo'} src={'/images/earthly-logo-desktop.png'} />
             </Link>
             <Div className={'items-center justify-center gap-7'}>
               <Link
@@ -135,22 +130,22 @@ const DesktopHeader = () => {
             <Div className={'items-center gap-5'}>
               <TextField inputClassName='pr-[104px]' size='small' rounded='full' className='w-[334px]'
                 endAdornment={<Button className='w-24' size={'small'} rounded='full'>Search</Button>}
-                placeholder='Search product name, ...'/>
+                placeholder='Search product name, ...' />
               {cart.length ? (
                 <Badge color='primary' size='xs' variant='standard' badgeContent={cart.length}>
                   <Button onClick={handleCart}
                     className={'!text-black hover:!text-control-500 active:!text-control-700'} iconSize={'large'}
-                    startAdornment={<CartIcon/>} variant='text' size='small' shape='square' color='primary'/>
+                    startAdornment={<CartIcon />} variant='text' size='small' shape='square' color='primary' />
                 </Badge>
               ) : (
                 <Button className={'!text-black hover:!text-control-500 active:!text-control-700'} iconSize={'large'}
-                  startAdornment={<CartIcon/>} variant='text' size='small' shape='square' color='primary'/>
+                  startAdornment={<CartIcon />} variant='text' size='small' shape='square' color='primary' />
               )}
               <Button
                 onClick={handleProfile}
                 className={'!text-black hover:!text-control-500 active:!text-control-700'}
                 iconSize={'large'}
-                startAdornment={<ProfileIcon/>}
+                startAdornment={<ProfileIcon />}
                 variant='text'
                 size='small'
                 shape='square'

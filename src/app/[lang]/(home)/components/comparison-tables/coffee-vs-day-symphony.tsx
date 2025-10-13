@@ -6,80 +6,44 @@ import Wrapper from '@layouts/wrapper';
 const CoffeeVsDaySymphony = () => {
   const comparisonData = [
     {
-      factor: 'Energy Boost',
-      coffee: { status: 'positive', text: 'Strong energy boost due to caffeine' },
-      daySymphony: { status: 'positive', text: 'Gentle energy boost from Yerba Mate Green' },
+      factor: 'Caffeine Content',
+      coffee: { status: 'positive', text: 'High caffeine from roasted beans' },
+      daySymphony: { status: 'positive', text: 'Mild caffeine from Yerba Mate Green' },
     },
     {
-      factor: 'Mental Focus & Clarity',
-      coffee: { status: 'positive', text: 'Improves alertness and concentration' },
-      daySymphony: { status: 'positive', text: 'Enhances mental focus and clarity naturally' },
+      factor: 'Flavor Profile',
+      coffee: { status: 'ordinary', text: 'Bold, bitter roast with acidic notes' },
+      daySymphony: { status: 'ordinary', text: 'Refreshing, minty freshness from Spearmint & Honeybush' },
     },
     {
-      factor: 'Stress Reduction',
-      coffee: { status: 'negative', text: 'Can increase stress hormones (cortisol)' },
-      daySymphony: { status: 'positive', text: 'Contains Spearmint & Honeybush for stress relief' },
+      factor: 'Preparation',
+      coffee: { status: 'ordinary', text: 'Brewed hot; often requires equipment' },
+      daySymphony: { status: 'ordinary', text: 'Simple steep in hot water; quick and easy' },
     },
     {
-      factor: 'Digestive Support',
-      coffee: { status: 'negative', text: 'May irritate stomach and cause acid reflux' },
-      daySymphony: { status: 'positive', text: 'Honeybush and Chamomile aid digestion' },
+      factor: 'Sustainability',
+      coffee: { status: 'ordinary', text: 'Varies; often mass-produced with environmental impact' },
+      daySymphony: { status: 'positive', text: '100% organic, sustainably sourced, plastic-free packaging' },
     },
     {
-      factor: 'Antioxidant Properties',
-      coffee: { status: 'positive', text: 'Contains antioxidants (polyphenols)' },
-      daySymphony: { status: 'positive', text: 'Rich in antioxidants, supports overall health' },
+      factor: 'Origin',
+      coffee: { status: 'ordinary', text: 'Typically from global plantations' },
+      daySymphony: { status: 'positive', text: 'Canadian-sourced, hand-crafted herbal blend' },
     },
     {
-      factor: 'Weight Management',
-      coffee: { status: 'positive', text: 'Boosts metabolism, supports weight loss' },
-      daySymphony: { status: 'positive', text: 'Yerba Mate supports metabolism and weight management' },
+      factor: 'Potential for Jitters',
+      coffee: { status: 'warning', text: 'May cause restlessness in some' },
+      daySymphony: { status: 'negative', text: 'Gentler profile, less likely to unsettle' },
     },
     {
-      factor: 'Hormonal Balance',
-      coffee: { status: 'negative', text: 'No hormonal balance benefits' },
-      daySymphony: { status: 'positive', text: 'Spearmint supports hormonal balance' },
+      factor: 'Addiction Risk',
+      coffee: { status: 'warning', text: 'Potential for dependence' },
+      daySymphony: { status: 'negative', text: 'No known dependence risk' },
     },
     {
-      factor: 'Blood Sugar Regulation',
-      coffee: { status: 'negative', text: 'Can impair blood sugar regulation in sensitive individuals' },
-      daySymphony: { status: 'positive', text: 'Honeybush helps regulate blood sugar' },
-    },
-    {
-      factor: 'Skin Health Improvement',
-      coffee: { status: 'negative', text: 'No skin health benefits, may worsen acne in some' },
-      daySymphony: { status: 'positive', text: 'Herbal blend supports healthy skin' },
-    },
-    {
-      factor: 'Sleep Disruption Risk',
-      coffee: { status: 'warning', text: 'High risk of sleep disruption, especially if consumed late' },
-      daySymphony: {
-        status: 'negative',
-        text: 'Very low risk, contains mild caffeine from Yerba Mate but gentler than coffee',
-      },
-    },
-    {
-      factor: 'Addiction / Dependence Risk',
-      coffee: { status: 'warning', text: 'Risk of dependence due to caffeine; withdrawal symptoms common' },
-      daySymphony: { status: 'negative', text: 'No dependence risk' },
-    },
-    {
-      factor: 'Nervousness / Anxiety Risk',
-      coffee: { status: 'warning', text: 'Can cause jitteriness, restlessness, and anxiety' },
-      daySymphony: { status: 'negative', text: 'Unlikely to cause anxiety or nervousness' },
-    },
-    {
-      factor: 'Long-term Safety',
-      coffee: {
-        status: 'warning',
-        text: 'Safe in moderation but overuse linked to heart issues, high BP, sleep disorders',
-      },
-      daySymphony: { status: 'positive', text: 'Safe for long-term use due to herbal blend' },
-    },
-    {
-      factor: 'Natural Origin',
-      coffee: { status: 'negative', text: 'Processed, roasted beans; natural but stimulating compound (caffeine)' },
-      daySymphony: { status: 'positive', text: '100% plant-based, natural ingredients' },
+      factor: 'Natural Composition',
+      coffee: { status: 'negative', text: 'Processed with added stimulants' },
+      daySymphony: { status: 'positive', text: 'Pure plant-based ingredients' },
     },
   ];
 
@@ -114,7 +78,7 @@ const CoffeeVsDaySymphony = () => {
       <Div className="flex-col items-center w-full justify-center md:gap-2 gap-1 mb-8">
         <Text color="primary" type="normal" typography={['xxs', 'xs']}>COMPARISON</Text>
         <Text type="bold" typography={['xl', 'xxl']}>Coffee VS Day Symphony</Text>
-        <Text color="grey.600" type="medium" typography={['sm', 'md']} className="mt-2">
+        <Text align='center' color="grey.600" type="medium" typography={['sm', 'md']} className="mt-2">
           Discover why Day Symphony is the superior choice for your daily energy needs
         </Text>
       </Div>

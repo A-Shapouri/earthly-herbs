@@ -6,54 +6,44 @@ import Wrapper from '@layouts/wrapper';
 const MelatoninVsNightSymphony = () => {
   const comparisonData = [
     {
-      factor: 'Sleep Aid',
-      melatonin: { status: 'positive', text: 'Helps regulate circadian rhythm, supports faster sleep onset' },
-      nightSymphony: { status: 'positive', text: 'Promotes deep, restful sleep with calming herbs (Passion Flower, Valerian, Chamomile, etc.)' },
+      factor: 'Form',
+      melatonin: { status: 'ordinary', text: 'Synthetic or extracted supplement in pill form' },
+      nightSymphony: { status: 'positive', text: 'Herbal tea blend for enjoyable sipping' },
     },
     {
-      factor: 'Anxiety & Stress Reduction',
-      melatonin: { status: 'negative', text: 'Minimal direct effect, mainly sleep-focused' },
-      nightSymphony: { status: 'positive', text: 'Strong calming and anti-stress properties' },
+      factor: 'Ingredients',
+      melatonin: { status: 'ordinary', text: 'Hormone-based' },
+      nightSymphony: { status: 'positive', text: 'Natural organics like Passionflower, Valerian Root, Lavender, Lemon Balm, Chamomile' },
     },
     {
-      factor: 'Pain & Muscle Tension Relief',
-      melatonin: { status: 'negative', text: 'Not significant' },
-      nightSymphony: { status: 'positive', text: 'Mild muscle relaxant, eases menstrual pain and headaches' },
+      factor: 'Flavor Profile',
+      melatonin: { status: 'ordinary', text: 'Tasteless (pill)' },
+      nightSymphony: { status: 'ordinary', text: 'Gentle, floral and herbal notes for a calming cup' },
     },
     {
-      factor: 'Anti-inflammatory Effects',
-      melatonin: { status: 'negative', text: 'Limited' },
-      nightSymphony: { status: 'positive', text: 'Chamomile and Lavender provide natural anti-inflammatory support' },
+      factor: 'Preparation',
+      melatonin: { status: 'ordinary', text: 'Swallow with water; no brewing' },
+      nightSymphony: { status: 'ordinary', text: 'Simple steep; ritualistic and relaxing' },
     },
     {
-      factor: 'Immune System Support',
-      melatonin: { status: 'negative', text: 'None' },
-      nightSymphony: { status: 'positive', text: 'Herbal ingredients support immune health' },
+      factor: 'Sustainability',
+      melatonin: { status: 'ordinary', text: 'Varies; often lab-produced' },
+      nightSymphony: { status: 'positive', text: '100% organic, sustainably sourced, plastic-free' },
     },
     {
-      factor: 'Digestive Support',
-      melatonin: { status: 'negative', text: 'None' },
-      nightSymphony: { status: 'positive', text: 'Lemon Balm and Chamomile aid digestion' },
+      factor: 'Origin',
+      melatonin: { status: 'ordinary', text: 'Manufactured' },
+      nightSymphony: { status: 'positive', text: 'Canadian-sourced, hand-crafted' },
     },
     {
-      factor: 'Risk of Dependence',
-      melatonin: { status: 'negative', text: 'Not addictive, but tolerance may develop with prolonged use' },
-      nightSymphony: { status: 'negative', text: 'No risk of dependence' },
+      factor: 'Potential Side Effects',
+      melatonin: { status: 'warning', text: 'May include grogginess or interactions' },
+      nightSymphony: { status: 'positive', text: 'Generally mild and well-tolerated' },
     },
     {
-      factor: 'Side Effects',
-      melatonin: { status: 'warning', text: 'Possible headaches, dizziness, next-day grogginess, vivid dreams, drug interactions' },
-      nightSymphony: { status: 'positive', text: 'Very minimal, generally well tolerated' },
-    },
-    {
-      factor: 'Long-term Safety',
-      melatonin: { status: 'warning', text: 'Long-term safety not fully established' },
-      nightSymphony: { status: 'positive', text: 'Safe for long-term use due to natural herbal composition' },
-    },
-    {
-      factor: 'Natural Origin',
-      melatonin: { status: 'negative', text: 'Synthetic or extracted hormone' },
-      nightSymphony: { status: 'positive', text: '100% plant-based, natural' },
+      factor: 'Long-term Use',
+      melatonin: { status: 'warning', text: 'Tolerance may develop' },
+      nightSymphony: { status: 'positive', text: 'Suitable for ongoing enjoyment' },
     },
   ];
 

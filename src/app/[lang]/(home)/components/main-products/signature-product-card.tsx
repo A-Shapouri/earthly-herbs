@@ -162,7 +162,10 @@ const SignatureProductCard = ({ product, reverse }: SignatureProductCardProps) =
             <Text typography={['xs', 'xs']} color="grey.600">100% Organic</Text>
           </Div>
           <Div className="flex items-center gap-1">
-            <Text typography={['xs', 'xs']} color="grey.600">Plastic-Free</Text>
+            <Text typography={['xs', 'xs']} color="grey.600">Biodegradable Sachets</Text>
+          </Div>
+          <Div className="flex items-center gap-1">
+            <Text typography={['xs', 'xs']} color="grey.600">Recyclable Pouches</Text>
           </Div>
           <Div className="flex items-center gap-1">
             <Text typography={['xs', 'xs']} color="grey.600">Hand-Crafted</Text>

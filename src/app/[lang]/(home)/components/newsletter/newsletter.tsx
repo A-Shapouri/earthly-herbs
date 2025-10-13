@@ -15,7 +15,7 @@ const Newsletter = () => {
         </Div>
         <Div className={'flex-col mt-2 self-start md:self-center gap-1'}>
           <Text typography={['md', 'base']}>Subcribe our Newsletter</Text>
-          <Text color={'primary'} typography={['xxs', 'xxs']}>Lorem Ipsum is simply dummy text of the printing</Text>
+          <Text color={'primary'} typography={['xxs', 'xxs']}>Subscribe for biweekly organic recipes and members-only deals: 15% off + early blends.</Text>
         </Div>
       </Div>
       <TextField

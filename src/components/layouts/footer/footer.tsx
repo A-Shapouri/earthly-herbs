@@ -66,12 +66,10 @@ const FooterIndex = () => {
             typography={['xs', 'xs']}
             type={'medium'}
             className={'w-[336px]'}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+            9563 Warden Ave, Markham, Ontario, Canada, L6C 1M5
           </Text>
           <Div className={'gap-4 items-center'}>
-            <Text typography={['xs', 'xs']}>437-833-3379</Text>
-            <Text type={'medium'} typography={['sm', 'sm']}>or</Text>
-            <Text typography={['xs', 'xs']}>156 king St, York, ON, M9N 1L5</Text>
+            <Text typography={['xs', 'xs']}>Info@earthlyherbs.ca</Text>
           </Div>
         </Div>
         <Div className={'mt-8 md:mt-0 justify-between w-full md:w-5/12'}>
@@ -81,25 +79,23 @@ const FooterIndex = () => {
               <Text className={'!font-open-sauce-semi-bold md:!font-open-sauce-regular'} typography={['xs', 'xs']} type={'medium'}>My Account</Text>
               <Text className={'!font-open-sauce-semi-bold md:!font-open-sauce-regular'} typography={['xs', 'xs']} type={'medium'}>Order History</Text>
               <Text className={'!font-open-sauce-semi-bold md:!font-open-sauce-regular'} typography={['xs', 'xs']} type={'medium'}>Shoping Cart</Text>
-              <Text className={'!font-open-sauce-semi-bold md:!font-open-sauce-regular'} typography={['xs', 'xs']} type={'medium'}>Wishlist</Text>
             </Div>
           </Div>
           <Div className={'flex-col md:gap-5 gap-1'}>
             <Text className={'!font-open-sauce-semi-bold md:!font-open-sauce-medium !text-[#4E614D]'} typography={['md', 'md']}>Helps</Text>
             <Div className={'flex-col md:gap-3 gap-1'}>
-              <Text className={'!font-open-sauce-semi-bold md:!font-open-sauce-regular'} typography={['xs', 'xs']} type={'medium'}>Contact</Text>
+              <Text className={'!font-open-sauce-semi-bold md:!font-open-sauce-regular'} typography={['xs', 'xs']} type={'medium'}>Contact Us</Text>
               <Text className={'!font-open-sauce-semi-bold md:!font-open-sauce-regular'} typography={['xs', 'xs']} type={'medium'}>Faqs</Text>
               <Text className={'!font-open-sauce-semi-bold md:!font-open-sauce-regular'} typography={['xs', 'xs']} type={'medium'}>Terms & Condition</Text>
-              <Text className={'!font-open-sauce-semi-bold md:!font-open-sauce-regular'} typography={['xs', 'xs']} type={'medium'}>Privacy Policy</Text>
             </Div>
           </Div>
           <Div className={'flex-col md:gap-5 gap-1'}>
             <Text className={'!font-open-sauce-semi-bold md:!font-open-sauce-medium !text-[#4E614D]'} typography={['md', 'md']}>Collections</Text>
             <Div className={'flex-col md:gap-3 gap-1'}>
-              <Text className={'!font-open-sauce-semi-bold md:!font-open-sauce-regular'} typography={['xs', 'xs']} type={'medium'}>Night</Text>
-              <Text className={'!font-open-sauce-semi-bold md:!font-open-sauce-regular'} typography={['xs', 'xs']} type={'medium'}>Tea</Text>
-              <Text className={'!font-open-sauce-semi-bold md:!font-open-sauce-regular'} typography={['xs', 'xs']} type={'medium'}>Blends</Text>
-              <Text className={'!font-open-sauce-semi-bold md:!font-open-sauce-regular'} typography={['xs', 'xs']} type={'medium'}>Matcha</Text>
+              <Text className={'!font-open-sauce-semi-bold md:!font-open-sauce-regular'} typography={['xs', 'xs']} type={'medium'}>Sleep (Night symphony, Ginger Glow)</Text>
+              <Text className={'!font-open-sauce-semi-bold md:!font-open-sauce-regular'} typography={['xs', 'xs']} type={'medium'}>Energize (Day Symphony, Radiant Mind)</Text>
+              <Text className={'!font-open-sauce-semi-bold md:!font-open-sauce-regular'} typography={['xs', 'xs']} type={'medium'}>Support (Winter Warrior, Vital Remedy)</Text>
+              <Text className={'!font-open-sauce-semi-bold md:!font-open-sauce-regular'} typography={['xs', 'xs']} type={'medium'}>Balance (Rhythm of life)</Text>
             </Div>
           </Div>
         </Div>
