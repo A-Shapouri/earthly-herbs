@@ -112,9 +112,9 @@ const DesktopHeader = () => {
                 href={getParseRoute({ pathname: routes['route.products.index'], locale: lang })}>
                 Shop
               </Link>
-              <Link className={'font-open-sauce-medium text-d-xs text-grey-700'} href={'#'}>
+              {/* <Link className={'font-open-sauce-medium text-d-xs text-grey-700'} href={'#'}>
                 Collections
-              </Link>
+              </Link> */}
               <Link
                 href={getParseRoute({ pathname: routes['route.blog.index'], locale: lang })}
                 className={classNames('font-open-sauce-medium text-d-xs transition-colors duration-500',
@@ -123,9 +123,9 @@ const DesktopHeader = () => {
               >
                 Blog
               </Link>
-              <Link className={'font-open-sauce-medium text-d-xs text-grey-700'} href={'#'}>
+              {/* <Link className={'font-open-sauce-medium text-d-xs text-grey-700'} href={'#'}>
                 About Us
-              </Link>
+              </Link> */}
             </Div>
             <Div className={'items-center gap-5'}>
               <TextField inputClassName='pr-[104px]' size='small' rounded='full' className='w-[334px]'

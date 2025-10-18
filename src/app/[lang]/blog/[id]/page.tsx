@@ -108,25 +108,51 @@ const BlogDetails = () => {
       <Wrapper className={'px-5 md:flex-row-reverse flex-col pt-8 gap-4 md:pb-24 pb-8 md:gap-16 md:pt-16'}>
         <Div className={'md:gap-16 gap-6 flex-col w-full'}>
           <Text type={'black'} typography={['xl', 'xl']}>{blogPost.title}</Text>
-          <Div className={'w-full sm:h-[400px] h-[160px] relative'}>
-            <Image src={blogPost.image} alt={blogPost.title} className={'object-fill'} fill={true} />
-          </Div>
-          <Div className={'w-full flex-col gap-6'}>
-            {contentParagraphs.map((paragraph, index) => (
-              <Div key={index} className={'flex-col gap-3'}>
-                <Text color={'grey.700'} typography={['sm', 'sm']} type={'medium'}>
-                  {paragraph}
-                </Text>
-              </Div>
-            ))}
-            <Div className={'gap-2'}>
-              {blogPost.tags.map((tag, index) => (
-                <Div key={index} className={'h-8 px-4 rounded-full bg-flurries items-center justify-center'}>
-                  <Text type={'bold'} typography={['xs', 'xs']}>{tag}</Text>
-                </Div>
+
+          {/* Image and content with text wrapping */}
+          <div className={'w-full'}>
+            {/* Image floating to the right on larger screens */}
+            <div className={'float-right ml-6 mb-4 w-[400px] h-[250px] relative hidden md:block'}>
+              <Image
+                src={blogPost.image}
+                alt={blogPost.title}
+                className={'object-cover rounded-lg'}
+                fill={true}
+              />
+            </div>
+
+            {/* Mobile image */}
+            <div className={'w-full h-[200px] relative mb-6 md:hidden'}>
+              <Image
+                src={blogPost.image}
+                alt={blogPost.title}
+                className={'object-cover rounded-lg'}
+                fill={true}
+              />
+            </div>
+
+            {/* Content that wraps around the image */}
+            <div className={'w-full'}>
+              {contentParagraphs.map((paragraph, index) => (
+                <div key={index} className={'mb-6'}>
+                  <Text color={'grey.700'} typography={['sm', 'sm']} type={'medium'}>
+                    {paragraph}
+                  </Text>
+                </div>
               ))}
-            </Div>
-          </Div>
+            </div>
+
+            {/* Clear float and add tags */}
+            <div className={'clear-both pt-6'}>
+              <Div className={'gap-2 flex-wrap'}>
+                {blogPost.tags.map((tag, index) => (
+                  <Div key={index} className={'h-8 px-4 rounded-full bg-flurries items-center justify-center'}>
+                    <Text type={'bold'} typography={['xs', 'xs']}>{tag}</Text>
+                  </Div>
+                ))}
+              </Div>
+            </div>
+          </div>
         </Div>
       </Wrapper>
     </Container>

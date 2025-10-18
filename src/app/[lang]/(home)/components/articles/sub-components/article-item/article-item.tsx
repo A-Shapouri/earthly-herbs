@@ -8,12 +8,12 @@ import PointerRightIcon from '@icons-components/pointer-right';
 import getParseRoute from '@utils/helpers/parse-route';
 import routes from '@routes';
 
-const ArticleItem = ({ day, description, image, month, title }: ArticleItemProps) => {
+const ArticleItem = ({ day, description, image, month, title, id }: ArticleItemProps & { id: string }) => {
   return (
     <Div className={'flex-col bg-white md:p-6 py-2 rounded-2xl md:gap-6 gap-2 group shadow-md'}>
       <Div className={'relative px-2 self-center'}>
         <Div className={'md:group-hover:scale-105 md:group-hover:-translate-y-2 transition-all duration-300'}>
-          <Image src={image} alt={'test'} />
+          <Image src={image} alt={title} width={400} height={200} className="rounded-lg" />
         </Div>
         <Div className={'flex-col transition-colors duration-500 group-hover:bg-black bg-white w-[58px] h-[58px] rounded items-center justify-center absolute bottom-5 left-5'}>
           <Text className={'group-hover:text-white transition-colors duration-300'} typography={['md', 'md']}>{day}</Text>
@@ -26,7 +26,7 @@ const ArticleItem = ({ day, description, image, month, title }: ArticleItemProps
           <Text typography={['xxs', 'xs']} type={'medium'}>{description}</Text>
         </Div>
         <Button
-          href={getParseRoute({ pathname: routes['route.blog.details'], locale: 'en', query: { id: title } })}
+          href={getParseRoute({ pathname: routes['route.blog.details'], locale: 'en', query: { id: id } })}
           className={'!pl-0'} variant={'text'} startAdornment={<PointerRightIcon />}>
           Read More
         </Button>

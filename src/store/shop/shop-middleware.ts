@@ -14,12 +14,12 @@ function* getCartsListWatcher() {
       perPage: 100,
     });
 
-      yield put({
-        type: ShopActionTypes.SET_CART,
-        payload: {
-          data: response?.data || [],
-        },
-      });
+    yield put({
+      type: ShopActionTypes.SET_CART,
+      payload: {
+        data: response?.data || [],
+      },
+    });
   } catch (error: any) {
   }
 }
@@ -49,8 +49,7 @@ function* addToCartWatcher() {
 }
 
 function* updateCartItemWatcher() {
-    const { updateCartItem } = yield select(shopStore);
-    console.log(updateCartItem,'updateCartItem');
+  const { updateCartItem } = yield select(shopStore);
   try {
     yield updateCartApi({
       id: updateCartItem?.id,

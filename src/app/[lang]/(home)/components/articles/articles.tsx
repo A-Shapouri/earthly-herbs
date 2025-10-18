@@ -6,13 +6,13 @@ import Button from '@elements/button';
 import Media from '@elements/media';
 import ArrowRightIcon from '@icons-components/arrow-right';
 import ArticleItem from './sub-components/article-item';
-import NatureImage from '../../../../../../public/images/articles/nature.png';
-import FieldImage from '../../../../../../public/images/articles/field.png';
-import GreenTeaImage from '../../../../../../public/images/articles/green-tea.png';
 import getParseRoute from '@utils/helpers/parse-route';
 import routes from '@routes';
+import { getRecentBlogPosts } from '../../../../../data/blogs';
 
 const Articles = () => {
+  const recentPosts = getRecentBlogPosts(3);
+
   return (
     <Div className={'bg-flurries-500 w-full justify-center items-center px-5'}>
       <Wrapper className={'flex-col md:py-20 py-6 md:gap-10 gap-6'}>
@@ -30,27 +30,17 @@ const Articles = () => {
           </Media>
         </Div>
         <Div className={'gap-6 flex-col md:flex-row'}>
-          <ArticleItem
-            day={'23'}
-            month={'JAN'}
-            title={'Best Teas for Energy: Natural Boosts to Power Up Your Da'}
-            image={NatureImage}
-            description={'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type'}
-          />
-          <ArticleItem
-            day={'13'}
-            month={'FEB'}
-            title={'Best Teas for Energy: Natural Boosts to Power Up Your Da'}
-            image={FieldImage}
-            description={'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type'}
-          />
-          <ArticleItem
-            day={'06'}
-            month={'NOV'}
-            title={'Best Teas for Energy: Natural Boosts to Power Up Your Da'}
-            image={GreenTeaImage}
-            description={'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type'}
-          />
+          {recentPosts.map((post) => (
+            <ArticleItem
+              key={post.id}
+              id={post.id}
+              day={post.day}
+              month={post.month}
+              title={post.title}
+              image={post.image}
+              description={post.description}
+            />
+          ))}
         </Div>
       </Wrapper>
     </Div>

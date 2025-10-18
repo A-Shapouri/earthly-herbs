@@ -8,7 +8,6 @@ import ProductImage1 from '../../../../../../public/images/products/prodcut-lett
 import ProductImage2 from '../../../../../../public/images/products/product-2.png';
 import Categories from './sub-components/categories';
 import HotSale from './sub-components/hot-sale';
-import Media from '@elements/media';
 
 const Products = () => {
   return (

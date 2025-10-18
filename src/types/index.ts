@@ -40,3 +40,5 @@ export type Rounded = 'none' | 'tiny' | 'small' | 'medium' | 'large' | 'huge' | 
  * set of kit rounded
  */
 export type Sizes = 'small' | 'medium' | 'large'
+
+export type Languages = 'en' | 'fr'

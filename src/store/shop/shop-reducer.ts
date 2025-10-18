@@ -34,7 +34,6 @@ function shopReducer(state = initialState, action: any) {
       };
     }
     case ShopActionTypes.ADD_TO_CART_SUCCESS: {
-      
       return {
         ...state,
         addToCartLoading: false,
@@ -73,7 +72,6 @@ function shopReducer(state = initialState, action: any) {
       };
     }
     case ShopActionTypes.DELETE_CART_ITEM_SUCCESS: {
-    
       return {
         ...state,
         deleteCartItemLoading: false,

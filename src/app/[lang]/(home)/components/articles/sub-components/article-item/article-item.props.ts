@@ -1,11 +1,9 @@
-import { StaticImageData } from 'next/image';
-
 export interface ArticleItemProps {
     title: string
 
     description: string
 
-    image: StaticImageData,
+    image: string,
 
     day: string
 
