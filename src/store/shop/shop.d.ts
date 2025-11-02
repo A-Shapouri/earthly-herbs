@@ -5,14 +5,29 @@ export interface ShopReducerProps {
   couponModal: boolean
   couponValue: string
   isCouponValid: boolean
-  shippingOption: ShippingOptionProps | null
-  shippingOptionList: Array<ShippingOptionProps>
   shippingOptionListModal: boolean
   addToCartLoading: boolean
   updateCartItem: any
   newCartItem: any
   deleteCartItemId: string | null
   deleteCartItemLoading: boolean
+  shippingCouriersListLoading: boolean
+  shippingCouriersList: Array<ShippingCouriersListProps>
+  shippingOption: ShippingOptionProps | null
+  order: {
+    customerId: string;
+    customerAddressId: string;
+    total: number;
+    products: Array<{
+      productId: string;
+      quantity: string;
+    }>;
+    shipments: {
+      id: string;
+      carrier: string;
+    };
+  }
+  orderLoading: boolean
 }
 
 export interface CartProps {
@@ -41,7 +56,7 @@ export interface SendVerificationCodeResponse {
 }
 
 export interface ShippingOptionProps {
-  title: string,
-  description: string,
+  shippingCourierCode: string,
+  shippingCourierName: string,
   id: string,
 }

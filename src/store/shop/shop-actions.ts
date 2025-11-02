@@ -24,6 +24,10 @@ export const ShopActionTypes = {
   SET_SHIPPING_OPTION_LIST_MODAL: `${preType}SET_SHIPPING_OPTION_LIST_MODAL`,
   SET_SHIPPING_OPTION: `${preType}SET_SHIPPING_OPTION`,
   SET_SHOP_INITIAL_STATE: `${preType}SET_SHOP_INITIAL_STATE`,
+  GET_SHIPPING_COURIERS_LIST: `${preType}GET_SHIPPING_COURIERS_LIST`,
+  SET_SHIPPING_COURIERS_LIST: `${preType}SET_SHIPPING_COURIERS_LIST`,
+  CREATE_ORDER: `${preType}CREATE_ORDER`,
+  SET_ORDER_LOADING: `${preType}SET_ORDER_LOADING`,
 };
 
 const addToCart = (data: { productId: string, quantity: string, customerId: string }) => ({ type: ShopActionTypes.ADD_TO_CART, data: data });
@@ -39,7 +43,8 @@ const setCouponValue = (data: { value: string }) => ({ type: ShopActionTypes.SET
 const validateCouponCode = () => ({ type: ShopActionTypes.VALIDATE_COUPON_CODE });
 const setShippingOptionListModal = (data: { open: boolean }) => ({ type: ShopActionTypes.SET_SHIPPING_OPTION_LIST_MODAL, data: data });
 const setShippingOption = (data: { option: ShippingOptionProps }) => ({ type: ShopActionTypes.SET_SHIPPING_OPTION, data: data });
-
+const getShippingCouriersList = () => ({ type: ShopActionTypes.GET_SHIPPING_COURIERS_LIST });
+const createOrder = (data: { customerId: string, customerAddressId: string, total: number, products: Array<{ productId: string, quantity: string }>, shipments: { id: string, carrier: string } }) => ({ type: ShopActionTypes.CREATE_ORDER, data: data });
 export const ShopActions = {
   addToCart: addToCart,
   getCart: getCart,
@@ -54,4 +59,6 @@ export const ShopActions = {
   validateCouponCode: validateCouponCode,
   setShippingOptionListModal: setShippingOptionListModal,
   setShippingOption: setShippingOption,
+  getShippingCouriersList: getShippingCouriersList,
+  createOrder: createOrder,
 };

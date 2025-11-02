@@ -15,20 +15,20 @@ import AddressItem from './components/address-item';
 import AddAddressModal from './components/add-address-modal';
 import { AddressActions } from '@store/address/address-actions';
 import AddressListModal from './components/address-list-modal';
-import FormControlLabel from '@elements/form-control-label';
-import Checkbox from '@elements/checkbox';
+// import FormControlLabel from '@elements/form-control-label';
+// import Checkbox from '@elements/checkbox';
 import ShippingOptionItem from './components/shipping-option-item';
 import ShippingOptionListModal from './components/shipping-option-list-modal';
 import { ShopActions } from '@store/shop/shop-actions';
-import CardInfo from './components/card-info';
-import Bank1 from '@images-components/banks/bank-1';
-import Bank2 from '@images-components/banks/bank-2';
-import Bank3 from '@images-components/banks/bank-3';
-import Bank4 from '@images-components/banks/bank-4';
-import Bank5 from '@images-components/banks/bank-5';
-import TextField from '@elements/text-field';
+// import CardInfo from './components/card-info';
+// import Bank1 from '@images-components/banks/bank-1';
+// import Bank2 from '@images-components/banks/bank-2';
+// import Bank3 from '@images-components/banks/bank-3';
+// import Bank4 from '@images-components/banks/bank-4';
+// import Bank5 from '@images-components/banks/bank-5';
+// import TextField from '@elements/text-field';
 import Media from '@elements/media';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import { useEffect } from 'react';
 
 const Checkout = () => {
@@ -40,22 +40,22 @@ const Checkout = () => {
     shippingOptionListModal,
     totalPrice,
     currency,
+    orderLoading,
   } = useSelector((state: RootState) => state.shop);
   const {
     shippingAddress,
     addressModal,
     addressListModal,
-    billingSameAsShipping,
-    billingAddress,
     addressModalType,
   } = useSelector((state: RootState) => state.address);
-
+  const { userId } = useSelector((state: RootState) => state.auth);
   const handleBackButton = () => {
     router.back();
   };
 
   useEffect(() => {
     dispatch(AddressActions.getAddresses());
+    dispatch(ShopActions.getShippingCouriersList());
   }, []);
 
   const handleAddAddressModal = () => {
@@ -66,14 +66,29 @@ const Checkout = () => {
     dispatch(AddressActions.setAddressListModal({ open: !addressListModal, addressModalType: addressModalType }));
   };
 
-  const handleSameAddress = () => {
-    dispatch(AddressActions.setBillingAsShipping());
-  };
+  // const handleSameAddress = () => {
+  //   dispatch(AddressActions.setBillingAsShipping());
+  // };
 
   const handleShippingOptionListModal = () => {
     dispatch(ShopActions.setShippingOptionListModal({ open: !shippingOptionListModal }));
   };
 
+  const handlePlaceOrder = () => {
+    dispatch(ShopActions.createOrder({
+      customerId: userId,
+      customerAddressId: shippingAddress?.id?.toString(),
+      total: totalPrice,
+      products: cart.map((item: any) => ({
+        productId: item?.product?.[0]?.id?.toString(),
+        quantity: item?.quantity?.toString(),
+      })),
+      shipments: {
+        id: shippingOption?.id,
+        carrier: shippingOption?.shippingCourierCode,
+      },
+    }));
+  };
   return (
     <Container>
       <Div className={'bg-flurries-500 w-full justify-center items-center'}>
@@ -117,12 +132,12 @@ const Checkout = () => {
                   </Div>
                 )}
               </Div>
-              {shippingAddress ? (
+              {/* {shippingAddress ? (
                 <FormControlLabel label={'Use same address for billing'}>
                   <Checkbox onChange={handleSameAddress} checked={billingSameAsShipping} color={'secondary'} />
                 </FormControlLabel>
-              ) : null}
-              <AnimatePresence>
+              ) : null} */}
+              {/* <AnimatePresence>
                 {shippingAddress && billingAddress && !billingSameAsShipping ? (
                   <motion.div
                     className='w-full flex'
@@ -139,14 +154,14 @@ const Checkout = () => {
                     </Div>
                   </motion.div>
                 ) : null}
-              </AnimatePresence>
+              </AnimatePresence> */}
               <Div className={'flex-col mt-4 md:gap-4 gap-3'}>
                 <Text>Shipping Option</Text>
                 <ShippingOptionItem
                   option={shippingOption}
                 />
               </Div>
-              <Div className={'flex-col mt-4 md:gap-4 gap-3'}>
+              {/* <Div className={'flex-col mt-4 md:gap-4 gap-3'}>
                 <Div className={'items-center justify-between'}>
                   <Text>Credit / debit card</Text>
                   <Div className={'items-center gap-1'}>
@@ -168,7 +183,7 @@ const Checkout = () => {
                   placeholder={'Notes about your order, e.g. special notes for delivery'}
                   inputClassName={'min-h-14'}
                 />
-              </Div>
+              </Div> */}
             </Div>
             <Media greaterThan={'sm'} className={'md:col-span-2'}>
               <Div className='flex-col w-full gap-6 self-start'>
@@ -180,12 +195,12 @@ const Checkout = () => {
                     animate={{ opacity: 1, translateX: 0 }}
                     transition={{ duration: 0.3, delay: 0.3 * (index + 1) }}
                   >
-                    <ProductItem key={index} amount={item.quantity} id={item.id} image={item.image} price={item.price}
-                      name={item.name} />
+                    <ProductItem key={index} amount={item.quantity} id={item.id} image={item?.image} price={item?.product?.[0]?.price}
+                      name={item?.product?.[0]?.model} />
                   </motion.div>
                 )) : null}
-                <PriceInfo />
-                <Button className='w-full !h-20' color='secondary' size='large'>
+                <PriceInfo hasShipping={true} />
+                <Button onClick={handlePlaceOrder} className='w-full !h-20' color='secondary' size='large' disabled={orderLoading} loading={orderLoading}>
                   Place Order
                 </Button>
               </Div>
@@ -200,7 +215,7 @@ const Checkout = () => {
             <Text type={'bold'}
               typography={['xl', 'xl']}>${(parseFloat(totalPrice) + parseFloat('14.99')).toFixed(2)} {currency}</Text>
           </Div>
-          <Button className='!h-14 w-[120px]' color='secondary' size='large'>
+          <Button onClick={handlePlaceOrder} className='!h-14 w-[120px]' color='secondary' size='large' disabled={orderLoading} loading={orderLoading}>
             Place Order
           </Button>
         </Div>

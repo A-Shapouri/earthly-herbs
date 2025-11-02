@@ -9,19 +9,25 @@ export const initialState: ShopReducerProps = {
   couponValue: '',
   isCouponValid: false,
   addToCartLoading: false,
-  shippingOption: { title: 'Expedited Parcel', description: 'Est delivery: November 22, 2024 – November 23, 2024', id: '1' },
-  shippingOptionList: [
-    { title: 'Expedited Parcel', description: 'Est delivery: November 22, 2024 – November 23, 2024', id: '1' },
-    { title: 'Expedited Parcel', description: 'Est delivery: November 24, 2024 – November 25, 2024', id: '2' },
-    { title: 'Expedited Parcel', description: 'Est delivery: November 26, 2024 – November 27, 2024', id: '3' },
-    { title: 'Expedited Parcel', description: 'Est delivery: November 28, 2024 – November 29, 2024', id: '4' },
-    { title: 'Expedited Parcel', description: 'Est delivery: November 30, 2024 – December 01, 2024', id: '5' },
-  ],
+  shippingOption: null,
+  shippingCouriersList: [],
+  shippingCouriersListLoading: false,
   shippingOptionListModal: false,
   updateCartItem: null,
   newCartItem: null,
   deleteCartItemId: null,
   deleteCartItemLoading: false,
+  order: {
+    customerId: '',
+    customerAddressId: '',
+    total: 0,
+    products: [],
+    shipments: {
+      id: '',
+      carrier: '',
+    },
+  },
+  orderLoading: false,
 };
 
 function shopReducer(state = initialState, action: any) {
@@ -162,14 +168,39 @@ function shopReducer(state = initialState, action: any) {
       };
 
     case ShopActionTypes.SET_CART:
-      console.log('reducer', action);
       return {
         ...state,
         cart: action.payload.data || [],
+        totalPrice: action.payload.data.reduce((acc: number, item: any) => acc + parseFloat(item?.product?.[0]?.price) * parseFloat(item?.quantity), 0).toFixed(2),
       };
     case ShopActionTypes.SET_SHOP_INITIAL_STATE:
       return initialState;
-
+    case ShopActionTypes.GET_SHIPPING_COURIERS_LIST: {
+      return {
+        ...state,
+        shippingCouriersListLoading: true,
+      };
+    }
+    case ShopActionTypes.SET_SHIPPING_COURIERS_LIST: {
+      return {
+        ...state,
+        shippingCouriersListLoading: false,
+        shippingCouriersList: action.payload.data || [],
+      };
+    }
+    case ShopActionTypes.CREATE_ORDER: {
+      return {
+        ...state,
+        orderLoading: true,
+        order: action.data,
+      };
+    }
+    case ShopActionTypes.SET_ORDER_LOADING: {
+      return {
+        ...state,
+        orderLoading: action.data.loading,
+      };
+    }
     default:
       return state;
   }

@@ -8,6 +8,8 @@ import { addressRoutes } from './address';
 import { customerRoutes } from './customer';
 import { termRoutes } from './terms';
 import { faqRoutes } from './faq';
+import { shippingRoutes } from './shipping-couriers';
+import { orderRoutes } from './order';
 
 const routes = {
   ...homeRoutes,
@@ -20,6 +22,8 @@ const routes = {
   ...customerRoutes,
   ...termRoutes,
   ...faqRoutes,
+  ...shippingRoutes,
+  ...orderRoutes,
 };
 
 export default routes;

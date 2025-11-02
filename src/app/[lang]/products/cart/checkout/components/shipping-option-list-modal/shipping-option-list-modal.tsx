@@ -6,10 +6,10 @@ import Text from '@elements/text';
 import CrossIcon from '@icons-components/cross';
 import { useSelector } from 'react-redux';
 import { RootState } from '@store/root-reducer';
-import ShippingOptionItem from "../shipping-option-item";
+import ShippingOptionItem from '../shipping-option-item';
 
 const ShippingOptionListModal = ({ isShow, closeModal }: { isShow: boolean, closeModal: () => void }) => {
-  const { shippingOptionList } = useSelector((state: RootState) => state.shop);
+  const { shippingCouriersList } = useSelector((state: RootState) => state.shop);
 
   return (
     <Modal className={'flex-col-reverse md:flex-col !justify-start md:!justify-center'} open={isShow} onClose={closeModal}>
@@ -19,8 +19,8 @@ const ShippingOptionListModal = ({ isShow, closeModal }: { isShow: boolean, clos
           <Button onClick={closeModal} startAdornment={<CrossIcon />} variant={'text'} color='primary' className={'!p-0 !text-black'} />
         </Div>
         <Div className={'grid grid-cols-1 md:gap-y-5 gap-y-4 w-full'}>
-          {shippingOptionList && shippingOptionList.length > 0 ? shippingOptionList.map((option: any) => (
-            <ShippingOptionItem inList={true} selectable={true} option={option} />
+          {shippingCouriersList && shippingCouriersList.length > 0 ? shippingCouriersList.map((option: any) => (
+            <ShippingOptionItem key={option.id} inList={true} selectable={true} option={option} />
           )) : null}
         </Div>
       </Div>

@@ -64,7 +64,7 @@ function* clientLoginWatcher() {
 function* clientRegisterWatcher() {
   const { email, password } = yield select(authStore);
   try {
-    const response = yield registerApi({
+    yield registerApi({
       email: email,
       password: password,
     });

@@ -91,7 +91,7 @@ const Cart = () => {
                   </Div>
                 </Div>
               ) : (
-                <Button onClick={handleCouponModal} rounded='large' className='w-full !h-14 md:!h-20 mt-1'
+                <Button disabled={true} onClick={handleCouponModal} rounded='large' className='w-full !h-14 md:!h-20 mt-1'
                   color='flurries' size='large'>
                   Add Coupon
                 </Button>
@@ -99,7 +99,7 @@ const Cart = () => {
             </Div>
             <Div className='flex-col w-full md:gap-6 gap-3 md:top-36 self-center md:!sticky md:self-start'>
               <Text type='normal' typography={['md', 'md']}>Price Details</Text>
-              <PriceInfo />
+              <PriceInfo hasShipping={false} />
               <Media greaterThan={'sm'}>
                 <Button onClick={handleCheckout} className='w-full !h-20' color='secondary' size='large'>
                   Continue
@@ -115,7 +115,7 @@ const Cart = () => {
           <Div className={'flex-col gap-1'}>
             <Text color={'grey.700'} typography={['lg', 'lg']}>Total Amount</Text>
             <Text type={'bold'}
-              typography={['xl', 'xl']}>${(parseFloat(totalPrice) + parseFloat('14.99')).toFixed(2)} {currency}</Text>
+              typography={['xl', 'xl']}>${(parseFloat(totalPrice)).toFixed(2)} {currency}</Text>
           </Div>
           <Button onClick={handleCheckout} className='!h-14 w-[120px]' color='secondary' size='large'>
             Continue

@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@store/root-reducer';
 import AnimatedNumber from '@modules/animated-number';
 
-const PriceInfo = () => {
+const PriceInfo = ({ hasShipping }: { hasShipping: boolean }) => {
   const { totalPrice, currency } = useSelector((state: RootState) => state.shop);
 
   return (
@@ -18,18 +18,22 @@ const PriceInfo = () => {
           <AnimatedNumber typography={['lg', 'lg']} color={'black'} price={true} amount={totalPrice || 0} />
         </Div>
       </Div>
-      <Divider color='control' />
-      <Div className='md:h-24 h-16 items-center md:px-6 px-4 justify-between'>
-        <Text color='grey.800' type='medium' typography={['md', 'md']}>Shipping</Text>
-        <Text typography={['lg', 'lg']}>$Shipping Price</Text>
-      </Div>
-      <Divider color='control' />
-      <Div className='md:h-24 h-16 items-center md:px-6 px-4 justify-between'>
-        <Text color='grey.800' type='medium' typography={['md', 'md']}>Total</Text>
-        <Div className={'justify-end md:mr-[70px] mr-[52px]'}>
-          <AnimatedNumber typography={['lg', 'lg']} color={'black'} price={true} currency={currency} amount={parseFloat((parseFloat(totalPrice) + parseFloat('14.99')).toFixed(2))} />
-        </Div>
-      </Div>
+      {hasShipping && (
+        <>
+          <Divider color='control' />
+          <Div className='md:h-24 h-16 items-center md:px-6 px-4 justify-between'>
+            <Text color='grey.800' type='medium' typography={['md', 'md']}>Shipping</Text>
+            <Text typography={['lg', 'lg']}>$Shipping Price</Text>
+          </Div>
+          <Divider color='control' />
+          <Div className='md:h-24 h-16 items-center md:px-6 px-4 justify-between'>
+            <Text color='grey.800' type='medium' typography={['md', 'md']}>Total</Text>
+            <Div className={'justify-end md:mr-[70px] mr-[52px]'}>
+              <AnimatedNumber typography={['lg', 'lg']} color={'black'} price={true} currency={currency} amount={parseFloat((parseFloat(totalPrice) + parseFloat('14.99')).toFixed(2))} />
+            </Div>
+          </Div>
+        </>
+      )}
     </Div>
   );
 };
