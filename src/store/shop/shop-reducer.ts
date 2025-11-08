@@ -95,38 +95,46 @@ function shopReducer(state = initialState, action: any) {
       const id = action.data.id;
       const cart = JSON.parse(JSON.stringify(state.cart));
       const index = cart.findIndex(item => item.productId.toString() === id.toString());
-      const productPrice = cart[index].price;
-      cart.splice(index, 1);
-      return {
-        ...state,
-        cart: cart,
-        totalPrice: (parseFloat(state.totalPrice) - parseFloat(productPrice)).toFixed(2),
-
-      };
+      if (index !== -1) {
+        const productPrice = parseFloat(cart[index].price || '0');
+        const productQuantity = parseInt(cart[index].quantity || '0');
+        cart.splice(index, 1);
+        return {
+          ...state,
+          cart: cart,
+          totalPrice: (parseFloat(state.totalPrice) - (productPrice * productQuantity)).toFixed(2),
+        };
+      }
+      return state;
     }
     case ShopActionTypes.INCREASE_PRODUCT_AMOUNT: {
       const productId = action.data.id;
       const cart = JSON.parse(JSON.stringify(state.cart));
       const product = cart.find(item => item.productId.toString() === productId.toString());
-      product.quantity = product.quantity + 1;
-      return {
-        ...state,
-        cart: cart,
-        totalPrice: (parseFloat(state.totalPrice) + parseFloat(product.price)).toFixed(2),
-
-      };
+      if (product) {
+        product.quantity = (parseInt(product.quantity || '0') + 1).toString();
+        return {
+          ...state,
+          cart: cart,
+          totalPrice: (parseFloat(state.totalPrice) + parseFloat(product.price || '0')).toFixed(2),
+        };
+      }
+      return state;
     }
 
     case ShopActionTypes.DECREASE_PRODUCT_AMOUNT: {
       const productId = action.data.id;
       const cart = JSON.parse(JSON.stringify(state.cart));
       const product = cart.find(item => item.productId.toString() === productId.toString());
-      product.quantity = product.quantity - 1;
-      return {
-        ...state,
-        cart: cart,
-        totalPrice: (parseFloat(state.totalPrice) - parseFloat(product.price)).toFixed(2),
-      };
+      if (product && parseInt(product.quantity || '0') > 0) {
+        product.quantity = (parseInt(product.quantity || '0') - 1).toString();
+        return {
+          ...state,
+          cart: cart,
+          totalPrice: (parseFloat(state.totalPrice) - parseFloat(product.price || '0')).toFixed(2),
+        };
+      }
+      return state;
     }
 
     case ShopActionTypes.SET_CURRENCY: {
@@ -167,12 +175,21 @@ function shopReducer(state = initialState, action: any) {
         shippingOptionListModal: action.data.open,
       };
 
-    case ShopActionTypes.SET_CART:
+    case ShopActionTypes.SET_CART: {
+      const cartItems = action.payload.data || [];
+      const calculatedTotal = cartItems.reduce((total, item) => {
+        const itemPrice = parseFloat(item.product?.[0]?.price || '0');
+        const itemQuantity = parseInt(item.quantity || '0');
+        return total + (itemPrice * itemQuantity);
+      }, 0);
+
       return {
         ...state,
-        cart: action.payload.data || [],
+        cart: cartItems,
+        totalPrice: calculatedTotal.toFixed(2),
         totalPrice: action.payload.data.reduce((acc: number, item: any) => acc + parseFloat(item?.product?.[0]?.price) * parseFloat(item?.quantity), 0).toFixed(2),
       };
+    }
     case ShopActionTypes.SET_SHOP_INITIAL_STATE:
       return initialState;
     case ShopActionTypes.GET_SHIPPING_COURIERS_LIST: {

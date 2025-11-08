@@ -34,11 +34,28 @@ function countProductsByCategory(products) {
   return categoryCount;
 }
 
+function getMaxPriceFromProducts(products) {
+  if (!products || products.length === 0) {
+    return 100; // Default fallback value
+  }
+
+  const prices = products
+    .map(product => parseFloat(product.price))
+    .filter(price => !isNaN(price) && price > 0);
+
+  if (prices.length === 0) {
+    return 100; // Default fallback if no valid prices found
+  }
+
+  return Math.ceil(Math.max(...prices));
+}
+
 const MobileFilter = () => {
   const { tags, categories, products, priceRange, selectedCategory, caffeineLevel, selectedTags } = useSelector((state: RootState) => state.products);
   const [sortModal, setSortModal] = useState(false);
   const [filterModal, setFilterModal] = useState(false);
   const counts = countProductsByCategory(products);
+  const maxPrice = getMaxPriceFromProducts(products);
   const dispatch = useDispatch();
 
   const handleSortModal = () => {
@@ -131,7 +148,7 @@ const MobileFilter = () => {
             <Divider />
             <Collapsible header={'Price'}>
               <Div className={'flex-col w-full pt-5 px-3'}>
-                <MultiRangeSlider min={0} max={100} step={1} value={priceRange} onChange={handlePriceRange} />
+                <MultiRangeSlider min={0} max={maxPrice} step={1} value={priceRange} onChange={handlePriceRange} />
               </Div>
             </Collapsible>
             <Divider />

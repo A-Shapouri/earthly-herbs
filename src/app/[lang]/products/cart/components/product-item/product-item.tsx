@@ -6,19 +6,17 @@ import Image from 'next/image';
 import MinusIcon from '@icons-components/minus';
 import PlusIcon from '@icons-components/plus';
 import TrashIcon from '@icons-components/trash';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '@store/root-reducer';
 import { ProductItemProps } from './prodcut-item.props';
-import AnimatedNumber from '@modules/animated-number';
 import { useOptimisticCart } from '@hooks/use-optimistic-cart';
 import ImageTemp from '../../../../../../../public/images/temp/products/turmeric-tonic-organic/turmeric-tonic-sachet-steeped-x21_bc2a3df9-5b6f-4a24-b2c7-7e043bd849c0-xa_550x.webp';
 
-const ProductItem = ({ name, price, id }: ProductItemProps) => {
+const ProductItem = ({ name, price, id, image }: ProductItemProps) => {
   const { cart, deleteCartItemLoading, deleteCartItemId } = useSelector((state: RootState) => state.shop);
 
   // Find the cart item based on product ID
   const cartItem = cart.find(item => item.productId.toString() === id.toString());
-  console.log({ cartItem })
   const {
     displayQuantity,
     optimisticIncrease,
@@ -51,7 +49,7 @@ const ProductItem = ({ name, price, id }: ProductItemProps) => {
       className={'rounded-xl justify-between md:rounded-2xl border transition duration-300 shadow-sm md:shadow-md border-grey-50 group z-10 relative p-1 gap-2'}>
       <Div className='gap-5 items-center'>
         <Div className={'rounded-xl md:rounded-t-2xl md:h-36 md:w-36 h-28 w-28 min-h-28 min-w-28 '}>
-          <Image objectFit={'contain'} className={'rounded-xl md:rounded-t-2xl'} src={ImageTemp} alt={name} />
+          <Image objectFit={'contain'} className={'rounded-xl md:rounded-t-2xl'} src={image ? `http://74.208.77.41:8080/uploads${image}` : ImageTemp} alt={name} />
         </Div>
         <Div className={'flex-col self-center'}>
           <Text color={'grey.900'} className={'text-ellipsis'} type={'medium'} typography={['md', 'base']}>{name || 'name'}</Text>

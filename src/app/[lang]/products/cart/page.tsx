@@ -43,7 +43,7 @@ const Cart = () => {
   const handleCouponModal = () => {
     dispatch(ShopActions.setCouponModal({ open: !couponModal }));
   };
-
+  console.log(cart);
   return (
     <Container>
       <Div className={'bg-flurries-500 w-full justify-center items-center'}>
@@ -78,6 +78,7 @@ const Cart = () => {
                     id={item.productId}
                     price={item?.product?.[0]?.price}
                     name={item?.product?.[0]?.model}
+                    image={item?.product?.[0]?.images?.[0]?.image}
                   />
                 </motion.div>
               )) : null}

@@ -3,13 +3,14 @@ import Div from '@elements/div';
 import Text from '@elements/text';
 import Image from 'next/image';
 import { ProductItemProps } from './prodcut-item.props';
-import Rating from '@elements/rating';
+// import Rating from '@elements/rating';
 import ProductAction from './action';
 import Link from 'next/link';
 import getParseRoute from '@utils/helpers/parse-route';
 import AddToWishlistAction from './wish-item';
 
-const ProductItem = ({ image, title, price, rate, isHealthy, isNew, id }: ProductItemProps) => {
+const ProductItem = ({ image, title, price, isHealthy, isNew, id }: ProductItemProps) => {
+  console.log('test', `http://74.208.77.41:8080/uploads${image}`);
   return (
     <Div
       className={'rounded-xl md:rounded-2xl flex-col border transition duration-300 md:hover:border-primary md:hover:shadow-primary-500 shadow-sm md:shadow-md border-grey-50 group z-10 relative'}>
@@ -28,19 +29,17 @@ const ProductItem = ({ image, title, price, rate, isHealthy, isNew, id }: Produc
         </Link>
         <AddToWishlistAction id={id} />
       </Div>
-      {image ? (
-        <Link href={getParseRoute({ pathname: '/products/[id]', query: { id: id } })} className={'flex rounded-t-xl md:rounded-t-2xl h-[190px] relative min-w-[200px] w-full'}>
-          <Image className={'rounded-t-xl md:rounded-t-2xl'} fill src={image} alt={title} />
-        </Link>
-      ) : null}
-      <Div className={'w-full items-start rounded-b-xl md:rounded-b-2xl bg-white justify-between md:px-4 px-3 h-fit pb-2 md:pt-3 pt-2 flex-col'}>
+      <Link href={getParseRoute({ pathname: '/products/[id]', query: { id: id } })} className={'flex rounded-t-xl md:rounded-t-2xl h-[190px] relative min-w-[200px] w-full'}>
+        <Image className={'rounded-t-xl md:rounded-t-2xl '} fill src={image ? `http://74.208.77.41:8080/uploads${image}` : '/images/temp/products/turmeric-tonic-organic/turmeric-tonic-sachet-steeped-x21_bc2a3df9-5b6f-4a24-b2c7-7e043bd849c0-xa_550x.webp'} alt={title} />
+      </Link>
+      <Div className={'w-full items-start rounded-b-xl md:rounded-b-2xl bg-white justify-between md:px-4 px-3 h-fit pb-2 md:pt-3 pt-2 flex-col gap-1'}>
         <Link href={getParseRoute({ pathname: '/products/[id]', query: { id: id } })} className={'items-start'}>
           <Text color={'grey.900'} type={'medium'} typography={['xs', 'xs']}>{title}</Text>
         </Link>
         <Div className={'w-full justify-between items-center h-12'}>
           <Div className={'flex-col'}>
             <Text typography={['base', 'sm']}>${price}</Text>
-            <Rating size={['xs', 'xxs']} value={rate} />
+            {/* <Rating size={['xs', 'xxs']} value={rate} /> */}
           </Div>
           <ProductAction
             id={id}

@@ -6,9 +6,9 @@ import Collapsible from '@elements/collapsable';
 import FormControlLabel from '@elements/form-control-label';
 import RadioButton from '@elements/radio-button';
 import Divider from '@elements/divider';
-import Checkbox from '@elements/checkbox';
-import Rating from '@elements/rating';
-import Tag from '@elements/tag';
+// import Checkbox from '@elements/checkbox';
+// import Rating from '@elements/rating';
+// import Tag from '@elements/tag';
 import MultiRangeSlider from '@elements/multi-range-slider';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@store/root-reducer';
@@ -30,18 +30,35 @@ function countProductsByCategory(products) {
   return categoryCount;
 }
 
+function getMaxPriceFromProducts(products) {
+  if (!products || products.length === 0) {
+    return 100; // Default fallback value
+  }
+
+  const prices = products
+    .map(product => parseFloat(product.price))
+    .filter(price => !isNaN(price) && price > 0);
+
+  if (prices.length === 0) {
+    return 100; // Default fallback if no valid prices found
+  }
+
+  return Math.ceil(Math.max(...prices));
+}
+
 const DesktopFilter = () => {
   const dispatch = useDispatch();
-  const { tags, categories, products, priceRange, selectedCategory, caffeineLevel, selectedTags } = useSelector((state: RootState) => state.products);
+  const { categories, products, priceRange, selectedCategory } = useSelector((state: RootState) => state.products);
   const counts = countProductsByCategory(products);
+  const maxPrice = getMaxPriceFromProducts(products);
 
-  const handleRemoveTag = (value: string) => {
-    dispatch(ProductsActions.removeFilterTag({ tag: value }));
-  };
+  // const handleRemoveTag = (value: string) => {
+  //   dispatch(ProductsActions.removeFilterTag({ tag: value }));
+  // };
 
-  const handleAddTag = (value: string) => {
-    dispatch(ProductsActions.addFilterTag({ tag: value }));
-  };
+  // const handleAddTag = (value: string) => {
+  //   dispatch(ProductsActions.addFilterTag({ tag: value }));
+  // };
 
   const handlePriceRange = ({ min, max }: { min: number, max: number }) => {
     dispatch(ProductsActions.setPriceRange({ min, max }));
@@ -51,9 +68,9 @@ const DesktopFilter = () => {
     dispatch(ProductsActions.setFilterCategory({ category: e.target.value }));
   };
 
-  const handleCaffeineLevel = (level: number) => {
-    dispatch(ProductsActions.setCaffeineLevel({ level: level }));
-  };
+  // const handleCaffeineLevel = (level: number) => {
+  //   dispatch(ProductsActions.setCaffeineLevel({ level: level }));
+  // };
 
   const handleClearFilters = () => {
     dispatch(ProductsActions.clearFilterProducts());
@@ -80,7 +97,7 @@ const DesktopFilter = () => {
         <Divider />
         <Collapsible className='w-[400px]' open={true} header={'Price'}>
           <Div className={'flex-col w-full pt-5 px-3'}>
-            <MultiRangeSlider min={0} max={100} step={1} value={priceRange} onChange={handlePriceRange} />
+            <MultiRangeSlider min={0} max={maxPrice} step={1} value={priceRange} onChange={handlePriceRange} />
           </Div>
         </Collapsible>
         {/* <Divider/>
