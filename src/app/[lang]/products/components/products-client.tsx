@@ -50,9 +50,8 @@ const ProductsClient = ({ initialProducts, initialCategories }: ProductsClientPr
   };
 
   // Use server data if client data is not loaded yet
-  const displayProducts = products.length > 0 ? products : initialProducts;
-  const isLoading = listLoading && products.length === 0;
-
+  const displayProducts = products?.length > 0 ? products : initialProducts;
+  const isLoading = listLoading && products?.length === 0;
   return (
     <>
       <Div className={'gap-4 md:gap-6 flex-col w-full'}>

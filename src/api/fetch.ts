@@ -23,7 +23,7 @@ export interface CacheProps {
 
 export async function fetchApi({ method, payload, withToken, url, cache = 'no-cache', next, uploadFile = false, download, withPagination }: ConfigProps): Promise<any> {
   const parseUrl: string = getParseUrl(url);
-  const baseURL = `http://74.208.77.41:8080/api/v1`;
+  const baseURL = `https://74.208.77.41:9443/api/v1`;
 
   const CatchFunction = async (error: any) => {
     const errorObject = {

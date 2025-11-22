@@ -57,7 +57,6 @@ const WishList = () => {
   }, [wishListLoading, wishList.length]);
 
   const handleAddToCart = (item: any, isInCart: boolean) => {
-    console.log(isInCart)
     if (isInCart) {
       dispatch(AlertActions.showAlert({ text: 'Item is already in cart', severity: 'danger' }));
     } else {
@@ -109,7 +108,7 @@ const WishList = () => {
           ) : wishList && wishList.length > 0 ? (
             <Div className="space-y-4 flex-col">
               {wishList.map((item, index) => {
-                const cartItem = cart.find(cartValue => item.productId.toString() === cartValue.productId.toString());
+                const cartItem = cart?.find(cartValue => item?.product?.id?.toString() === cartValue?.productId?.toString());
                 return (
                   <Div key={index} className={'w-full p-3 flex-col gap-6 border border-gray-300 rounded-2xl'}>
                     <Div className={'gap-6'}>
@@ -117,8 +116,8 @@ const WishList = () => {
                         <Image fill={true} src={ThumbnailImage2} alt={'image'} />
                       </Div>
                       <Div className={'flex-col gap-1'}>
-                        <Text color={'grey.700'} typography={['xs', 'xs']} type={'medium'}>{item.name || 'product name'}</Text>
-                        <Text typography={['sm', 'sm']} type={'normal'}>${item.price || 'product price'}</Text>
+                        <Text color={'grey.700'} typography={['xs', 'xs']} type={'medium'}>{item?.product?.model || 'product name'}</Text>
+                        <Text typography={['sm', 'sm']} type={'normal'}>${item?.product?.price || 'product price'}</Text>
                       </Div>
                     </Div>
                     <Div className={'grid grid-cols-3 gap-2'}>
@@ -130,7 +129,7 @@ const WishList = () => {
                       </Button>
                     </Div>
                   </Div>
-                )
+                );
               })}
             </Div>
           ) : (
